@@ -1,0 +1,86 @@
+package pnemonic.balloon_pop.view.home
+
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import balloon_pop.composeapp.generated.resources.Res
+import balloon_pop.composeapp.generated.resources.title
+import org.jetbrains.compose.resources.stringResource
+import pnemonic.balloon_pop.view.previewColor
+import pnemonic.balloon_pop.view.previewWidthDp
+import pnemonic.balloon_pop.view.theme.Brown
+import pnemonic.balloon_pop.view.theme.DarkRed
+import pnemonic.balloon_pop.view.theme.Gold
+import pnemonic.balloon_pop.view.theme.LightBrown
+
+private val sizeTitle = 70.sp
+
+@Composable
+fun Title(modifier: Modifier = Modifier) {
+    val title = stringResource(Res.string.title)
+    Title(modifier = modifier, title = title)
+}
+
+@Composable
+fun Title(modifier: Modifier = Modifier, title: String) {
+    var heightPx by remember { mutableFloatStateOf(200f) }
+
+    val style = LocalTextStyle.current.copy(
+        lineHeight = sizeTitle,
+        brush = Brush.verticalGradient(
+            colors = listOf(White, Yellow, Gold, LightBrown, Brown, DarkRed),
+            endY = heightPx
+        ),
+        shadow = Shadow(blurRadius = 5f),
+    )
+
+    Text(
+        modifier = modifier,
+        text = title,
+        fontSize = sizeTitle,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center,
+        style = style,
+        onTextLayout = { tlr ->
+            heightPx = tlr.size.height.toFloat()
+        }
+    )
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp * 2)
+private fun PreviewWide() {
+    MaterialTheme {
+        Title()
+    }
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp)
+private fun PreviewLong() {
+    MaterialTheme {
+        Title(title = "Bug Bash 123")
+    }
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp, locale = "af")
+private fun Preview3() {
+    MaterialTheme {
+        Title()
+    }
+}
