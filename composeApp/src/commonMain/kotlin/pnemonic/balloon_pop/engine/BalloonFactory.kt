@@ -73,14 +73,14 @@ object BalloonFactory {
     fun createBouquet(level: Int, difficulty: Difficulty): Bouquet {
         val size = BALLOONS_PER_LEVEL * level * difficulty
         val candidates = createCandidates(level)
-        val bugs = mutableListOf<Balloon>()
+        val balloons = mutableListOf<Balloon>()
 
         (1..size).forEach { _ ->
             val bug = createBug(candidates)
-            bugs.add(bug)
+            balloons.add(bug)
         }
 
-        return Bouquet(bugs)
+        return Bouquet(balloons)
     }
 
     val allBalloons: List<Balloon>

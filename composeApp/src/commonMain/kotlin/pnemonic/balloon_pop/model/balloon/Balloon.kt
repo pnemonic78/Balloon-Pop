@@ -16,6 +16,8 @@ import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.sin
 
+typealias BalloonCallback = (Balloon) -> Unit
+
 abstract class Balloon(
     val size: Float,
     val speed: Float,

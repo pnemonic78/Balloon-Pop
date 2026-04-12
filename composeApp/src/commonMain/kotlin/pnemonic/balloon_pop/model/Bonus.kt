@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import pnemonic.balloon_pop.sound.SoundType
 
+typealias BonusCallback = (Bonus) -> Unit
+
 sealed class Bonus(
     // Score required to activate the bonus.
     val score: Long,

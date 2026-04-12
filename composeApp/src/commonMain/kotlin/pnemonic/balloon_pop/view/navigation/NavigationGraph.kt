@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import pnemonic.balloon_pop.view.board.BoardScreen
+import pnemonic.balloon_pop.view.help.HelpScreen
 import pnemonic.balloon_pop.view.home.HomeScreen
 
 @Composable
@@ -13,10 +15,10 @@ fun NavigationGraph(navController: NavHostController) {
             HomeScreen(navController)
         }
         composable(Routes.Board.route) {
-//            BoardScreen(navController)
+            BoardScreen(navController)
         }
         composable(Routes.Help.route) {
-//            HelpScreen(navController)
+            HelpScreen(navController)
         }
     }
 }
