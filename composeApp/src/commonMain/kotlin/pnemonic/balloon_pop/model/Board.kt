@@ -9,7 +9,6 @@ data class Board(
     val scene: Scene = Scene.Garden,
     val level: Int = 0,
     val difficulty: Difficulty = Difficulty.Easy,
-    val speed: Speed = Speed.Slow,
     val score: Long = 0,
     val lives: Int = LIVES,
     val bonuses: List<Bonus> = emptyList(),

@@ -5,12 +5,12 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 abstract class BalloonThatFlies(
+    size: Float,
     speed: Float,
     score: Long,
     hits: Int,
-    noise: SoundType = SoundType.None,
-    soundPop: SoundType
-) : Balloon(speed = speed, score = score, hits = hits, noise = noise, soundPop = soundPop) {
+    sound: SoundType
+) : Balloon(size = size, speed = speed, score = score, hits = hits, sound = sound) {
     override fun moveNext(): Boolean = moveZigZag()
 
     private var angleZigZag = 0f

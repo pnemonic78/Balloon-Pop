@@ -1,5 +1,5 @@
 package pnemonic.balloon_pop.model.balloon
 
-class Round : Balloon(speed = 1f, score = 5, hits = 1) {
+class Round(size: Float = 1f) : Balloon(size = size, speed = 1f, score = 5, hits = 1) {
     override val description = "🎈"
 }

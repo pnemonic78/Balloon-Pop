@@ -17,11 +17,11 @@ import kotlin.math.max
 import kotlin.math.sin
 
 abstract class Balloon(
+    val size: Float,
     val speed: Float,
     val score: Long,
-    hits: Int,
-    val noise: SoundType = SoundType.None,
-    val soundPop: SoundType = SoundType.Pop,
+    hits: Int = 1,
+    val sound: SoundType = SoundType.Pop,
 ) {
     var hits: Int = hits
         private set(value) {

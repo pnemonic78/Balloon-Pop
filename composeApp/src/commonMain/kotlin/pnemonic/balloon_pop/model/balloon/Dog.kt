@@ -2,6 +2,7 @@ package pnemonic.balloon_pop.model.balloon
 
 import pnemonic.balloon_pop.sound.SoundType
 
-class Dog : Animal(speed = 1f, score = 5, hits = 1, soundPop = SoundType.Dog) {
+class Dog(size: Float = 1f) :
+    Animal(size = size, speed = 1f, score = 5, hits = 1, sound = SoundType.Dog) {
     override val description = "🐕"
 }
