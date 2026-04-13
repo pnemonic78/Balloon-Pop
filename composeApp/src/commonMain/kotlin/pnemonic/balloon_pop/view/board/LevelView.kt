@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import pnemonic.balloon_pop.drawable.Balloon
 import pnemonic.balloon_pop.drawable.Level
+import pnemonic.balloon_pop.drawable.Round
 import pnemonic.balloon_pop.view.theme.Gold
 import pnemonic.balloon_pop.view.theme.panel
 import pnemonic.compose.Left
@@ -38,7 +38,7 @@ fun LevelView(modifier: Modifier = Modifier, level: Int, count: Int) {
         Text("$level", color = colorText, fontSize = sizeText)
         Spacer(modifier = Modifier.width(8.dp))
         Image(
-            imageVector = Balloon,
+            imageVector = Round,
             contentDescription = "⏳",
             modifier = Modifier.size(sizeIcon)
         )

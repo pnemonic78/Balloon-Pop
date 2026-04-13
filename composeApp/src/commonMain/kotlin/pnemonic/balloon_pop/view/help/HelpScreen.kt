@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,7 @@ import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.BonusCallback
 import pnemonic.balloon_pop.model.balloon.Balloon
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
+import pnemonic.balloon_pop.view.board.BalloonSprite
 import pnemonic.balloon_pop.view.board.BonusSprite
 import pnemonic.balloon_pop.view.home.HomeButton
 import pnemonic.balloon_pop.view.previewHeightDp
@@ -107,8 +109,8 @@ private fun BalloonList(
         horizontalArrangement = Arrangement.spacedBy(8.dp), // Spacing between columns
         verticalArrangement = Arrangement.spacedBy(8.dp) // Spacing between rows
     ) {
-        items(balloons) { bug ->
-            HelpCard(bug = bug, onBalloonClick)
+        items(balloons) { balloon ->
+            HelpCard(balloon = balloon, onBalloonClick)
         }
         items(bonuses) { bonus ->
             HelpCard(bonus = bonus, onBonusClick)
@@ -117,9 +119,9 @@ private fun BalloonList(
 }
 
 @Composable
-fun HelpCard(bug: Balloon, onClick: BalloonCallback) {
+fun HelpCard(balloon: Balloon, onClick: BalloonCallback) {
     Card {
-        BalloonCell(bug, onClick)
+        BalloonCell(balloon, onClick)
     }
 }
 
@@ -131,20 +133,20 @@ fun HelpCard(bonus: Bonus, onClick: BonusCallback) {
 }
 
 @Composable
-private fun BalloonCell(bug: Balloon, onClick: BalloonCallback) {
-    val color = if (bug.score >= 0) colorGood else colorBad
+private fun BalloonCell(balloon: Balloon, onClick: BalloonCallback) {
+    val color = if (balloon.score >= 0) colorGood else colorBad
 
     Row(modifier = Modifier.padding(8.dp)) {
         Box(
             modifier = Modifier.size(sizeBalloonWidth, sizeBalloonHeight),
             contentAlignment = Alignment.Center
         ) {
-//            BalloonSprite(
-//                bug = bug,
-//                boardSize = Size.Zero,
-//                onSize = {},
-//                onTap = onClick
-//            )
+            BalloonSprite(
+                balloon = balloon,
+                boardSize = Size.Zero,
+                onSize = {},
+                onTap = onClick
+            )
         }
         Spacer(modifier = Modifier.width(4.dp))
         Column(modifier = Modifier.weight(1f)) {
@@ -157,7 +159,7 @@ private fun BalloonCell(bug: Balloon, onClick: BalloonCallback) {
                 Spacer(modifier = Modifier.width(sizeSpace))
                 Text("×")
                 Spacer(modifier = Modifier.width(sizeSpace))
-                Text("${bug.hits}", fontWeight = FontWeight.Medium, softWrap = false)
+                Text("${balloon.hits}", fontWeight = FontWeight.Medium, softWrap = false)
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -170,7 +172,7 @@ private fun BalloonCell(bug: Balloon, onClick: BalloonCallback) {
                 Text("×")
                 Spacer(modifier = Modifier.width(sizeSpace))
                 Text(
-                    "${bug.score}",
+                    "${balloon.score}",
                     fontWeight = FontWeight.Medium,
                     softWrap = false,
                     color = color

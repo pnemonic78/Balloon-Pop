@@ -4,6 +4,7 @@ import pnemonic.balloon_pop.model.Difficulty
 import pnemonic.balloon_pop.model.Difficulty.Companion.times
 import pnemonic.balloon_pop.model.balloon.Balloon
 import pnemonic.balloon_pop.model.balloon.Bouquet
+import pnemonic.balloon_pop.model.balloon.Butterfly
 import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
@@ -23,6 +24,7 @@ object BalloonFactory {
 
     private const val BALLOONS_PER_LEVEL = 10
 
+    private const val CLASS_BUTTERFLY = "Butterfly"
     private const val CLASS_DOG = "Dog"
     private const val CLASS_FLOWER = "Flower"
     private const val CLASS_GIRAFFE = "Giraffe"
@@ -52,6 +54,7 @@ object BalloonFactory {
         val i = rand.nextInt(candidates.size)
         // klass.createInstance() does not work in JS
         return when (val klass = candidates[i]) {
+            CLASS_BUTTERFLY -> Butterfly()
             CLASS_DOG -> Dog()
             CLASS_FLOWER -> Flower()
             CLASS_GIRAFFE -> Giraffe()
@@ -85,6 +88,7 @@ object BalloonFactory {
 
     val allBalloons: List<Balloon>
         get() = listOf(
+            Butterfly(),
             Dog(),
             Flower(),
             Giraffe(),

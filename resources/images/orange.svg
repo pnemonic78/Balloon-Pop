@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="26.525007mm"
+   height="31.108919mm"
+   viewBox="0 0 26.525007 31.108919"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="orange.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.4520903"
+     inkscape:cx="57.158978"
+     inkscape:cy="120.17159"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g30" />
+  <defs
+     id="defs1">
+    <clipPath
+       id="SVGID_00000179631716516520773980000017893050969431748534_">
+			<rect
+   id="use1"
+   width="500"
+   height="500"
+   x="0"
+   y="0" />
+
+		</clipPath>
+    <radialGradient
+       id="SVGID_00000067935432768201434420000008084085773402116540_"
+       cx="172.51131"
+       cy="338.09821"
+       r="73.2855"
+       gradientUnits="userSpaceOnUse">
+							<stop
+   offset="0"
+   style="stop-color:#FFE097"
+   id="stop19" />
+
+							<stop
+   offset="0.0911"
+   style="stop-color:#FFDA8B"
+   id="stop20" />
+
+							<stop
+   offset="0.2537"
+   style="stop-color:#FFCB6D"
+   id="stop21" />
+
+							<stop
+   offset="0.4677"
+   style="stop-color:#FFB33B"
+   id="stop22" />
+
+							<stop
+   offset="0.4773"
+   style="stop-color:#FFB239"
+   id="stop23" />
+
+							<stop
+   offset="0.6034"
+   style="stop-color:#FF9028"
+   id="stop24" />
+
+							<stop
+   offset="0.7783"
+   style="stop-color:#FF6813"
+   id="stop25" />
+
+							<stop
+   offset="0.9165"
+   style="stop-color:#FF4E07"
+   id="stop26" />
+
+							<stop
+   offset="1"
+   style="stop-color:#FF4502"
+   id="stop27" />
+
+						</radialGradient>
+    <clipPath
+       id="SVGID_00000031187196468635166580000011690118464373994413_">
+							<use
+   xlink:href="#SVGID_00000035505882365891678700000002583799808366675082_"
+   style="overflow:visible"
+   id="use19" />
+
+						</clipPath>
+    <ellipse
+       id="SVGID_00000035505882365891678700000002583799808366675082_"
+       cx="155.239"
+       cy="357.26099"
+       rx="50.125999"
+       ry="53.643002" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-82.579895,-63.13434)">
+    <g
+       clip-path="url(#SVGID_00000179631716516520773980000017893050969431748534_)"
+       id="g30"
+       transform="matrix(-0.26458333,0,0,0.26458333,136.91605,-17.197917)">
+			
+			<g
+   id="g29">
+				<path
+   style="fill:#ff4502"
+   d="M 155.239,407.34 150.16,416.555 C 149.01,418.641 150.519,421.195 152.901,421.195 H 155.239 157.577 C 159.959,421.195 161.468,418.64 160.318,416.555 Z"
+   id="path19" />
+
+				<g
+   id="g28">
+					<ellipse
+   style="fill:#ff4502"
+   cx="155.239"
+   cy="357.26099"
+   rx="50.125999"
+   ry="53.643002"
+   id="ellipse19" />
+
+					<g
+   id="g27">
+						<defs
+   id="defs19">
+							
+								<ellipse
+   id="ellipse1"
+   cx="155.239"
+   cy="357.26099"
+   rx="50.125999"
+   ry="53.643002" />
+
+						</defs>
+
+						<clipPath
+   id="clipPath2">
+							<use
+   xlink:href="#SVGID_00000035505882365891678700000002583799808366675082_"
+   style="overflow:visible"
+   id="use2" />
+
+						</clipPath>
+
+						
+							<radialGradient
+   id="radialGradient10"
+   cx="172.51131"
+   cy="338.09821"
+   r="73.2855"
+   gradientUnits="userSpaceOnUse">
+							<stop
+   offset="0"
+   style="stop-color:#FFE097"
+   id="stop2" />
+
+							<stop
+   offset="0.0911"
+   style="stop-color:#FFDA8B"
+   id="stop3" />
+
+							<stop
+   offset="0.2537"
+   style="stop-color:#FFCB6D"
+   id="stop4" />
+
+							<stop
+   offset="0.4677"
+   style="stop-color:#FFB33B"
+   id="stop5" />
+
+							<stop
+   offset="0.4773"
+   style="stop-color:#FFB239"
+   id="stop6" />
+
+							<stop
+   offset="0.6034"
+   style="stop-color:#FF9028"
+   id="stop7" />
+
+							<stop
+   offset="0.7783"
+   style="stop-color:#FF6813"
+   id="stop8" />
+
+							<stop
+   offset="0.9165"
+   style="stop-color:#FF4E07"
+   id="stop9" />
+
+							<stop
+   offset="1"
+   style="stop-color:#FF4502"
+   id="stop10" />
+
+						</radialGradient>
+
+						
+							<circle
+   style="fill:url(#SVGID_00000067935432768201434420000008084085773402116540_)"
+   cx="172.511"
+   cy="338.09799"
+   r="73.285004"
+   clip-path="url(#SVGID_00000031187196468635166580000011690118464373994413_)"
+   id="circle27" />
+
+					</g>
+
+				</g>
+
+			</g>
+
+		</g>
+  </g>
+</svg>
