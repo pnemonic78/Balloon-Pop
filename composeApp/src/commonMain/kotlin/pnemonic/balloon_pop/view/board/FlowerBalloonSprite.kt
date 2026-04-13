@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.FlowerBalloon as FlowerImage
 
 @Composable
 fun FlowerSprite(balloon: Flower, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, FlowerImage, 1.25f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, FlowerImage, 1.5f, onSize, onTap)
 }
 
 @Preview(

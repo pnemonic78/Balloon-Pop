@@ -68,7 +68,7 @@ fun BalloonSprite(
     val width = image.defaultWidth * scale
     val height = image.defaultHeight * scale
     val sx by animateFloatAsState(targetValue = if (isPopped) 1.3f else 1f)
-    val sy by animateFloatAsState(targetValue = if (isPopped) 1.15f else 1f)
+    val sy by animateFloatAsState(targetValue = if (isPopped) 1.25f else 1f)
     val animatedOpacity by animateFloatAsState(targetValue = balloon.opacity)
 
     Box(

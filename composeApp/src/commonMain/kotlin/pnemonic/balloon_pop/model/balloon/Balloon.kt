@@ -91,7 +91,7 @@ abstract class Balloon(
     }
 
     fun setTick(tick: Long) {
-        velocity = speed * 0.0025f * tick
+        velocity = speed * 0.001f * tick
     }
 
     fun move(): Boolean {

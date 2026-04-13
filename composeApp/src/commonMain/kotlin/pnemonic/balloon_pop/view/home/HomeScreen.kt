@@ -99,7 +99,7 @@ private fun HomeScreen(
             StartButton(
                 onClick = onPlayClick
             )
-            Spacer(modifier = Modifier.height(24.dp).weight(0.25f))
+            Spacer(modifier = Modifier.height(24.dp).weight(0.2f))
             DifficultyPanel(
                 difficulty = difficulty,
                 onDifficultyChange = onDifficultyChange

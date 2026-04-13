@@ -21,8 +21,7 @@ class HomeViewModel : LifecycleViewModel() {
     val difficulty get() = settings.difficulty
 
     private var engine = HomeEngine(viewModelScope)
-//    private val _board = MutableStateFlow(engine.boards.value)
-    private val _board = MutableStateFlow(Board())
+    private val _board = MutableStateFlow(engine.boards.value)
     val board: StateFlow<Board> = _board
 
     init {
@@ -31,25 +30,25 @@ class HomeViewModel : LifecycleViewModel() {
 
     private fun collectAll(engine: GameEngine) {
         viewModelScope.launch {
-//            engine.boards.collect {
-//                _board.emit(it)
-//            }
+            engine.boards.collect {
+                _board.emit(it)
+            }
         }
         viewModelScope.launch {
-//            _board.emit(engine.boards.value)
+            _board.emit(engine.boards.value)
         }
     }
 
     override fun onStart() {
-//        engine.start(difficulty)
+        engine.start(difficulty)
     }
 
     override fun onPause() {
-//        engine.pause()
+        engine.pause()
     }
 
     override fun onStop() {
-//        engine.stop()
+        engine.stop()
     }
 
     fun onMusicChange(enabled: Boolean) {
@@ -73,10 +72,10 @@ class HomeViewModel : LifecycleViewModel() {
     }
 
     fun onBoardSize(size: IntSize) {
-//        engine.onSize(size)
+        engine.onSize(size)
     }
 
     fun onBalloonSize(bug: Balloon) {
-//        engine.onBalloonSize(bug)
+        engine.onBalloonSize(bug)
     }
 }

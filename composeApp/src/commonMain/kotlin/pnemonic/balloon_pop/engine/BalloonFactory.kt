@@ -15,7 +15,6 @@ import pnemonic.balloon_pop.model.balloon.Round
 import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
 import pnemonic.balloon_pop.model.balloon.Watermelon
-import pnemonic.times
 import kotlin.random.Random
 
 typealias KlassName = String
@@ -37,15 +36,29 @@ object BalloonFactory {
     private const val CLASS_WATERMELON = "Watermelon"
 
     private val level1 = listOf(CLASS_ROUND)
-    private val level2 = level1 + listOf(CLASS_DOG) * 2
-    private val level3 = level2 + listOf(CLASS_HEART) * 3
-    private val level4 = level3 + listOf(CLASS_STAR) * 4
+    private val level2 = level1 + CLASS_STAR
+    private val level3 = level2 + CLASS_HEART
+    private val level4 = level3 + CLASS_DOG
+    private val level5 = level4 + CLASS_BUTTERFLY
+    private val level6 = level5 + CLASS_SNAKE
+    private val level7 = level6 + CLASS_ORANGE
+    private val level8 = level7 + CLASS_GIRAFFE
+    private val level9 = level8 + CLASS_LEMON
+    private val level10 = level9 + CLASS_WATERMELON
+    private val level11 = level10 + CLASS_FLOWER
 
     private val levels = mapOf(
         1 to level1,
         2 to level2,
         3 to level3,
         4 to level4,
+        5 to level5,
+        6 to level6,
+        7 to level7,
+        8 to level8,
+        9 to level9,
+        10 to level10,
+        11 to level11,
     )
 
     private val rand = Random.Default
@@ -70,7 +83,7 @@ object BalloonFactory {
     }
 
     private fun createCandidates(level: Int): List<KlassName> {
-        return levels[level] ?: level4
+        return levels[level] ?: level11
     }
 
     fun createBouquet(level: Int, difficulty: Difficulty): Bouquet {

@@ -11,11 +11,9 @@ class BonusEngine(
     private val coroutineScope: CoroutineScope
 ) {
     fun clear() {
-        TODO("Not yet implemented")
     }
 
     fun onTap(board: Board, offset: Offset) {
-        TODO("Not yet implemented")
     }
 
     suspend fun process(board: Board): Board {
@@ -23,10 +21,8 @@ class BonusEngine(
     }
 
     fun onClick(bonus: Bonus) {
-        TODO("Not yet implemented")
     }
 
     fun onUse(tool: Tool) {
-        TODO("Not yet implemented")
     }
 }

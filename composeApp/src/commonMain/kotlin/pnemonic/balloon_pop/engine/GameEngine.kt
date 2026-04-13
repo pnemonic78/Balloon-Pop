@@ -103,7 +103,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         _boards.update { board }
     }
 
-    private suspend fun move(board: Board): Board {
+    private fun move(board: Board): Board {
         if (board.bouquet.isEmpty()) return board
         val boardSize = board.size
         if ((boardSize.width <= 0) || (boardSize.height <= 0)) return board
@@ -217,11 +217,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
     fun onBalloonSize(balloon: Balloon) {
         val board = boards.value
-        when (board.difficulty) {
-            Difficulty.Easy -> applyVerticalPath(balloon, board.size)
-            Difficulty.Medium -> applyCentralPath(balloon, board.size)
-            else -> applyRandomPath(balloon, board.size)
-        }
+        applyVerticalPath(balloon, board.size)
     }
 
     // Vertical paths.
@@ -232,127 +228,10 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         val widthPadded = width - widthPad - widthPad
         val balloonHeight = balloon.height
 
-        //TODO try to avoid overlap balloons with each other.
-        val side = if (rand.nextBoolean()) SIDE_TOP else SIDE_BOTTOM
-        var x1 = 0f
-        var y1 = 0f
-        var x2 = width
-        var y2 = height
-        when (side) {
-            SIDE_TOP -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = -(balloonHeight * 1.25f)
-                x2 = x1
-                y2 = height + balloonHeight
-            }
-
-            SIDE_BOTTOM -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = height + (balloonHeight * 0.25f)
-                x2 = x1
-                y2 = -balloonHeight
-            }
-        }
-        balloon.moveTo(x1, y1)
-        balloon.setDestination(x2, y2)
-    }
-
-    // Random paths that go through the centre.
-    private fun applyCentralPath(balloon: Balloon, boardSize: Size) {
-        val width = boardSize.width
-        val height = boardSize.height
-        val widthPad = width * PADDING
-        val heightPad = height * PADDING
-        val widthPadded = width - widthPad - widthPad
-        val heightPadded = height - heightPad - heightPad
-        val balloonWidth = balloon.width
-        val balloonHeight = balloon.height
-
-        //TODO try to avoid overlap balloons with each other.
-        val side = rand.nextInt(SIDE_MIN, SIDE_MAX)
-        var x1 = 0f
-        var y1 = 0f
-        var x2 = width
-        var y2 = height
-        when (side) {
-            SIDE_TOP -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = -(balloonHeight * 1.25f)
-                x2 = width - x1
-                y2 = height + balloonHeight
-            }
-
-            SIDE_BOTTOM -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = height + (balloonHeight * 0.25f)
-                x2 = width - x1
-                y2 = -balloonHeight
-            }
-
-            SIDE_LEFT -> {
-                x1 = -(balloonWidth * 2)
-                y1 = heightPad + (rand.nextFloat() * heightPadded)
-                x2 = width + balloonWidth
-                y2 = height - y1
-            }
-
-            SIDE_RIGHT -> {
-                x1 = width + (balloonWidth * 2)
-                y1 = heightPad + (rand.nextFloat() * heightPadded)
-                x2 = -balloonWidth
-                y2 = height - y1
-            }
-        }
-        balloon.moveTo(x1, y1)
-        balloon.setDestination(x2, y2)
-    }
-
-    // Random paths .
-    private fun applyRandomPath(balloon: Balloon, boardSize: Size) {
-        val width = boardSize.width
-        val height = boardSize.height
-        val widthPad = width * PADDING
-        val heightPad = height * PADDING
-        val widthPadded = width - widthPad - widthPad
-        val heightPadded = height - heightPad - heightPad
-        val balloonWidth = balloon.width
-        val balloonHeight = balloon.height
-
-        //TODO try to avoid overlap balloons with each other.
-        val side = rand.nextInt(SIDE_MIN, SIDE_MAX)
-        var x1 = 0f
-        var y1 = 0f
-        var x2 = width
-        var y2 = height
-        when (side) {
-            SIDE_TOP -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = -(balloonHeight * 1.25f)
-                x2 = widthPad + (rand.nextFloat() * widthPadded)
-                y2 = height + balloonHeight
-            }
-
-            SIDE_BOTTOM -> {
-                x1 = widthPad + (rand.nextFloat() * widthPadded)
-                y1 = height + (balloonHeight * 0.25f)
-                x2 = widthPad + (rand.nextFloat() * widthPadded)
-                y2 = -balloonHeight
-            }
-
-            SIDE_LEFT -> {
-                x1 = -(balloonWidth * 2)
-                y1 = heightPad + (rand.nextFloat() * heightPadded)
-                x2 = width + balloonWidth
-                y2 = heightPad + (rand.nextFloat() * heightPadded)
-            }
-
-            SIDE_RIGHT -> {
-                x1 = width + (balloonWidth * 2)
-                y1 = heightPad + (rand.nextFloat() * heightPadded)
-                x2 = -balloonWidth
-                y2 = heightPad + (rand.nextFloat() * heightPadded)
-            }
-        }
+        val x1 = widthPad + (rand.nextFloat() * widthPadded)
+        val y1 = height + (balloonHeight * 0.25f)
+        val x2 = x1
+        val y2 = -balloonHeight
         balloon.moveTo(x1, y1)
         balloon.setDestination(x2, y2)
     }
@@ -437,11 +316,6 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         notifyFeedback(Feedback.Silence(scene.music))
     }
 
-    private suspend fun stopSound(sound: SoundType) {
-        if (sound === SoundType.None) return
-        notifyFeedback(Feedback.Silence(sound))
-    }
-
     // Apply any bonuses
     private suspend fun bonus(board: Board): Board {
         return bonusEngine.process(board)
@@ -473,13 +347,6 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
         // Time to show the score after balloon squashed.
         private const val DELAY_DEAD_REMOVE = 1000L
-
-        private const val SIDE_TOP = 0
-        private const val SIDE_LEFT = 1
-        private const val SIDE_BOTTOM = 2
-        private const val SIDE_RIGHT = 3
-        private const val SIDE_MIN = SIDE_TOP
-        private const val SIDE_MAX = SIDE_RIGHT + 1
 
         private const val PADDING = 0.2f
     }
