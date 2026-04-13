@@ -1,5 +1,5 @@
 <resources>
-    <string name="title">Triturador de plagas</string>
+    <string name="title">Explosión de globos</string>
     <string name="play">Jugar</string>
     <string name="game_state_finished">¡Fin del juego!</string>
 </resources>

@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
-private val colorMask = Color(0xAA452716)
+private val colorMask = Color(0xAACC00CC)
 
 @Composable
 private fun HomeScreen(
@@ -114,7 +114,7 @@ private fun HomeScreen(
 }
 
 @Composable
-@Preview(widthDp = previewWidthDp, heightDp = previewHeightDp)
+@Preview(widthDp = previewWidthDp, heightDp = previewHeightDp, locale = "ru")
 private fun Preview() {
     MaterialTheme {
         HomeScreen(
@@ -132,7 +132,7 @@ private fun Preview() {
 }
 
 @Composable
-@Preview(widthDp = previewWidthDp * 2, heightDp = previewHeightDp * 2)
+@Preview(widthDp = previewWidthDp * 2, heightDp = previewHeightDp * 2, locale = "ru")
 private fun PreviewBig() {
     MaterialTheme {
         HomeScreen(

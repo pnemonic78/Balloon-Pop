@@ -1,5 +1,5 @@
 <resources>
-    <string name="title">Bug Bash</string>
+    <string name="title">Popping Balloons</string>
     <string name="play">Play</string>
     <string name="game_state_finished">Game Over!</string>
 </resources>

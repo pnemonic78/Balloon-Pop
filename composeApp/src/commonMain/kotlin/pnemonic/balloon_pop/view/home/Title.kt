@@ -1,8 +1,9 @@
 package pnemonic.balloon_pop.view.home
 
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +37,7 @@ fun Title(modifier: Modifier = Modifier) {
     Title(modifier = modifier, title = title)
 }
 
+@Suppress("AssignedValueIsNeverRead")
 @Composable
 fun Title(modifier: Modifier = Modifier, title: String) {
     var heightPx by remember { mutableFloatStateOf(200f) }
@@ -46,18 +49,24 @@ fun Title(modifier: Modifier = Modifier, title: String) {
             endY = heightPx
         ),
         shadow = Shadow(blurRadius = 5f),
-    )
-
-    Text(
-        modifier = modifier,
-        text = title,
         fontSize = sizeTitle,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
+    )
+
+    BasicText(
+        modifier = modifier,
+        text = title,
         style = style,
-        onTextLayout = { tlr ->
+        maxLines = 3,
+        onTextLayout = { tlr: TextLayoutResult ->
             heightPx = tlr.size.height.toFloat()
-        }
+        },
+        autoSize = TextAutoSize.StepBased(
+            minFontSize = 16.sp,
+            maxFontSize = sizeTitle,
+            stepSize = 1.sp
+        ),
     )
 }
 
@@ -80,6 +89,14 @@ private fun PreviewLong() {
 @Composable
 @Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp, locale = "af")
 private fun Preview3() {
+    MaterialTheme {
+        Title()
+    }
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp, locale = "ru")
+private fun Preview4() {
     MaterialTheme {
         Title()
     }

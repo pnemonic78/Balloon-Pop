@@ -1,5 +1,5 @@
 <resources>
-    <string name="title">Знищити помилок</string>
+    <string name="title">Лопання повітряних кульок</string>
     <string name="play">Грати</string>
     <string name="game_state_finished">Гра закінчена!</string>
 </resources>

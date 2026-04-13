@@ -1,5 +1,5 @@
 <resources>
-    <string name="title">Tuholaismylly</string>
+    <string name="title">Ilmapallojen poksahtelu</string>
     <string name="play">Pelaa</string>
     <string name="game_state_finished">Peli ohi!</string>
 </resources>

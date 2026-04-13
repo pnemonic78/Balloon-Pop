@@ -1,5 +1,5 @@
 <resources>
-    <string name="title">スクイッシュバグ</string>
+    <string name="title">風船を割る</string>
     <string name="play">プレイ</string>
     <string name="game_state_finished">ゲームオーバー！</string>
 </resources>
