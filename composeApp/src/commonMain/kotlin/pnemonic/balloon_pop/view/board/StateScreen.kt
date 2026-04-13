@@ -31,7 +31,7 @@ import pnemonic.balloon_pop.view.theme.paddingScreen
 
 private val colorMask = Color.Black.copy(alpha = 0.7f)
 private val colorText = Color(0xFFCC0088)
-private val colorShadow = Color(0xFF008800)
+private val colorShadow = Color.Magenta
 private val sizeText = 60.sp
 
 @Composable
@@ -109,7 +109,7 @@ private fun PreviewWide() {
     backgroundColor = previewColor,
     widthDp = previewWidthDp,
     heightDp = previewHeightDp,
-    locale = "af"
+    locale = "ru"
 )
 private fun Preview_AF() {
     MaterialTheme {
