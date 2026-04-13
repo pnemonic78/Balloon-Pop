@@ -3,6 +3,8 @@ package pnemonic.balloon_pop.view.home
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -13,10 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import balloon_pop.composeapp.generated.resources.Res
-import balloon_pop.composeapp.generated.resources.ic_explosion
 import balloon_pop.composeapp.generated.resources.play
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.resources.vectorResource
 import pnemonic.VoidCallback
 import pnemonic.balloon_pop.view.GlossyButton
 import pnemonic.balloon_pop.view.GlowBox
@@ -45,8 +45,8 @@ fun StartButton(modifier: Modifier = Modifier, onClick: VoidCallback) {
             Text(text = stringResource(Res.string.play), fontSize = 40.sp, color = colorContent)
             Spacer(modifier = Modifier.width(sizeIconSpacing))
             Icon(
-                imageVector = vectorResource(Res.drawable.ic_explosion),
-                contentDescription = "💣",
+                imageVector = Icons.Default.PushPin,
+                contentDescription = "📌",
                 modifier = Modifier.size(40.dp),
                 tint = colorContent.copy(alpha = 0.8f)
             )
