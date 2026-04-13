@@ -23,13 +23,13 @@ class HelpViewModel : LifecycleViewModel() {
 
     init {
         viewModelScope.launch {
-            val bugs = BalloonFactory.allBalloons.sortedWith { b1, b2 ->
+            val balloons = BalloonFactory.allBalloons.sortedWith { b1, b2 ->
                 val c = b1.hits.compareTo(b2.hits)
                 if (c != 0) return@sortedWith c
                 b1.score.compareTo(b2.score)
             }
-            bugs.forEach { it.freeze(1L) }
-            _catalog.update { bugs }
+            balloons.forEach { it.freeze(1L) }
+            _catalog.update { balloons }
         }
         viewModelScope.launch {
             _bonuses.update {

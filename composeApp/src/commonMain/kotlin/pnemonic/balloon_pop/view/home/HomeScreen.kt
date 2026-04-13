@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
@@ -24,7 +25,10 @@ import pnemonic.BooleanCallback
 import pnemonic.VoidCallback
 import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Difficulty
+import pnemonic.balloon_pop.model.Scene
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
+import pnemonic.balloon_pop.view.board.BouquetView
+import pnemonic.balloon_pop.view.board.SceneView
 import pnemonic.balloon_pop.view.difficulty.DifficultyCallback
 import pnemonic.balloon_pop.view.difficulty.DifficultyPanel
 import pnemonic.balloon_pop.view.previewHeightDp
@@ -78,12 +82,12 @@ private fun HomeScreen(
     onBoardSize: OnSizeCallback,
     onBalloonSize: BalloonCallback,
 ) {
-//    SceneView(
-//        modifier = Modifier.fillMaxSize()
-//            .onSizeChanged { onBoardSize(it) },
-//        scene = Scene.Grass,
-//    ) {
-//        SwarmView(board, onBalloonSize, onTap = {})
+    SceneView(
+        modifier = Modifier.fillMaxSize()
+            .onSizeChanged { onBoardSize(it) },
+        scene = Scene.Garden,
+    ) {
+        BouquetView(board, onBalloonSize, onTap = {})
         Box(modifier = Modifier.fillMaxSize().background(color = colorMask))
         Column(
             modifier = Modifier.fillMaxSize().padding(paddingScreen),
@@ -110,7 +114,7 @@ private fun HomeScreen(
             )
             Spacer(modifier = Modifier.weight(0.25f))
         }
-//    }
+    }
 }
 
 @Composable

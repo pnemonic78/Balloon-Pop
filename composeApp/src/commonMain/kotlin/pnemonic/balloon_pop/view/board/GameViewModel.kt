@@ -1,0 +1,181 @@
+package pnemonic.balloon_pop.view.board
+
+import androidx.annotation.FloatRange
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.IntSize
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import pnemonic.balloon_pop.Feedback
+import pnemonic.balloon_pop.Platform
+import pnemonic.balloon_pop.control.LifecycleViewModel
+import pnemonic.balloon_pop.engine.GameEngine
+import pnemonic.balloon_pop.getPlatform
+import pnemonic.balloon_pop.model.Board
+import pnemonic.balloon_pop.model.Bonus
+import pnemonic.balloon_pop.model.GameState
+import pnemonic.balloon_pop.model.balloon.Balloon
+import pnemonic.balloon_pop.model.tool.Tool
+import pnemonic.balloon_pop.sound.SoundType
+import pnemonic.balloon_pop.view.settings.SettingsManager
+
+class GameViewModel : LifecycleViewModel() {
+    private var engine = GameEngine(viewModelScope)
+    private val platform: Platform = getPlatform()
+    private val settings = SettingsManager
+
+    private val _board = MutableStateFlow(engine.boards.value)
+    val board: StateFlow<Board> = _board
+    private val _state = MutableStateFlow(engine.state.value)
+    val state: StateFlow<GameState> get() = engine.state
+    val isMusicEnabled get() = settings.isMusicEnabled
+    val isSoundEnabled get() = settings.isSoundEnabled
+    val difficulty get() = settings.difficulty
+
+    init {
+        collectAll(engine)
+    }
+
+    private fun collectAll(engine: GameEngine) {
+        viewModelScope.launch {
+            engine.boards.collect {
+                _board.emit(it)
+            }
+        }
+        viewModelScope.launch {
+            engine.state.collect {
+                _state.emit(it)
+            }
+        }
+        viewModelScope.launch {
+            engine.feedback.collect {
+                notifyFeedback(it)
+            }
+        }
+        viewModelScope.launch {
+            _board.emit(engine.boards.value)
+            _state.emit(engine.state.value)
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        engine.clear()
+    }
+
+    override fun onStart() {
+        engine.start(difficulty)
+        platform.sound.onStart()
+    }
+
+    override fun onPause() {
+        engine.pause()
+    }
+
+    override fun onResume() {
+        engine.resume()
+    }
+
+    override fun onStop() {
+        engine.stop()
+        platform.sound.onStop()
+    }
+
+    override fun onDestroy() {
+        platform.haptic.onDestroy()
+        platform.sound.onDestroy()
+    }
+
+    fun onBoardSize(size: IntSize) {
+        engine.onSize(size)
+    }
+
+    fun onTap(offset: Offset) {
+        engine.touch(offset)
+    }
+
+    fun onBalloonTap(balloon: Balloon) {
+        engine.touch(balloon)
+    }
+
+    fun onBalloonSize(balloon: Balloon) {
+        engine.onBalloonSize(balloon)
+    }
+
+    suspend fun notifyFeedback(feedback: Feedback) {
+        when (feedback) {
+            Feedback.None -> return
+            is Feedback.Bash -> bash(feedback)
+            is Feedback.Hit -> vibrate(feedback.duration, feedback.amplitude)
+            is Feedback.Silence -> stopSound(feedback.soundType)
+            is Feedback.Sound -> playSound(feedback.soundType)
+            is Feedback.Vibrate -> vibrate(feedback.duration, feedback.amplitude)
+        }
+        engine.feedbackDone()
+    }
+
+    private suspend fun bash(feedback: Feedback.Bash) {
+        playSound(feedback.soundType)
+        vibrate(feedback.duration, feedback.amplitude)
+    }
+
+    private suspend fun playSound(soundType: SoundType) {
+        if ((soundType.repeat && isMusicEnabled) || (!soundType.repeat && isSoundEnabled)) {
+            withContext(Dispatchers.Main) {
+                platform.sound.play(soundType)
+            }
+        }
+    }
+
+    private suspend fun stopSound(soundType: SoundType) {
+        withContext(Dispatchers.Main) {
+            if (soundType.repeat) {
+                platform.sound.pause(soundType)
+            } else {
+                platform.sound.stop(soundType)
+            }
+        }
+    }
+
+    private fun vibrate(
+        duration: Long,
+        @FloatRange(from = 0.0, to = 1.0) amplitude: Float = 1f
+    ) {
+        platform.haptic.vibrate(duration, amplitude)
+    }
+
+    fun onSoundChange(enabled: Boolean) {
+        SettingsManager.isSoundEnabled = enabled
+    }
+
+    fun onMusicChange(enabled: Boolean) {
+        SettingsManager.isMusicEnabled = enabled
+        viewModelScope.launch {
+            val sound = board.value.scene.music.soundType
+            if (enabled) {
+                playSound(sound)
+            } else {
+                stopSound(sound)
+            }
+        }
+    }
+
+    fun onBonusClick(bonus: Bonus) {
+        engine.onBonusClick(bonus)
+    }
+
+    fun onPauseChange(paused: Boolean) {
+        if (paused) {
+            engine.pause()
+        } else {
+            engine.resume()
+        }
+    }
+
+    fun onToolUse(tool: Tool) {
+        engine.onToolUse(tool)
+    }
+}
