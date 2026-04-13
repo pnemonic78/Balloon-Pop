@@ -66,7 +66,7 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
-private val colorMask = Color(0xAACC00CC)
+private val colorMask = Color(0xCCCC00CC)
 
 @Composable
 private fun HomeScreen(

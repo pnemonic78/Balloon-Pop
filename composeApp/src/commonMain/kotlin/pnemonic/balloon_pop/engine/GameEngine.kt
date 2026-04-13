@@ -259,7 +259,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         stopSounds(board)
 
         val level = board.level + 1
-        val scene = Scene.forLevel(level)
+        val scene = generateScene(level)
         val boardNext = generateBalloons(board.copy(level = level, scene = scene, tool = null))
 
         if (level > 1) {
@@ -270,6 +270,10 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         playSounds(boardNext)
 
         return boardNext
+    }
+
+    protected open fun generateScene(level: Int): Scene {
+        return Scene.forLevel(level)
     }
 
     protected open suspend fun finished() {

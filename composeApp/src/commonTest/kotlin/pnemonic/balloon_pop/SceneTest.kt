@@ -8,9 +8,15 @@ class SceneTest {
 
     @Test
     fun next() {
-        var scene = Scene.Garden
+        var scene = Scene.Sky
+        assertEquals(Scene.Sky, scene)
+        scene = scene.next()
         assertEquals(Scene.Garden, scene)
         scene = scene.next()
-        assertEquals(Scene.Beach, scene)
+        assertEquals(Scene.Park, scene)
+        scene = scene.next()
+        assertEquals(Scene.Forest, scene)
+        scene = scene.next()
+        assertEquals(Scene.Rainbow, scene)
     }
 }

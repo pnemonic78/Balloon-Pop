@@ -2,8 +2,11 @@ package pnemonic.balloon_pop.model
 
 import androidx.annotation.IntRange
 import balloon_pop.composeapp.generated.resources.Res
-import balloon_pop.composeapp.generated.resources.bg_daisies
-import balloon_pop.composeapp.generated.resources.bg_sand
+import balloon_pop.composeapp.generated.resources.bg_flowers
+import balloon_pop.composeapp.generated.resources.bg_lawn
+import balloon_pop.composeapp.generated.resources.bg_mountains
+import balloon_pop.composeapp.generated.resources.bg_rainbow
+import balloon_pop.composeapp.generated.resources.bg_sky
 import org.jetbrains.compose.resources.DrawableResource
 import pnemonic.balloon_pop.Feedback
 import pnemonic.balloon_pop.sound.SoundType
@@ -15,8 +18,11 @@ enum class Scene(
     // Stats are in top-left corner.
     val flipPortraitHorizontal: Boolean = false
 ) {
-    Garden(SoundType.Garden, Res.drawable.bg_daisies),
-    Beach(SoundType.Beach, Res.drawable.bg_sand);
+    Sky(SoundType.Beach, Res.drawable.bg_sky),
+    Garden(SoundType.Garden, Res.drawable.bg_flowers),
+    Park(SoundType.Garden, Res.drawable.bg_lawn),
+    Forest(SoundType.Garden, Res.drawable.bg_mountains),
+    Rainbow(SoundType.Beach, Res.drawable.bg_rainbow);
 
     constructor(
         soundType: SoundType,

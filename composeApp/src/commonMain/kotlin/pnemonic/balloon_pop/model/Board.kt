@@ -6,7 +6,7 @@ import pnemonic.balloon_pop.model.tool.Tool
 
 data class Board(
     val size: Size = Size.Zero,
-    val scene: Scene = Scene.Garden,
+    val scene: Scene = Scene.Sky,
     val level: Int = 0,
     val difficulty: Difficulty = Difficulty.Easy,
     val score: Long = 0,
