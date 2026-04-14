@@ -9,6 +9,7 @@ import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
 import pnemonic.balloon_pop.model.balloon.Heart
+import pnemonic.balloon_pop.model.balloon.HotAirBalloon
 import pnemonic.balloon_pop.model.balloon.Lemon
 import pnemonic.balloon_pop.model.balloon.Orange
 import pnemonic.balloon_pop.model.balloon.Snake
@@ -28,6 +29,7 @@ object BalloonFactory {
     private const val CLASS_FLOWER = "Flower"
     private const val CLASS_GIRAFFE = "Giraffe"
     private const val CLASS_HEART = "Heart"
+    private const val CLASS_HOT_AIR = "HotAir"
     private const val CLASS_LEMON = "Lemon"
     private const val CLASS_ORANGE = "Orange"
     private const val CLASS_SNAKE = "Snake"
@@ -39,7 +41,7 @@ object BalloonFactory {
     private val level2 = level1 + CLASS_STAR
     private val level3 = level2 + CLASS_HEART
     private val level4 = level3 + CLASS_DOG
-    private val level5 = level4 + CLASS_BUTTERFLY
+    private val level5 = level4 + CLASS_BUTTERFLY + CLASS_HOT_AIR
     private val level6 = level5 + CLASS_SNAKE
     private val level7 = level6 + CLASS_ORANGE
     private val level8 = level7 + CLASS_GIRAFFE
@@ -82,6 +84,7 @@ object BalloonFactory {
             CLASS_FLOWER -> Flower(size = size, sway = sway)
             CLASS_GIRAFFE -> Giraffe(size = size, sway = sway)
             CLASS_HEART -> Heart(size = size, sway = sway)
+            CLASS_HOT_AIR -> HotAirBalloon(size = size, sway = sway)
             CLASS_LEMON -> Lemon(size = size, sway = sway)
             CLASS_ORANGE -> Orange(size = size, sway = sway)
             CLASS_SNAKE -> Snake(size = size, sway = sway)
@@ -115,6 +118,7 @@ object BalloonFactory {
             Flower(),
             Giraffe(),
             Heart(),
+            HotAirBalloon(),
             Lemon(),
             Orange(),
             Snake(),

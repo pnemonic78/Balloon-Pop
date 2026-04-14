@@ -4,7 +4,21 @@ Have fun **popping** 🎈🎈 before they escape.
 
 There are infinite levels where 🎈🎈 are floating upwards into the sky.
 
-🎈🦋🐕🌼🦒❤🍋🍊🐍⭐🍉
+### Most balloons should be popped:
+🦋 Butterfly\
+🐕 Dog\
+🌼 Flower\
+🦒 Giraffe\
+❤ Heart\
+🍋 Lemon\
+🍊 Orange\
+🐍 Snake\
+⭐ Star\
+🎈 Teardrop\
+🍉 Watermelon
+
+### Some balloons are friendly:
+<img src="./resources/images/hot-air-balloon.svg" width="22" height="22" alt="🪂" /> Hot Air Balloon
 
 ### Use bonuses to pop 🎈🎈:
 💝 Extra life.\
