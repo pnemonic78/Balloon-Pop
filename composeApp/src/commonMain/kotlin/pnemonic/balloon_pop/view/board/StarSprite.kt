@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.Star as StarImage
 
 @Composable
 fun StarSprite(balloon: Star, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, StarImage, 4f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, StarImage, 4f, true, onSize, onTap)
 }
 
 @Preview(

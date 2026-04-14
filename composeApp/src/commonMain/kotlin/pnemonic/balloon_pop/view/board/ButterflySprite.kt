@@ -14,8 +14,13 @@ import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.drawable.Butterfly as ButterflyImage
 
 @Composable
-fun ButterflySprite(balloon: Butterfly, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, ButterflyImage, 0.75f, onSize, onTap)
+fun ButterflySprite(
+    balloon: Butterfly,
+    boardSize: Size,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback
+) {
+    BalloonSprite(balloon, boardSize, ButterflyImage, 0.75f, false, onSize, onTap)
 }
 
 @Preview(

@@ -14,8 +14,13 @@ import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.drawable.Giraffe as GiraffeImage
 
 @Composable
-fun GiraffeSprite(balloon: Giraffe, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, GiraffeImage, 0.5f, onSize, onTap)
+fun GiraffeSprite(
+    balloon: Giraffe,
+    boardSize: Size,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback
+) {
+    BalloonSprite(balloon, boardSize, GiraffeImage, 0.5f, false, onSize, onTap)
 }
 
 @Preview(

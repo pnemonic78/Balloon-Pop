@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.Heart as HeartImage
 
 @Composable
 fun HeartSprite(balloon: Heart, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, HeartImage, 4f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, HeartImage, 4f, true, onSize, onTap)
 }
 
 @Preview(

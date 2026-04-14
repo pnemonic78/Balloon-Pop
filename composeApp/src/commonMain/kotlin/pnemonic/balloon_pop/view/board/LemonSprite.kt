@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.Lemon as LemonImage
 
 @Composable
 fun LemonSprite(balloon: Lemon, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, LemonImage, 40f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, LemonImage, 40f, true, onSize, onTap)
 }
 
 @Preview(

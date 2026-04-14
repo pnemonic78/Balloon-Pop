@@ -14,8 +14,13 @@ import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.drawable.Teardrop as TeardropImage
 
 @Composable
-fun TeardropSprite(balloon: Teardrop, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, TeardropImage, 5f, onSize, onTap)
+fun TeardropSprite(
+    balloon: Teardrop,
+    boardSize: Size,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback
+) {
+    BalloonSprite(balloon, boardSize, TeardropImage, 5f, true, onSize, onTap)
 }
 
 @Preview(

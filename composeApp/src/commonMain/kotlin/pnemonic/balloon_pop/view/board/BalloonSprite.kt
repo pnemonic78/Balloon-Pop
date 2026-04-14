@@ -2,20 +2,27 @@ package pnemonic.balloon_pop.view.board
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.dp
+import pnemonic.balloon_pop.drawable.Cord
 import pnemonic.balloon_pop.drawable.Pop
 import pnemonic.balloon_pop.model.balloon.Balloon
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
@@ -47,9 +54,9 @@ fun BalloonSprite(
         is Heart -> HeartSprite(balloon, boardSize, onSize, onTap)
         is Lemon -> LemonSprite(balloon, boardSize, onSize, onTap)
         is Orange -> OrangeSprite(balloon, boardSize, onSize, onTap)
-        is Teardrop -> TeardropSprite(balloon, boardSize, onSize, onTap)
         is Snake -> SnakeSprite(balloon, boardSize, onSize, onTap)
         is Star -> StarSprite(balloon, boardSize, onSize, onTap)
+        is Teardrop -> TeardropSprite(balloon, boardSize, onSize, onTap)
         is Watermelon -> WatermelonSprite(balloon, boardSize, onSize, onTap)
     }
 }
@@ -60,6 +67,7 @@ fun BalloonSprite(
     boardSize: Size,
     image: ImageVector,
     scale: Float,
+    cord: Boolean = false,
     onSize: BalloonCallback,
     onTap: BalloonCallback,
     modifier: Modifier = Modifier
@@ -74,7 +82,6 @@ fun BalloonSprite(
 
     Box(
         modifier = modifier
-            .size(width, height)
             .onSizeChanged { size ->
                 val oldWidth = balloon.width.roundToInt()
                 val oldHeight = balloon.height.roundToInt()
@@ -90,23 +97,33 @@ fun BalloonSprite(
                 scaleX = sx
                 scaleY = sy
             }
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null
-            ) {
-                onTap(balloon)
-            }
     ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            imageVector = image,
-            contentDescription = balloon.description,
-            contentScale = ContentScale.Fit,
-            alpha = animatedOpacity
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(
+                modifier = Modifier.size(width, height)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
+                        onTap(balloon)
+                    },
+                imageVector = image,
+                contentDescription = balloon.description,
+                contentScale = ContentScale.Fit,
+                alpha = animatedOpacity
+            )
+            if (cord) {
+                Image(
+                    modifier = Modifier.size(width, 100.dp),
+                    imageVector = Cord,
+                    contentDescription = "~",
+                    contentScale = ContentScale.Fit
+                )
+            }
+        }
         if (isPopped) {
             Image(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.size(width, height),
                 imageVector = Pop,
                 contentDescription = "💥",
                 contentScale = ContentScale.FillBounds

@@ -14,8 +14,13 @@ import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.drawable.Watermelon as WatermelonImage
 
 @Composable
-fun WatermelonSprite(balloon: Watermelon, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, WatermelonImage, 10f, onSize, onTap)
+fun WatermelonSprite(
+    balloon: Watermelon,
+    boardSize: Size,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback
+) {
+    BalloonSprite(balloon, boardSize, WatermelonImage, 10f, true, onSize, onTap)
 }
 
 @Preview(

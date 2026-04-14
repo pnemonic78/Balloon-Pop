@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.Dog as DogImage
 
 @Composable
 fun DogSprite(balloon: Dog, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, DogImage, 0.8f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, DogImage, 0.8f, false, onSize, onTap)
 }
 
 @Preview(

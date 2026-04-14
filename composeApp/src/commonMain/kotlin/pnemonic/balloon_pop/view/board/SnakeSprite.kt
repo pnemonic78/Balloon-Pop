@@ -15,7 +15,7 @@ import pnemonic.balloon_pop.drawable.Snake as SnakeImage
 
 @Composable
 fun SnakeSprite(balloon: Snake, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, SnakeImage, 1f, onSize, onTap)
+    BalloonSprite(balloon, boardSize, SnakeImage, 1f, false, onSize, onTap)
 }
 
 @Preview(

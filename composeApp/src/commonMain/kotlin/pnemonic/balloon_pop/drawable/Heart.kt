@@ -45,7 +45,7 @@ val Heart: ImageVector
                             0.879f to Color(0xFFFF486A),
                             1f to Color(0xFFFF5E79)
                         ),
-                        center = Offset(17.699f, 11.889f),
+                        center = Offset(22f, 10f),
                         radius = 18.55f
                     )
                 ) {

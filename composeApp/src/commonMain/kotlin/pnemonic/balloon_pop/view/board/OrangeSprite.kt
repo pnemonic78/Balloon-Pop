@@ -14,8 +14,13 @@ import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.drawable.Orange as OrangeImage
 
 @Composable
-fun OrangeSprite(balloon: Orange, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, OrangeImage, 5f, onSize, onTap)
+fun OrangeSprite(
+    balloon: Orange,
+    boardSize: Size,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback
+) {
+    BalloonSprite(balloon, boardSize, OrangeImage, 5f, true, onSize, onTap)
 }
 
 @Preview(
