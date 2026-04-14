@@ -1,8 +1,10 @@
 # Balloon Pop
 
-The fun game where you **pop** balloons before they escape.
+Have fun **popping** 🎈🎈 before they escape.
 
-There are infinite levels where various balloons are floating upwards into the sky.
+There are infinite levels where 🎈🎈 are floating upwards into the sky.
+
+🎈🦋🐕🌼🦒❤🍋🍊🐍⭐🍉
 
 ### Use bonuses to pop balloons:
 💝 Extra life.\
