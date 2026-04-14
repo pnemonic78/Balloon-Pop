@@ -65,6 +65,11 @@ object BalloonFactory {
 
     private fun createBalloon(difficulty: Difficulty, candidates: List<KlassName>): Balloon {
         val i = rand.nextInt(candidates.size)
+        val size = when (difficulty) {
+            Difficulty.Easy -> 1f + (rand.nextFloat() * 0.25f)
+            Difficulty.Medium -> 0.75f + (rand.nextFloat() * 0.75f)
+            Difficulty.Hard -> 0.5f + rand.nextFloat()
+        }
         val sway = when (difficulty) {
             Difficulty.Easy -> false
             Difficulty.Medium -> rand.nextBoolean()
@@ -72,17 +77,17 @@ object BalloonFactory {
         }
         // klass.createInstance() does not work in JS
         return when (val klass = candidates[i]) {
-            CLASS_BUTTERFLY -> Butterfly(sway = sway)
-            CLASS_DOG -> Dog(sway = sway)
-            CLASS_FLOWER -> Flower(sway = sway)
-            CLASS_GIRAFFE -> Giraffe(sway = sway)
-            CLASS_HEART -> Heart(sway = sway)
-            CLASS_LEMON -> Lemon(sway = sway)
-            CLASS_ORANGE -> Orange(sway = sway)
-            CLASS_SNAKE -> Snake(sway = sway)
-            CLASS_STAR -> Star(sway = sway)
-            CLASS_TEARDROP -> Teardrop(sway = sway)
-            CLASS_WATERMELON -> Watermelon(sway = sway)
+            CLASS_BUTTERFLY -> Butterfly(size = size, sway = sway)
+            CLASS_DOG -> Dog(size = size, sway = sway)
+            CLASS_FLOWER -> Flower(size = size, sway = sway)
+            CLASS_GIRAFFE -> Giraffe(size = size, sway = sway)
+            CLASS_HEART -> Heart(size = size, sway = sway)
+            CLASS_LEMON -> Lemon(size = size, sway = sway)
+            CLASS_ORANGE -> Orange(size = size, sway = sway)
+            CLASS_SNAKE -> Snake(size = size, sway = sway)
+            CLASS_STAR -> Star(size = size, sway = sway)
+            CLASS_TEARDROP -> Teardrop(size = size, sway = sway)
+            CLASS_WATERMELON -> Watermelon(size = size, sway = sway)
             else -> throw IllegalArgumentException(klass)
         }
     }

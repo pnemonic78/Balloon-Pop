@@ -19,7 +19,7 @@ import kotlin.math.sin
 typealias BalloonCallback = (Balloon) -> Unit
 
 abstract class Balloon(
-    val size: Float,
+    val size: Float = 1f,
     val speed: Float,
     val score: Long,
     hits: Int = 1,
@@ -139,6 +139,7 @@ abstract class Balloon(
         val x2 = x1 + (dx * c) - (dy * s)
         val y2 = y1 + (dx * s) + (dy * c)
         moveTo(x2, y2)
+        this.velocity *= ACCELERATION
         return angle == rotationMovement
     }
 
@@ -154,7 +155,8 @@ abstract class Balloon(
         val x2 = x1 + (dx * c) - (dy * s)
         val y2 = y1 + (dx * s) + (dy * c)
         moveTo(x2, y2)
-        angleZigZag += 0.02f
+        this.velocity *= ACCELERATION
+        this.angleZigZag += ZIG_ZAG
         return true
     }
 
@@ -206,7 +208,10 @@ abstract class Balloon(
     }
 
     companion object {
+        // Accelerate because of buoyancy.
+        private const val ACCELERATION = 1.002f
         private const val EPSILON_ESCAPE = 5f
+        private const val ZIG_ZAG = 0.02f
     }
 }
 

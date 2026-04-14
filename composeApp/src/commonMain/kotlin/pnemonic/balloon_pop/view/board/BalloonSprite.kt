@@ -64,6 +64,7 @@ fun BalloonSprite(
     onTap: BalloonCallback,
     modifier: Modifier = Modifier
 ) {
+    val scale = scale * balloon.size
     val isPopped = balloon.isPopped
     val width = image.defaultWidth * scale
     val height = image.defaultHeight * scale
