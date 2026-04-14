@@ -24,6 +24,12 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 💝 Extra life.\
 🏆 Extra score.
 
+## Play Online
+
+[🎈💣 in browser](./play-web/){:target="_blank"}
+
+[Google Play Store](https://play.google.com/store/apps/details?id=pnemonic.balloon_pop)
+
 ## Privacy
 
 [Privacy Policy](./resources/docs/privacy-policy.html)
@@ -33,6 +39,10 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 * [Apache 2.0](./LICENSE)
 
 Designed using Kotlin Compose Multiplatform.
+
+### Images
+
+* [FreePik](https://www.freepik.com/)
 
 ### Music
 
