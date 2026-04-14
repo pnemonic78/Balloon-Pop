@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,8 @@ private val sizeText = 20.sp
 
 @Composable
 fun LevelView(modifier: Modifier = Modifier, level: Int, count: Int) {
+    val counterIcon = remember { Teardrop(30f) }
+
     Row(
         modifier = modifier.panel(),
         verticalAlignment = Alignment.CenterVertically,
@@ -38,7 +41,7 @@ fun LevelView(modifier: Modifier = Modifier, level: Int, count: Int) {
         Text("$level", color = colorText, fontSize = sizeText)
         Spacer(modifier = Modifier.width(8.dp))
         Image(
-            imageVector = Teardrop,
+            imageVector = counterIcon,
             contentDescription = "⏳",
             modifier = Modifier.size(sizeIcon)
         )

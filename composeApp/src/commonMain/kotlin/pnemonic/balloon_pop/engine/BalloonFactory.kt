@@ -86,7 +86,7 @@ object BalloonFactory {
             CLASS_ORANGE -> Orange(size = size, sway = sway)
             CLASS_SNAKE -> Snake(size = size, sway = sway)
             CLASS_STAR -> Star(size = size, sway = sway)
-            CLASS_TEARDROP -> Teardrop(size = size, sway = sway)
+            CLASS_TEARDROP -> Teardrop(size = size, sway = sway, hue = rand.nextFloat() * 360)
             CLASS_WATERMELON -> Watermelon(size = size, sway = sway)
             else -> throw IllegalArgumentException(klass)
         }

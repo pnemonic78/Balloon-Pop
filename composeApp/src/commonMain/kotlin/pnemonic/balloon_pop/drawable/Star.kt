@@ -94,7 +94,7 @@ val Star: ImageVector
                             0.829f to Color(0xFFFFD11B),
                             0.966f to Color(0xFFFFDD13)
                         ),
-                        center = Offset(19.285f, 19.859f),
+                        center = Offset(15f, 15f),
                         radius = 19.494f
                     )
                 ) {

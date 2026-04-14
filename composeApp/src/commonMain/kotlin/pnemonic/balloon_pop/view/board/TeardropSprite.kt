@@ -20,7 +20,7 @@ fun TeardropSprite(
     onSize: BalloonCallback,
     onTap: BalloonCallback
 ) {
-    BalloonSprite(balloon, boardSize, TeardropImage, 5f, true, onSize, onTap)
+    BalloonSprite(balloon, boardSize, TeardropImage(balloon.hue), 5f, true, onSize, onTap)
 }
 
 @Preview(

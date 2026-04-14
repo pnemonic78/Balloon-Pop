@@ -1,5 +1,6 @@
 package pnemonic.compose
 
+import androidx.annotation.FloatRange
 import androidx.compose.ui.graphics.Color
 import kotlin.math.max
 import kotlin.math.min
@@ -38,5 +39,12 @@ fun Color.lighten(factor: Float = 0.1f): Color {
     val hsl = toHsl()
     // Increase 'Value' (index 2) to make it brighter, capped at 1.0
     hsl[2] = (hsl[2] + factor).coerceIn(0f, 1f)
+    return Color.hsl(hsl[0], hsl[1], hsl[2], alpha)
+}
+
+// The color value in the range (0..360), where 0 is red, 120 is green, and 240 is blue
+fun Color.hue(@FloatRange(0.0, 360.0) hue: Float): Color {
+    val hsl = toHsl()
+    hsl[0] = hue.coerceIn(0f, 360f)
     return Color.hsl(hsl[0], hsl[1], hsl[2], alpha)
 }

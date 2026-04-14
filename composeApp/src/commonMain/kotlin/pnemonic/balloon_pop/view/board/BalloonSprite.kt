@@ -2,23 +2,21 @@ package pnemonic.balloon_pop.view.board
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.VectorPainter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
@@ -37,6 +35,7 @@ import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
 import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.Watermelon
+import pnemonic.compose.toDp
 import kotlin.math.roundToInt
 
 @Composable
@@ -72,10 +71,34 @@ fun BalloonSprite(
     onTap: BalloonCallback,
     modifier: Modifier = Modifier
 ) {
+    val painter = rememberVectorPainter(image)
+    BalloonSprite(
+        balloon,
+        boardSize,
+        painter,
+        scale,
+        cord,
+        onSize,
+        onTap,
+        modifier
+    )
+}
+
+@Composable
+fun BalloonSprite(
+    balloon: Balloon,
+    boardSize: Size,
+    painter: VectorPainter,
+    scale: Float,
+    cord: Boolean = false,
+    onSize: BalloonCallback,
+    onTap: BalloonCallback,
+    modifier: Modifier = Modifier
+) {
     val scale = scale * balloon.size
     val isPopped = balloon.isPopped
-    val width = image.defaultWidth * scale
-    val height = image.defaultHeight * scale
+    val width = (painter.intrinsicSize.width * scale).toDp()
+    val height = (painter.intrinsicSize.height * scale).toDp()
     val sx by animateFloatAsState(targetValue = if (isPopped) 1.3f else 1f)
     val sy by animateFloatAsState(targetValue = if (isPopped) 1.25f else 1f)
     val animatedOpacity by animateFloatAsState(targetValue = balloon.opacity)
@@ -107,7 +130,7 @@ fun BalloonSprite(
                     ) {
                         onTap(balloon)
                     },
-                imageVector = image,
+                painter = painter,
                 contentDescription = balloon.description,
                 contentScale = ContentScale.Fit,
                 alpha = animatedOpacity
