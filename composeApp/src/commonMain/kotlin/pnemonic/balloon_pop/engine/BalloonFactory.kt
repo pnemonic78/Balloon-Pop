@@ -63,7 +63,7 @@ object BalloonFactory {
 
     private val rand = Random.Default
 
-    private fun createBug(candidates: List<KlassName>): Balloon {
+    private fun createBalloon(candidates: List<KlassName>): Balloon {
         val i = rand.nextInt(candidates.size)
         // klass.createInstance() does not work in JS
         return when (val klass = candidates[i]) {
@@ -92,8 +92,7 @@ object BalloonFactory {
         val balloons = mutableListOf<Balloon>()
 
         (1..size).forEach { _ ->
-            val bug = createBug(candidates)
-            balloons.add(bug)
+            balloons.add(createBalloon(candidates))
         }
 
         return Bouquet(balloons)

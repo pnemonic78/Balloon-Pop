@@ -5,13 +5,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +27,7 @@ import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewHeightDp
 import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.view.settings.ActionPanel
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.paddingScreen
 
 private val colorMask = Color.Black.copy(alpha = 0.7f)
@@ -69,6 +70,7 @@ private fun GameOver(modifier: Modifier = Modifier, text: String) {
     Text(
         modifier = modifier.padding(8.dp),
         text = text,
+        fontFamily = FontFamily.Serif,
         fontSize = sizeText,
         fontWeight = FontWeight.Bold,
         color = colorText,
@@ -85,7 +87,7 @@ private fun GameOver(modifier: Modifier = Modifier, text: String) {
     heightDp = previewHeightDp
 )
 private fun Preview() {
-    MaterialTheme {
+    AppTheme {
         StateScreen(state = GameState.FINISHED, onHomeClick = {})
     }
 }
@@ -98,7 +100,7 @@ private fun Preview() {
     heightDp = previewHeightDp
 )
 private fun PreviewWide() {
-    MaterialTheme {
+    AppTheme {
         StateScreen(state = GameState.FINISHED, onHomeClick = {})
     }
 }
@@ -112,7 +114,7 @@ private fun PreviewWide() {
     locale = "ru"
 )
 private fun Preview_AF() {
-    MaterialTheme {
+    AppTheme {
         StateScreen(state = GameState.FINISHED, onHomeClick = {})
     }
 }

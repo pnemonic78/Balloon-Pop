@@ -5,7 +5,6 @@ import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.MusicOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +15,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import pnemonic.BooleanCallback
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.colorButton
 import pnemonic.balloon_pop.view.theme.modifierButton
 import pnemonic.balloon_pop.view.theme.modifierIcon
@@ -53,7 +53,7 @@ fun MusicButton(
 @Composable
 @Preview
 private fun Preview0() {
-    MaterialTheme {
+    AppTheme {
         MusicButton(false) {}
     }
 }
@@ -61,7 +61,7 @@ private fun Preview0() {
 @Composable
 @Preview
 private fun Preview1() {
-    MaterialTheme {
+    AppTheme {
         MusicButton(true) {}
     }
 }

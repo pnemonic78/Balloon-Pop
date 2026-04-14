@@ -2,7 +2,6 @@ package pnemonic.balloon_pop.view.home
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -13,6 +12,7 @@ import pnemonic.balloon_pop.view.settings.ActionPanel
 import pnemonic.balloon_pop.view.settings.HelpButton
 import pnemonic.balloon_pop.view.settings.MusicButton
 import pnemonic.balloon_pop.view.settings.SoundButton
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.sizeHomeButton
 
 @Composable
@@ -36,7 +36,7 @@ fun SettingsPanel(
 @Preview
 @Composable
 private fun Preview() {
-    MaterialTheme {
+    AppTheme {
         SettingsPanel(
             isSoundEnabled = true,
             onSoundChange = {},
@@ -50,7 +50,7 @@ private fun Preview() {
 @Preview(locale = "he")
 @Composable
 private fun Preview_RTL() {
-    MaterialTheme {
+    AppTheme {
         SettingsPanel(
             isSoundEnabled = true,
             onSoundChange = {},

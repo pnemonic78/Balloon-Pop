@@ -5,8 +5,8 @@ import androidx.compose.ui.geometry.Size
 import pnemonic.balloon_pop.model.balloon.Balloon
 
 @Composable
-fun BalloonScore(bug: Balloon, boardSize: Size) {
-    if (bug.isPopped) {
-        Score(bug, boardSize)
+fun BalloonScore(balloon: Balloon, boardSize: Size) {
+    if (balloon.isPopped) {
+        Score(balloon, boardSize)
     }
 }

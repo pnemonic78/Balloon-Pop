@@ -2,7 +2,6 @@ package pnemonic.balloon_pop.view.board
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Modifier
@@ -16,6 +15,7 @@ import pnemonic.balloon_pop.model.balloon.BalloonCallback
 import pnemonic.balloon_pop.model.balloon.Bouquet
 import pnemonic.balloon_pop.model.balloon.contains
 import pnemonic.balloon_pop.view.previewColor
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.compose.toPx
 
 @Composable
@@ -68,7 +68,7 @@ private fun Preview() {
         y += dy
     }
 
-    MaterialTheme {
+    AppTheme {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = AbsoluteAlignment.TopLeft) {
             BouquetView(Bouquet(balloons), Size.Zero, onSize = {}, onTap = {})
         }

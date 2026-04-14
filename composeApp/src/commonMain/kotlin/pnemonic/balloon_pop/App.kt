@@ -1,13 +1,13 @@
 package pnemonic.balloon_pop
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import pnemonic.balloon_pop.view.MainScreen
+import pnemonic.balloon_pop.view.theme.AppTheme
 
 @Composable
 fun App() {
-    MaterialTheme {
+    AppTheme {
         MainScreen()
     }
 }

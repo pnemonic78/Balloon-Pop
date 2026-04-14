@@ -3,7 +3,6 @@ package pnemonic.balloon_pop.view.home
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -15,6 +14,7 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +24,8 @@ import balloon_pop.composeapp.generated.resources.title
 import org.jetbrains.compose.resources.stringResource
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewWidthDp
-import pnemonic.balloon_pop.view.theme.Brown
-import pnemonic.balloon_pop.view.theme.DarkRed
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.Gold
-import pnemonic.balloon_pop.view.theme.LightBrown
 
 private val sizeTitle = 70.sp
 
@@ -43,12 +41,13 @@ fun Title(modifier: Modifier = Modifier, title: String) {
     var heightPx by remember { mutableFloatStateOf(200f) }
 
     val style = LocalTextStyle.current.copy(
-        lineHeight = sizeTitle,
+        lineHeight = sizeTitle * 1.2,
         brush = Brush.verticalGradient(
-            colors = listOf(White, Yellow, Gold, LightBrown, Brown, DarkRed),
+            colors = listOf(White, Yellow, Gold),
             endY = heightPx
         ),
         shadow = Shadow(blurRadius = 5f),
+        fontFamily = FontFamily.Serif,
         fontSize = sizeTitle,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
@@ -73,7 +72,7 @@ fun Title(modifier: Modifier = Modifier, title: String) {
 @Composable
 @Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp * 2)
 private fun PreviewWide() {
-    MaterialTheme {
+    AppTheme {
         Title()
     }
 }
@@ -81,15 +80,15 @@ private fun PreviewWide() {
 @Composable
 @Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp)
 private fun PreviewLong() {
-    MaterialTheme {
-        Title(title = "Bug Bash 123")
+    AppTheme {
+        Title(title = "Popping Balloons 123")
     }
 }
 
 @Composable
 @Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp, locale = "af")
 private fun Preview3() {
-    MaterialTheme {
+    AppTheme {
         Title()
     }
 }
@@ -97,7 +96,7 @@ private fun Preview3() {
 @Composable
 @Preview(showBackground = true, backgroundColor = previewColor, widthDp = previewWidthDp, locale = "ru")
 private fun Preview4() {
-    MaterialTheme {
+    AppTheme {
         Title()
     }
 }

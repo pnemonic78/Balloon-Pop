@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +37,7 @@ import pnemonic.balloon_pop.drawable.LifeHas
 import pnemonic.balloon_pop.drawable.Trophy
 import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.BonusCallback
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.panel
 import pnemonic.compose.Left
 import pnemonic.balloon_pop.drawable.Bonus as BonusImage
@@ -173,7 +173,7 @@ private fun Preview() {
         Bonus.Score(progress = 30),
     )
 
-    MaterialTheme {
+    AppTheme {
         BonusesView(bonuses = items, onClick = {})
     }
 }

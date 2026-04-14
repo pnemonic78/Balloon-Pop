@@ -3,7 +3,6 @@ package pnemonic.balloon_pop.view.difficulty
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pnemonic.balloon_pop.model.Difficulty
 import pnemonic.balloon_pop.view.settings.ActionPanel
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.shapePanel
 import pnemonic.balloon_pop.view.theme.sizeHomeButton
 
@@ -61,7 +61,7 @@ fun DifficultyPanel(
 @Preview
 @Composable
 private fun Preview() {
-    MaterialTheme {
+    AppTheme {
         DifficultyPanel(onDifficultyChange = {})
     }
 }

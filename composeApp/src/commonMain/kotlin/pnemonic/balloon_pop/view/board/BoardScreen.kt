@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -35,6 +34,7 @@ import pnemonic.balloon_pop.model.tool.ToolCallback
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewHeightDp
 import pnemonic.balloon_pop.view.previewWidthDp
+import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.compose.OnSizeCallback
 import pnemonic.compose.OnTapCallback
 import pnemonic.compose.toPx
@@ -152,15 +152,15 @@ private fun Preview() {
     val dy = 40.dp.toPx()
     var x = dx
     var y = dy
-    for (bug in balloons) {
-        bug.moveTo(x, y)
-        bug.setDestination(x, 0f)
+    for (balloon in balloons) {
+        balloon.moveTo(x, y)
+        balloon.setDestination(x, 0f)
         x += dx
         y += dy
     }
     val board = Board(bouquet = Bouquet(balloons), bonuses = bonuses)
 
-    MaterialTheme {
+    AppTheme {
         BoardView(
             board,
             GameState.STARTED,

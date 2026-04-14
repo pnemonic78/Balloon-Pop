@@ -75,7 +75,7 @@ class HomeViewModel : LifecycleViewModel() {
         engine.onSize(size)
     }
 
-    fun onBalloonSize(bug: Balloon) {
-        engine.onBalloonSize(bug)
+    fun onBalloonSize(balloon: Balloon) {
+        engine.onBalloonSize(balloon)
     }
 }
