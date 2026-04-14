@@ -51,8 +51,19 @@ private val spacing = 8.dp
 
 @Composable
 fun BonusesView(modifier: Modifier = Modifier, bonuses: List<Bonus>, onClick: BonusCallback) {
+    BonusesView(modifier = modifier, bonuses = bonuses, expanded = false, onClick = onClick)
+}
+
+@Composable
+fun BonusesView(
+    modifier: Modifier = Modifier,
+    bonuses: List<Bonus>,
+    expanded: Boolean,
+    onClick: BonusCallback
+) {
     if (bonuses.isEmpty()) return
-    var expanded by remember { mutableStateOf(true) }
+
+    var expanded by remember { mutableStateOf(expanded) }
     val onBonusClick: BonusCallback = {
         onClick(it)
         expanded = false
@@ -168,12 +179,12 @@ private fun BonusScore(bonus: Bonus.Score) {
 private fun Preview() {
     val items = listOf(
         Bonus.None,
-        Bonus.Flower(progress = 10),
-        Bonus.Life(progress = 20),
-        Bonus.Score(progress = 30),
+        Bonus.Flower(progress = 20),
+        Bonus.Life(progress = 40),
+        Bonus.Score(progress = 60),
     )
 
     AppTheme {
-        BonusesView(bonuses = items, onClick = {})
+        BonusesView(bonuses = items, expanded = true, onClick = {})
     }
 }
