@@ -85,7 +85,7 @@ private fun HomeScreen(
     SceneView(
         modifier = Modifier.fillMaxSize()
             .onSizeChanged { onBoardSize(it) },
-        scene = Scene.Garden,
+        scene = board.scene,
     ) {
         BouquetView(board, onBalloonSize, onTap = {})
         Box(modifier = Modifier.fillMaxSize().background(color = colorMask))

@@ -24,6 +24,7 @@ abstract class Balloon(
     val score: Long,
     hits: Int = 1,
     val sound: SoundType = SoundType.Pop,
+    val sway: Boolean = false
 ) {
     var hits: Int = hits
         private set(value) {
@@ -65,8 +66,7 @@ abstract class Balloon(
         }
     var isStopped by mutableStateOf(false)
         private set
-    var isInBoardBounds = false
-        private set
+    private var angleZigZag = 0f
 
     abstract val description: String
 
@@ -77,7 +77,7 @@ abstract class Balloon(
     fun setSize(width: Float, height: Float) {
         this.width = width
         this.height = height
-        opacity = 1f
+        this.opacity = 1f
     }
 
     fun setSize(size: IntSize) {
@@ -99,7 +99,7 @@ abstract class Balloon(
         return moveNext()
     }
 
-    open fun moveNext() = moveStraight()
+    open fun moveNext() = if (sway) moveZigZag() else moveStraight()
 
     fun moveTo(left: Float, top: Float) {
         this.left = left
@@ -142,6 +142,22 @@ abstract class Balloon(
         return angle == rotationMovement
     }
 
+    protected fun moveZigZag(): Boolean {
+        val size = height
+        val angle = rotationMovement
+        val c = cos(angle)  //TODO cache this value
+        val s = sin(angle)  //TODO cache this value
+        val x1 = left
+        val y1 = top
+        val dx = velocity * size
+        val dy = size * 0.01f * sin(angleZigZag)
+        val x2 = x1 + (dx * c) - (dy * s)
+        val y2 = y1 + (dx * s) + (dy * c)
+        moveTo(x2, y2)
+        angleZigZag += 0.02f
+        return true
+    }
+
     fun isBadMove(): Boolean {
         return destinationX.isNaN()
                 || destinationY.isNaN()
@@ -170,48 +186,11 @@ abstract class Balloon(
         }
     }
 
-    fun didEnter(boardSize: Size): Boolean {
-        if (isInBoardBounds) return false
-
-        val x1 = left
-        val y1 = top
-        val x2 = x1 + width
-        val y2 = y1 + height
-        val x3 = boardSize.width
-        val y3 = boardSize.height
-        val angle = destinationAngle
-        isInBoardBounds = when {
-            // heading to Top-Right
-            (angle <= 90f) -> (x2 > 0) && (y1 < y3)
-            // heading to Bottom-Right
-            (angle <= 180f) -> (x2 > 0) && (y2 > 0)
-            // heading to Bottom-Left
-            (angle <= 270f) -> (x1 < x3) && (y2 > 0)
-            // heading to Top-Left
-            else -> (x1 < x3) && (y2 < y3)
-        }
-        return isInBoardBounds
-    }
-
     fun didEscape(boardSize: Size): Boolean {
-        val x1 = left
         val y1 = top
-        val x2 = x1 + width
         val y2 = y1 + height
-        val x3 = boardSize.width
-        val y3 = boardSize.height
-        val angle = destinationAngle
 
-        return when {
-            // heading to Top-Right
-            (angle <= 90f) -> (x1 + EPSILON_ESCAPE >= x3) || (y2 - EPSILON_ESCAPE < 0f)
-            // heading to Bottom-Right
-            (angle <= 180f) -> (x1 + EPSILON_ESCAPE >= x3) || (y1 + EPSILON_ESCAPE >= y3)
-            // heading to Bottom-Left
-            (angle <= 270f) -> (x2 - EPSILON_ESCAPE < 0f) || (y1 + EPSILON_ESCAPE >= y3)
-            // heading to Top-Left
-            else -> (x2 - EPSILON_ESCAPE < 0f) || (y2 - EPSILON_ESCAPE < 0f)
-        }
+        return (y2 - EPSILON_ESCAPE < 0f)
     }
 
     // delay

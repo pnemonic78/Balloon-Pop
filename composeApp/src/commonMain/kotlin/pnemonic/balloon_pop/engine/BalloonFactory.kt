@@ -30,9 +30,9 @@ object BalloonFactory {
     private const val CLASS_HEART = "Heart"
     private const val CLASS_LEMON = "Lemon"
     private const val CLASS_ORANGE = "Orange"
-    private const val CLASS_TEARDROP = "Teardrop"
     private const val CLASS_SNAKE = "Snake"
     private const val CLASS_STAR = "Star"
+    private const val CLASS_TEARDROP = "Teardrop"
     private const val CLASS_WATERMELON = "Watermelon"
 
     private val level1 = listOf(CLASS_TEARDROP)
@@ -63,21 +63,26 @@ object BalloonFactory {
 
     private val rand = Random.Default
 
-    private fun createBalloon(candidates: List<KlassName>): Balloon {
+    private fun createBalloon(difficulty: Difficulty, candidates: List<KlassName>): Balloon {
         val i = rand.nextInt(candidates.size)
+        val sway = when (difficulty) {
+            Difficulty.Easy -> false
+            Difficulty.Medium -> rand.nextBoolean()
+            Difficulty.Hard -> rand.nextBoolean()
+        }
         // klass.createInstance() does not work in JS
         return when (val klass = candidates[i]) {
-            CLASS_BUTTERFLY -> Butterfly()
-            CLASS_DOG -> Dog()
-            CLASS_FLOWER -> Flower()
-            CLASS_GIRAFFE -> Giraffe()
-            CLASS_HEART -> Heart()
-            CLASS_LEMON -> Lemon()
-            CLASS_ORANGE -> Orange()
-            CLASS_TEARDROP -> Teardrop()
-            CLASS_SNAKE -> Snake()
-            CLASS_STAR -> Star()
-            CLASS_WATERMELON -> Watermelon()
+            CLASS_BUTTERFLY -> Butterfly(sway = sway)
+            CLASS_DOG -> Dog(sway = sway)
+            CLASS_FLOWER -> Flower(sway = sway)
+            CLASS_GIRAFFE -> Giraffe(sway = sway)
+            CLASS_HEART -> Heart(sway = sway)
+            CLASS_LEMON -> Lemon(sway = sway)
+            CLASS_ORANGE -> Orange(sway = sway)
+            CLASS_SNAKE -> Snake(sway = sway)
+            CLASS_STAR -> Star(sway = sway)
+            CLASS_TEARDROP -> Teardrop(sway = sway)
+            CLASS_WATERMELON -> Watermelon(sway = sway)
             else -> throw IllegalArgumentException(klass)
         }
     }
@@ -92,7 +97,7 @@ object BalloonFactory {
         val balloons = mutableListOf<Balloon>()
 
         (1..size).forEach { _ ->
-            balloons.add(createBalloon(candidates))
+            balloons.add(createBalloon(difficulty, candidates))
         }
 
         return Bouquet(balloons)
@@ -107,9 +112,9 @@ object BalloonFactory {
             Heart(),
             Lemon(),
             Orange(),
-            Teardrop(),
             Snake(),
             Star(),
+            Teardrop(),
             Watermelon(),
         )
 }
