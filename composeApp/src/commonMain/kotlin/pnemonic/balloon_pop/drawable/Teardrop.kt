@@ -10,13 +10,13 @@ import androidx.compose.ui.graphics.vector.group
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val Round: ImageVector
+val Teardrop: ImageVector
     get() {
-        if (_Round != null) {
-            return _Round!!
+        if (_Teardrop != null) {
+            return _Teardrop!!
         }
-        _Round = ImageVector.Builder(
-            name = "Round",
+        _Teardrop = ImageVector.Builder(
+            name = "Teardrop",
             defaultWidth = 25.114.dp,
             defaultHeight = 33.671.dp,
             viewportWidth = 25.114f,
@@ -94,8 +94,8 @@ val Round: ImageVector
             }
         }.build()
 
-        return _Round!!
+        return _Teardrop!!
     }
 
 @Suppress("ObjectPropertyName")
-private var _Round: ImageVector? = null
+private var _Teardrop: ImageVector? = null

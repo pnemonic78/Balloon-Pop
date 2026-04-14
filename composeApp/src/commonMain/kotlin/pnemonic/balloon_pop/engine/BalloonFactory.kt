@@ -11,9 +11,9 @@ import pnemonic.balloon_pop.model.balloon.Giraffe
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.Lemon
 import pnemonic.balloon_pop.model.balloon.Orange
-import pnemonic.balloon_pop.model.balloon.Round
 import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
+import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.Watermelon
 import kotlin.random.Random
 
@@ -30,12 +30,12 @@ object BalloonFactory {
     private const val CLASS_HEART = "Heart"
     private const val CLASS_LEMON = "Lemon"
     private const val CLASS_ORANGE = "Orange"
-    private const val CLASS_ROUND = "Round"
+    private const val CLASS_TEARDROP = "Teardrop"
     private const val CLASS_SNAKE = "Snake"
     private const val CLASS_STAR = "Star"
     private const val CLASS_WATERMELON = "Watermelon"
 
-    private val level1 = listOf(CLASS_ROUND)
+    private val level1 = listOf(CLASS_TEARDROP)
     private val level2 = level1 + CLASS_STAR
     private val level3 = level2 + CLASS_HEART
     private val level4 = level3 + CLASS_DOG
@@ -74,7 +74,7 @@ object BalloonFactory {
             CLASS_HEART -> Heart()
             CLASS_LEMON -> Lemon()
             CLASS_ORANGE -> Orange()
-            CLASS_ROUND -> Round()
+            CLASS_TEARDROP -> Teardrop()
             CLASS_SNAKE -> Snake()
             CLASS_STAR -> Star()
             CLASS_WATERMELON -> Watermelon()
@@ -108,7 +108,7 @@ object BalloonFactory {
             Heart(),
             Lemon(),
             Orange(),
-            Round(),
+            Teardrop(),
             Snake(),
             Star(),
             Watermelon(),

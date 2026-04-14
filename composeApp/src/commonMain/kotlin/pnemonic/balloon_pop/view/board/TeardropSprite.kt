@@ -7,15 +7,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.tooling.preview.Preview
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
-import pnemonic.balloon_pop.model.balloon.Round
+import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewHeightDp
 import pnemonic.balloon_pop.view.previewWidthDp
-import pnemonic.balloon_pop.drawable.Round as RoundImage
+import pnemonic.balloon_pop.drawable.Teardrop as TeardropImage
 
 @Composable
-fun RoundSprite(balloon: Round, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
-    BalloonSprite(balloon, boardSize, RoundImage, 5f, onSize, onTap)
+fun TeardropSprite(balloon: Teardrop, boardSize: Size, onSize: BalloonCallback, onTap: BalloonCallback) {
+    BalloonSprite(balloon, boardSize, TeardropImage, 5f, onSize, onTap)
 }
 
 @Preview(
@@ -26,9 +26,9 @@ fun RoundSprite(balloon: Round, boardSize: Size, onSize: BalloonCallback, onTap:
 )
 @Composable
 private fun Preview() {
-    val balloon = Round()
+    val balloon = Teardrop()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        RoundSprite(balloon, Size.Zero, onSize = {}, onTap = {})
+        TeardropSprite(balloon, Size.Zero, onSize = {}, onTap = {})
     }
 }

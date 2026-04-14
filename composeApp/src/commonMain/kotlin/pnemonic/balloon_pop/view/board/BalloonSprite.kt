@@ -26,9 +26,9 @@ import pnemonic.balloon_pop.model.balloon.Giraffe
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.Lemon
 import pnemonic.balloon_pop.model.balloon.Orange
-import pnemonic.balloon_pop.model.balloon.Round
 import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
+import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.Watermelon
 import kotlin.math.roundToInt
 
@@ -47,7 +47,7 @@ fun BalloonSprite(
         is Heart -> HeartSprite(balloon, boardSize, onSize, onTap)
         is Lemon -> LemonSprite(balloon, boardSize, onSize, onTap)
         is Orange -> OrangeSprite(balloon, boardSize, onSize, onTap)
-        is Round -> RoundSprite(balloon, boardSize, onSize, onTap)
+        is Teardrop -> TeardropSprite(balloon, boardSize, onSize, onTap)
         is Snake -> SnakeSprite(balloon, boardSize, onSize, onTap)
         is Star -> StarSprite(balloon, boardSize, onSize, onTap)
         is Watermelon -> WatermelonSprite(balloon, boardSize, onSize, onTap)

@@ -6,7 +6,7 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 
 🎈🦋🐕🌼🦒❤🍋🍊🐍⭐🍉
 
-### Use bonuses to pop balloons:
+### Use bonuses to pop 🎈🎈:
 💝 Extra life.\
 🏆 Extra score.
 

@@ -1,7 +1,7 @@
 package pnemonic.balloon_pop
 
 import androidx.compose.ui.geometry.Rect
-import pnemonic.balloon_pop.model.balloon.Round
+import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.contains
 import kotlin.test.Test
 import kotlin.test.assertFalse
@@ -13,7 +13,7 @@ class BalloonTest {
     fun `rect contains`() {
         val board = Rect(0f, 0f, 1000f, 1000f)
 
-        val balloon = Round()
+        val balloon = Teardrop()
         balloon.setSize(100f, 100f)
 
         // top-left in board
