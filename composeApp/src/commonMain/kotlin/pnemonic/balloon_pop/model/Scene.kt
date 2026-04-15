@@ -21,8 +21,8 @@ enum class Scene(
     Sky(SoundType.Beach, Res.drawable.bg_sky),
     Garden(SoundType.Garden, Res.drawable.bg_flowers),
     Park(SoundType.Garden, Res.drawable.bg_lawn),
-    Forest(SoundType.Garden, Res.drawable.bg_mountains),
-    Rainbow(SoundType.Beach, Res.drawable.bg_rainbow);
+    Forest(SoundType.Forest, Res.drawable.bg_mountains),
+    Rainbow(SoundType.Midday, Res.drawable.bg_rainbow);
 
     constructor(
         soundType: SoundType,
