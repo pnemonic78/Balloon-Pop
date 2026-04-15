@@ -13,7 +13,7 @@ import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.balloon.Balloon
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
 import pnemonic.balloon_pop.model.balloon.Bouquet
-import pnemonic.balloon_pop.model.balloon.contains
+import pnemonic.balloon_pop.model.contains
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.compose.toPx
@@ -25,12 +25,12 @@ fun BouquetView(board: Board, onSize: BalloonCallback, onTap: BalloonCallback) {
 
 @Composable
 fun BouquetView(
-    swarm: Bouquet,
+    bouquet: Bouquet,
     boardSize: Size,
     onSize: BalloonCallback,
     onTap: BalloonCallback
 ) {
-    BouquetView(swarm.balloons, boardSize, onSize, onTap)
+    BouquetView(bouquet.balloons, boardSize, onSize, onTap)
 }
 
 @Composable
@@ -45,6 +45,7 @@ fun BouquetView(
             BalloonSprite(balloon, boardSize, onSize, onTap)
         }
     }
+    // TODO render prizes
 }
 
 @Composable

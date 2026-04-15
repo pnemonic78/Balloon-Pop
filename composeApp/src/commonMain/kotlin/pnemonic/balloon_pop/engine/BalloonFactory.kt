@@ -17,6 +17,10 @@ import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
 import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.Watermelon
+import pnemonic.balloon_pop.model.prize.Coins
+import pnemonic.balloon_pop.model.prize.Gem
+import pnemonic.balloon_pop.model.prize.Gemstone
+import pnemonic.balloon_pop.model.prize.Prize
 import kotlin.random.Random
 
 typealias KlassName = String
@@ -67,7 +71,11 @@ object BalloonFactory {
 
     private val rand = Random.Default
 
-    private fun createBalloon(difficulty: Difficulty, candidates: List<KlassName>): Balloon {
+    private fun createBalloon(
+        difficulty: Difficulty,
+        level: Int,
+        candidates: List<KlassName>
+    ): Balloon {
         val i = rand.nextInt(candidates.size)
         val size = when (difficulty) {
             Difficulty.Easy -> 1f + (rand.nextFloat() * 0.25f)
@@ -85,7 +93,7 @@ object BalloonFactory {
             CLASS_DOG -> Dog(size = size, sway = sway)
             CLASS_FLOWER -> Flower(size = size, sway = sway)
             CLASS_GIRAFFE -> Giraffe(size = size, sway = sway)
-            CLASS_GOLD -> Gold(size = size, sway = sway)
+            CLASS_GOLD -> Gold(size = size, sway = sway, prize = createPrize(difficulty, level))
             CLASS_HEART -> Heart(size = size, sway = sway)
             CLASS_HOT_AIR -> HotAirBalloon(size = size, sway = sway)
             CLASS_LEMON -> Lemon(size = size, sway = sway)
@@ -108,10 +116,23 @@ object BalloonFactory {
         val balloons = mutableListOf<Balloon>()
 
         (1..size).forEach { _ ->
-            balloons.add(createBalloon(difficulty, candidates))
+            balloons.add(createBalloon(difficulty, level, candidates))
         }
 
         return Bouquet(balloons)
+    }
+
+    private fun createPrize(difficulty: Difficulty, level: Int): Prize {
+        val score = 10L * level * difficulty
+        val money = rand.nextBoolean()
+        return if (money) {
+            Coins(score = score)
+        } else {
+            val gems = Gem.entries
+            val i = rand.nextInt(gems.size)
+            val gem = gems[i]
+            Gemstone(score = score, gem = gem)
+        }
     }
 
     val allBalloons: List<Balloon>
@@ -120,7 +141,7 @@ object BalloonFactory {
             Dog(),
             Flower(),
             Giraffe(),
-            Gold(),
+            Gold(prize = Coins(0)),
             Heart(),
             HotAirBalloon(),
             Lemon(),

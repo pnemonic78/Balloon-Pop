@@ -44,6 +44,7 @@ import pnemonic.balloon_pop.Platform
 import pnemonic.balloon_pop.drawable.Trophy
 import pnemonic.balloon_pop.getPlatform
 import pnemonic.balloon_pop.model.balloon.Balloon
+import pnemonic.balloon_pop.model.prize.Prize
 import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.DarkRed
 import pnemonic.balloon_pop.view.theme.Gold
@@ -86,6 +87,11 @@ private val colorShadow = Yellow
 @Composable
 fun Score(balloon: Balloon, boardSize: Size) {
     Score(balloon.score, boardSize, balloon.left + balloon.width.half, balloon.top + balloon.height.half)
+}
+
+@Composable
+fun Score(prize: Prize, boardSize: Size) {
+    Score(prize.score, boardSize, prize.left + prize.width.half, prize.top + prize.height.half)
 }
 
 @Composable

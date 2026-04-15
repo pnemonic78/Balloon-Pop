@@ -4,10 +4,8 @@ import pnemonic.balloon_pop.sound.SoundType
 
 abstract class Animal(
     size: Float,
-    speed: Float,
     score: Long,
     hits: Int,
     sound: SoundType,
     sway: Boolean
-) :
-    Balloon(size = size, speed = speed, score = score, hits = hits, sound = sound, sway = sway)
+) : Balloon(size = size, score = score, hits = hits, sound = sound, sway = sway)

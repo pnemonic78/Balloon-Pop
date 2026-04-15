@@ -20,9 +20,13 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 ### Some balloons are friendly:
 <img src="./resources/images/hot-air-balloon.svg" width="22" height="22" alt="🪂" /> Hot Air Balloon
 
-### Use bonuses to pop 🎈🎈:
-💝 Extra life.\
-🏆 Extra score.
+### Some balloons have prizes:
+💎 Gemstones\
+💰 Gold coins
+
+### Get bonuses:
+💝 Extra life\
+🏆 Extra score
 
 ## Play Online
 
@@ -53,4 +57,5 @@ Designed using Kotlin Compose Multiplatform.
 
 ### Sounds
 
+* [Cha-Ching Register](https://soundbible.com/1997-Cha-Ching-Register.html)
 * [Slime Splash](https://soundbible.com/1097-Slime-Splash.html)

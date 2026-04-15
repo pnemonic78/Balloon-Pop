@@ -28,6 +28,7 @@ import pnemonic.balloon_pop.model.balloon.Butterfly
 import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
+import pnemonic.balloon_pop.model.balloon.Gold
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.HotAirBalloon
 import pnemonic.balloon_pop.model.balloon.Lemon
@@ -51,6 +52,7 @@ fun BalloonSprite(
         is Dog -> DogSprite(balloon, boardSize, onSize, onTap)
         is Flower -> FlowerSprite(balloon, boardSize, onSize, onTap)
         is Giraffe -> GiraffeSprite(balloon, boardSize, onSize, onTap)
+        is Gold -> GoldSprite(balloon, boardSize, onSize, onTap)
         is Heart -> HeartSprite(balloon, boardSize, onSize, onTap)
         is HotAirBalloon -> HotAirBalloonSprite(balloon, boardSize, onSize, onTap)
         is Lemon -> LemonSprite(balloon, boardSize, onSize, onTap)
