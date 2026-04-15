@@ -34,7 +34,6 @@ class HelpViewModel : LifecycleViewModel() {
         viewModelScope.launch {
             _bonuses.update {
                 listOf(
-                    Bonus.Flower(progress = Long.MAX_VALUE),
                     Bonus.Life(progress = Long.MAX_VALUE),
                     Bonus.Score(progress = Long.MAX_VALUE),
                 )

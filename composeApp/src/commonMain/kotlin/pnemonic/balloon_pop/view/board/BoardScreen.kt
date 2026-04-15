@@ -147,7 +147,7 @@ fun BoardView(
 )
 private fun Preview() {
     val balloons = BalloonFactory.allBalloons
-    val bonuses = listOf(Bonus.None, Bonus.Flower(1), Bonus.Life(2), Bonus.Score(3))
+    val bonuses = listOf(Bonus.None, Bonus.Life(20), Bonus.Score(30))
     val dx = 20.dp.toPx()
     val dy = 40.dp.toPx()
     var x = dx

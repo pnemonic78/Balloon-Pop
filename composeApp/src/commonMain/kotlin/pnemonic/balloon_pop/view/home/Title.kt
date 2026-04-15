@@ -26,6 +26,7 @@ import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.Gold
+import pnemonic.balloon_pop.view.theme.Orange
 
 private val sizeTitle = 70.sp
 
@@ -43,7 +44,7 @@ fun Title(modifier: Modifier = Modifier, title: String) {
     val style = LocalTextStyle.current.copy(
         lineHeight = sizeTitle * 1.2,
         brush = Brush.verticalGradient(
-            colors = listOf(White, Yellow, Gold),
+            colors = listOf(White, Yellow, Gold, Orange),
             endY = heightPx
         ),
         shadow = Shadow(blurRadius = 5f),

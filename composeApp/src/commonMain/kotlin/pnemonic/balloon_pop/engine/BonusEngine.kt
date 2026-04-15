@@ -12,7 +12,6 @@ import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.tool.AttractionTool
 import pnemonic.balloon_pop.model.tool.BonusTool
 import pnemonic.balloon_pop.model.tool.ExtraLife
-import pnemonic.balloon_pop.model.tool.Flower
 import pnemonic.balloon_pop.model.tool.FreezeTool
 import pnemonic.balloon_pop.model.tool.PopTool
 import pnemonic.balloon_pop.model.tool.Score
@@ -128,7 +127,6 @@ class BonusEngine(
     private suspend fun addTool(board: Board, bonus: Bonus): Board {
         return when (bonus) {
             Bonus.None -> board
-            is Bonus.Flower -> add(board, bonus)
             is Bonus.Life -> add(board, bonus)
             is Bonus.Score -> add(board, bonus)
         }
@@ -137,16 +135,10 @@ class BonusEngine(
     private fun applyTool(board: Board, tool: Tool): Board {
         return when (tool) {
             Bonus.None -> board
-            is Flower -> used(board, tool)
             is ExtraLife -> apply(board, tool)
             is Score -> apply(board, tool)
             else -> board
         }
-    }
-
-    private fun add(board: Board, bonus: Bonus.Flower): Board {
-        val tool = Flower(bonus)
-        return board.copy(tool = tool)
     }
 
     private suspend fun add(board: Board, bonus: Bonus.Life): Board {
@@ -177,11 +169,6 @@ class BonusEngine(
 
         val board = usedTool(board, tool)
         return board.copy(lives = lives)
-    }
-
-    private fun used(board: Board, tool: Flower): Board {
-        tool.thaw()
-        return usedTool(board, tool)
     }
 
     private fun apply(board: Board, tool: Score): Board {
@@ -228,14 +215,7 @@ class BonusEngine(
     }
 
     private suspend fun useTool(board: Board, tool: Tool): Board {
-        return when (tool) {
-            is Flower -> useTool(board, tool)
-            else -> board
-        }
-    }
-
-    private fun useTool(board: Board, tool: Flower): Board {
-        return attract(board, tool)
+        return board
     }
 
     private fun attract(board: Board, tool: AttractionTool): Board {

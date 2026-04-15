@@ -37,15 +37,6 @@ sealed class Bonus(
 
     object None : Bonus(score = 0, hits = 0, description = "", sound = SoundType.None)
 
-    // Attract balloons to the flower.
-    class Flower(progress: Long = 0) : Bonus(
-        score = 100,
-        hits = 1,
-        description = "🌼",
-        sound = SoundType.Pop,
-        progress = progress
-    )
-
     // Extra life.
     class Life(progress: Long = 0) : Bonus(
         score = 300,

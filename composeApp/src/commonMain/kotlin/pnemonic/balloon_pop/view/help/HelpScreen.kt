@@ -185,9 +185,7 @@ private fun BalloonCell(balloon: Balloon, onClick: BalloonCallback) {
 @Composable
 private fun BonusCell(bonus: Bonus, onClick: BonusCallback) {
     val color = if (bonus.hits >= 0) colorGood else colorBad
-    val isPrize = (bonus is Bonus.Flower)
-            || (bonus is Bonus.Life)
-            || (bonus is Bonus.Score)
+    val isPrize = (bonus is Bonus.Life) || (bonus is Bonus.Score)
 
     Row(modifier = Modifier.padding(8.dp)) {
         Box(

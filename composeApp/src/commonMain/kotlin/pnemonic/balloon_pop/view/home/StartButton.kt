@@ -22,12 +22,12 @@ import pnemonic.balloon_pop.view.GlossyButton
 import pnemonic.balloon_pop.view.GlowBox
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.theme.AppTheme
-import pnemonic.balloon_pop.view.theme.Gold
 import pnemonic.balloon_pop.view.theme.LargeIconSpacing
+import pnemonic.balloon_pop.view.theme.Orange
 import pnemonic.compose.lighten
 
-private val colorContainer = Gold
-private val colorContent = Gold.lighten(-0.3f)
+private val colorContainer = Orange
+private val colorContent = Orange.lighten(-0.3f)
 private val colorShadow = Yellow
 private val sizeShadow = 25.dp
 private val sizeIconSpacing = LargeIconSpacing

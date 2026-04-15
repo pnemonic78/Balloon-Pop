@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.toSize
 import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.Difficulty
 import pnemonic.balloon_pop.model.tool.ExtraLife
-import pnemonic.balloon_pop.model.tool.Flower
 import pnemonic.balloon_pop.model.tool.Score
 import pnemonic.balloon_pop.model.tool.Tool
 import pnemonic.balloon_pop.model.tool.ToolCallback
@@ -53,9 +52,6 @@ fun ToolBelow(
     boardSize: Size,
     difficulty: Difficulty
 ) {
-    when (tool) {
-        is Flower -> FlowerSprite(tool, onToolUse, boardSize, difficulty)
-    }
 }
 
 @Composable
@@ -130,15 +126,12 @@ fun ToolSprite(
 )
 private fun Preview() {
     val boardSize = Size(previewWidthDp.dp.toPx(), previewHeightDp.dp.toPx())
-    val toolBelow = Flower(Bonus.Flower())
     val toolAbove = ExtraLife(Bonus.Life())
 
-    toolBelow.show()
     toolAbove.show()
 
     AppTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            ToolBelow(toolBelow, onToolUse = {}, boardSize, Difficulty.Easy)
             ToolAbove(toolAbove, onToolUse = {}, boardSize)
         }
     }

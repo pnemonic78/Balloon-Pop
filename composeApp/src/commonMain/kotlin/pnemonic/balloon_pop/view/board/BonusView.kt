@@ -32,7 +32,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import pnemonic.balloon_pop.drawable.Flower
 import pnemonic.balloon_pop.drawable.LifeHas
 import pnemonic.balloon_pop.drawable.Trophy
 import pnemonic.balloon_pop.model.Bonus
@@ -128,7 +127,6 @@ fun BonusSprite(bonus: Bonus, size: Dp, onClick: BonusCallback) {
     ) {
         when (bonus) {
             Bonus.None -> return
-            is Bonus.Flower -> BonusFlower(bonus)
             is Bonus.Life -> BonusLife(bonus)
             is Bonus.Score -> BonusScore(bonus)
         }
@@ -142,16 +140,6 @@ fun BonusSprite(bonus: Bonus, size: Dp, onClick: BonusCallback) {
             )
         }
     }
-}
-
-@Composable
-private fun BonusFlower(bonus: Bonus.Flower) {
-    Image(
-        modifier = Modifier.fillMaxSize(),
-        imageVector = Flower,
-        contentDescription = bonus.description,
-        contentScale = ContentScale.Fit
-    )
 }
 
 @Composable
@@ -179,7 +167,6 @@ private fun BonusScore(bonus: Bonus.Score) {
 private fun Preview() {
     val items = listOf(
         Bonus.None,
-        Bonus.Flower(progress = 20),
         Bonus.Life(progress = 40),
         Bonus.Score(progress = 60),
     )
