@@ -8,6 +8,7 @@ import pnemonic.balloon_pop.model.balloon.Butterfly
 import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
+import pnemonic.balloon_pop.model.balloon.Gold
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.HotAirBalloon
 import pnemonic.balloon_pop.model.balloon.Lemon
@@ -28,6 +29,7 @@ object BalloonFactory {
     private const val CLASS_DOG = "Dog"
     private const val CLASS_FLOWER = "Flower"
     private const val CLASS_GIRAFFE = "Giraffe"
+    private const val CLASS_GOLD = "Gold"
     private const val CLASS_HEART = "Heart"
     private const val CLASS_HOT_AIR = "HotAir"
     private const val CLASS_LEMON = "Lemon"
@@ -83,6 +85,7 @@ object BalloonFactory {
             CLASS_DOG -> Dog(size = size, sway = sway)
             CLASS_FLOWER -> Flower(size = size, sway = sway)
             CLASS_GIRAFFE -> Giraffe(size = size, sway = sway)
+            CLASS_GOLD -> Gold(size = size, sway = sway)
             CLASS_HEART -> Heart(size = size, sway = sway)
             CLASS_HOT_AIR -> HotAirBalloon(size = size, sway = sway)
             CLASS_LEMON -> Lemon(size = size, sway = sway)
@@ -117,6 +120,7 @@ object BalloonFactory {
             Dog(),
             Flower(),
             Giraffe(),
+            Gold(),
             Heart(),
             HotAirBalloon(),
             Lemon(),
