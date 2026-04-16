@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="31.086689mm"
+   height="36.746391mm"
+   viewBox="0 0 31.086689 36.746391"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="bomb.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.1071317"
+     inkscape:cx="46.260995"
+     inkscape:cy="82.417615"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="XMLID_355_" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient13"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop12" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="1"
+         id="stop13" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient9"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop10" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="1"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop7" />
+      <stop
+         style="stop-color:#3f3f3f;stop-opacity:1;"
+         offset="0.48379052"
+         id="stop9" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="1"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       id="XMLID_00000084504989090136655080000000042426285250184326_"
+       gradientUnits="userSpaceOnUse"
+       x1="281.3428"
+       y1="218.0607"
+       x2="287.8428"
+       y2="181.0607">
+					<stop
+   offset="0.005"
+   style="stop-color:#EB3E00"
+   id="stop47" />
+
+					<stop
+   offset="0.1238"
+   style="stop-color:#EC4700"
+   id="stop48" />
+
+					<stop
+   offset="0.3164"
+   style="stop-color:#ED5F00"
+   id="stop49" />
+
+					<stop
+   offset="0.5587"
+   style="stop-color:#F08600"
+   id="stop50" />
+
+					<stop
+   offset="0.8386"
+   style="stop-color:#F3BC00"
+   id="stop51" />
+
+					<stop
+   offset="0.995"
+   style="stop-color:#F5DD00"
+   id="stop52" />
+
+				</linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="linearGradient8"
+       x1="227.42"
+       y1="215.2715"
+       x2="260.232"
+       y2="215.2715"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9"
+       id="radialGradient11"
+       cx="243.826"
+       cy="266.86899"
+       fx="243.826"
+       fy="266.86899"
+       r="52.573002"
+       gradientTransform="translate(0,-2.5637956e-5)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient13"
+       id="radialGradient12"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.93503446,-0.02273717,0.02262768,0.9305316,13.634417,19.951679)"
+       cx="258.49783"
+       cy="255.18275"
+       fx="258.49783"
+       fy="255.18275"
+       r="52.573002" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-89.429167,-130.175)">
+    <g
+       id="XMLID_299_"
+       transform="matrix(-0.26458333,0,0,0.26458333,171.11821,82.402363)">
+		<g
+   id="XMLID_347_">
+			<g
+   id="XMLID_355_"
+   style="fill:url(#radialGradient11)"
+   inkscape:transform-center-y="0.25768186"
+   inkscape:label="ball">
+				<circle
+   id="XMLID_359_"
+   style="fill:url(#radialGradient12)"
+   r="52.573002"
+   cy="266.86899"
+   cx="243.826" />
+
+				
+			</g>
+
+			<g
+   id="XMLID_348_"
+   inkscape:label="cap">
+				<ellipse
+   id="XMLID_354_"
+   style="fill:#282828"
+   cx="243.826"
+   cy="208.10201"
+   rx="16.406"
+   ry="2.802" />
+
+				<g
+   id="XMLID_349_">
+					<path
+   id="XMLID_353_"
+   style="fill:url(#linearGradient8)"
+   d="M 243.826,210.904 C 234.765,210.904 227.42,209.65 227.42,208.102 V 219.639 C 227.42,221.186 234.765,222.441 243.826,222.441 252.887,222.441 260.232,221.187 260.232,219.639 V 208.102 C 260.232,209.65 252.887,210.904 243.826,210.904 Z" />
+
+					
+					
+					
+				</g>
+
+			</g>
+
+		</g>
+
+		<g
+   id="XMLID_300_"
+   inkscape:label="fuse">
+			<g
+   id="XMLID_316_">
+				
+					<linearGradient
+   id="linearGradient6"
+   gradientUnits="userSpaceOnUse"
+   x1="281.3428"
+   y1="218.0607"
+   x2="287.8428"
+   y2="181.0607">
+					<stop
+   offset="0.005"
+   style="stop-color:#EB3E00"
+   id="stop1" />
+
+					<stop
+   offset="0.1238"
+   style="stop-color:#EC4700"
+   id="stop2" />
+
+					<stop
+   offset="0.3164"
+   style="stop-color:#ED5F00"
+   id="stop3" />
+
+					<stop
+   offset="0.5587"
+   style="stop-color:#F08600"
+   id="stop4" />
+
+					<stop
+   offset="0.8386"
+   style="stop-color:#F3BC00"
+   id="stop5" />
+
+					<stop
+   offset="0.995"
+   style="stop-color:#F5DD00"
+   id="stop6" />
+
+				</linearGradient>
+
+				<path
+   id="XMLID_318_"
+   style="fill:url(#XMLID_00000084504989090136655080000000042426285250184326_)"
+   d="M 292.774,180.558 C 292.774,180.558 281.976,192.197 267.982,186.235 267.982,186.235 277.089,201.371 259.77,212.355 259.77,212.355 283.079,206.888 284.504,225.665 284.504,225.665 285.663,205.154 305.189,210.823 305.189,210.823 298.48,194.96 308.746,189.185 308.746,189.186 295.341,194.248 292.774,180.558 Z" />
+
+				<path
+   id="XMLID_317_"
+   style="opacity:0.5;fill:#eb3e00"
+   d="M 289.779,188.49 C 289.779,188.49 282.778,196.036 273.705,192.171 273.705,192.171 279.609,201.984 268.381,209.105 268.381,209.105 283.493,205.561 284.417,217.734 284.417,217.734 285.168,204.436 297.828,208.112 297.828,208.112 293.479,197.828 300.134,194.083 300.134,194.083 291.443,197.365 289.779,188.49 Z" />
+
+			</g>
+
+			<g
+   id="XMLID_301_">
+				<g
+   id="XMLID_314_">
+					<path
+   id="XMLID_315_"
+   style="fill:#f9ed95"
+   d="M 243.822,209.368 C 241.187,209.368 238.982,207.308 238.834,204.645 238.776,203.612 238.434,194.39 243.937,188.573 246.692,185.661 250.437,184.121 254.767,184.121 262.053,184.121 265.707,187.79 268.641,190.738 271.755,193.866 274.445,196.566 282.848,196.566 285.61,196.566 287.848,198.805 287.848,201.566 287.848,204.327 285.61,206.566 282.848,206.566 270.289,206.566 265.242,201.496 261.555,197.793 258.954,195.181 257.779,194.121 254.767,194.121 252.717,194.121 251.785,194.829 251.201,195.445 248.957,197.817 248.752,202.868 248.819,204.091 248.972,206.848 246.861,209.207 244.104,209.36 244.009,209.366 243.915,209.368 243.822,209.368 Z" />
+
+				</g>
+
+				<g
+   id="XMLID_302_">
+					<path
+   id="XMLID_313_"
+   style="fill:#bfb26a"
+   d="M 239.342,198.207 C 239.276,198.545 239.22,198.873 239.168,199.197 242.476,199.334 245.98,199.607 249.029,200.872 249.077,200.553 249.138,200.224 249.207,199.893 246.132,198.671 242.673,198.359 239.342,198.207 Z" />
+
+					<path
+   id="XMLID_312_"
+   style="fill:#bfb26a"
+   d="M 247.894,193.704 C 246.162,192.408 244.253,191.45 242.228,190.759 242.038,191.05 241.866,191.348 241.697,191.646 243.924,192.382 246.019,193.445 247.856,194.933 248.651,195.576 249.468,196.283 250.112,197.084 250.267,196.762 250.442,196.459 250.634,196.173 249.805,195.264 248.879,194.441 247.894,193.704 Z" />
+
+					<path
+   id="XMLID_311_"
+   style="fill:#bfb26a"
+   d="M 252.11,194.722 C 252.354,194.582 252.64,194.456 252.977,194.356 252.646,192.655 252.122,190.985 251.555,189.337 251.015,187.767 250.357,186.299 249.373,185.04 249.043,185.159 248.717,185.285 248.399,185.427 250.402,187.795 251.635,191.42 252.11,194.722 Z" />
+
+					<path
+   id="XMLID_310_"
+   style="fill:#bfb26a"
+   d="M 256.383,191.007 C 256.318,192.072 256.241,193.159 256.019,194.207 256.368,194.253 256.692,194.324 256.999,194.415 257.008,194.372 257.022,194.329 257.03,194.286 257.245,193.06 257.352,191.797 257.411,190.556 257.512,188.445 257.394,186.349 257.117,184.265 256.782,184.225 256.444,184.188 256.091,184.165 256.404,186.432 256.524,188.71 256.383,191.007 Z" />
+
+					<path
+   id="XMLID_309_"
+   style="fill:#bfb26a"
+   d="M 260.072,196.354 C 261.03,195.011 261.806,193.442 262.575,192.234 263.63,190.575 264.343,189.012 264.808,187.297 264.527,187.091 264.235,186.893 263.934,186.699 263.49,188.469 262.774,190.06 261.712,191.729 260.996,192.854 260.236,194.4 259.317,195.699 259.561,195.897 259.813,196.115 260.072,196.354 Z" />
+
+					<path
+   id="XMLID_308_"
+   style="fill:#bfb26a"
+   d="M 269.713,191.801 C 268.819,193.041 267.873,194.24 266.9,195.429 265.807,196.764 264.594,198.437 262.993,199.214 263.237,199.448 263.49,199.684 263.751,199.92 264.885,199.266 265.842,198.259 266.707,197.233 268.009,195.691 269.274,194.125 270.451,192.492 270.201,192.266 269.956,192.036 269.713,191.801 Z" />
+
+					<path
+   id="XMLID_307_"
+   style="fill:#bfb26a"
+   d="M 274.028,194.949 C 272.893,198.112 270.984,201.15 268.382,203.291 268.694,203.465 269.017,203.635 269.35,203.8 271.909,201.579 273.801,198.518 274.949,195.345 274.629,195.22 274.321,195.089 274.028,194.949 Z" />
+
+					<path
+   id="XMLID_306_"
+   style="fill:#bfb26a"
+   d="M 275.467,205.861 C 275.824,205.935 276.174,206.013 276.549,206.076 278.536,203.239 279.675,199.947 279.877,196.435 279.533,196.403 279.204,196.363 278.882,196.319 278.693,199.825 277.523,203.079 275.467,205.861 Z" />
+
+					<path
+   id="XMLID_305_"
+   style="fill:#bfb26a"
+   d="M 282.398,196.557 C 283.395,199.853 283.527,203.273 282.783,206.565 282.805,206.565 282.826,206.567 282.848,206.567 283.181,206.567 283.505,206.531 283.82,206.469 284.502,203.228 284.393,199.87 283.466,196.629 283.261,196.604 283.06,196.567 282.848,196.567 282.691,196.567 282.55,196.559 282.398,196.557 Z" />
+
+					<g
+   id="XMLID_303_">
+						<path
+   id="XMLID_304_"
+   style="fill:#bfb26a"
+   d="M 243.894,207.247 C 241.824,207.247 239.992,206.245 238.843,204.704 239.02,207.338 241.207,209.369 243.822,209.369 243.915,209.369 244.009,209.367 244.103,209.361 246.577,209.224 248.516,207.307 248.781,204.923 247.625,206.34 245.866,207.247 243.894,207.247 Z" />
+
+					</g>
+
+				</g>
+
+			</g>
+
+		</g>
+
+	</g>
+  </g>
+</svg>

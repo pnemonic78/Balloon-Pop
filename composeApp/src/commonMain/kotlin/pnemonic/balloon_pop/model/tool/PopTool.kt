@@ -6,13 +6,14 @@ import pnemonic.balloon_pop.model.Bonus
 import kotlin.math.max
 import kotlin.math.min
 
-open class PopTool(bonus: Bonus) : BonusTool(bonus) {
-    suspend fun pop(board: Board, callback: EngineCallback): Board {
+open class PopTool(bonus: Bonus, val isSingleton: Boolean = false) : BonusTool(bonus) {
+    open suspend fun pop(board: Board, callback: EngineCallback): Board {
+        val boardSize = board.size
         var lives = board.lives
         var score = board.score
 
         for (balloon in board.bouquet) {
-            if ((hits > 0) && !balloon.isPopped && isHit(balloon)) {
+            if ((hits > 0) && !balloon.isPopped && isHit(balloon, boardSize)) {
                 val balloonHits = min(balloon.hits.toLong(), hits)
                 (1..balloonHits).forEach { _ ->
                     balloon.hit()
@@ -28,6 +29,11 @@ open class PopTool(bonus: Bonus) : BonusTool(bonus) {
 
                 hits -= balloonHits
             }
+        }
+
+        // single-use tool.
+        if (isSingleton) {
+            hits = 0L
         }
 
         return board.copy(score = score, lives = lives)

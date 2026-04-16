@@ -45,10 +45,6 @@ abstract class Tool {
         bounds = Rect(left = x1, top = y1, right = x2, bottom = y2)
     }
 
-    fun moveBy(dx: Float, dy: Float) {
-        bounds = bounds.translate(dx, dy)
-    }
-
     fun setSize(width: Float, height: Float, boardSize: Size) {
         val left = boardSize.width.half - width.half
         val top = boardSize.height.half - height.half
@@ -67,7 +63,7 @@ abstract class Tool {
         opacity = 0f
     }
 
-    fun isHit(balloon: Balloon): Boolean {
+    open fun isHit(balloon: Balloon, boardSize: Size): Boolean {
         return balloon.isHit(bounds)
     }
 }

@@ -1,15 +1,17 @@
 package pnemonic.balloon_pop.model.tool
 
+import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.balloon.Balloon
-import pnemonic.balloon_pop.model.balloon.Bouquet
 
 open class FreezeTool(bonus: Bonus) : BonusTool(bonus) {
     private val frozen = mutableListOf<Balloon>()
 
-    fun freeze(bouquet: Bouquet) {
+    fun freeze(board: Board) {
+        val boardSize = board.size
+        val bouquet = board.bouquet
         for (balloon in bouquet) {
-            if (isHit(balloon)) {
+            if (isHit(balloon, boardSize)) {
                 freeze(balloon)
             }
         }

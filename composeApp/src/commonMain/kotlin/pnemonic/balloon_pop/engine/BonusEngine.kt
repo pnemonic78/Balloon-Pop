@@ -9,10 +9,9 @@ import pnemonic.add
 import pnemonic.balloon_pop.Feedback
 import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Bonus
-import pnemonic.balloon_pop.model.tool.AttractionTool
+import pnemonic.balloon_pop.model.tool.Bomb
 import pnemonic.balloon_pop.model.tool.BonusTool
 import pnemonic.balloon_pop.model.tool.ExtraLife
-import pnemonic.balloon_pop.model.tool.FreezeTool
 import pnemonic.balloon_pop.model.tool.PopTool
 import pnemonic.balloon_pop.model.tool.Score
 import pnemonic.balloon_pop.model.tool.Tool
@@ -83,6 +82,7 @@ class BonusEngine(
         var bonuses = board.bonuses
         if (bonuses.isEmpty()) {
             bonuses = listOf(
+                Bonus.Bomb(Long.MAX_VALUE),
                 Bonus.Life(),
                 Bonus.Score(),
             )
@@ -127,18 +127,25 @@ class BonusEngine(
     private suspend fun addTool(board: Board, bonus: Bonus): Board {
         return when (bonus) {
             Bonus.None -> board
+            is Bonus.Bomb -> add(board, bonus)
             is Bonus.Life -> add(board, bonus)
             is Bonus.Score -> add(board, bonus)
         }
     }
 
-    private fun applyTool(board: Board, tool: Tool): Board {
+    private suspend fun applyTool(board: Board, tool: Tool): Board {
         return when (tool) {
             Bonus.None -> board
+            is Bomb -> apply(board, tool)
             is ExtraLife -> apply(board, tool)
             is Score -> apply(board, tool)
             else -> board
         }
+    }
+
+    private fun add(board: Board, bonus: Bonus.Bomb): Board {
+        val tool = Bomb(bonus)
+        return board.copy(tool = tool)
     }
 
     private suspend fun add(board: Board, bonus: Bonus.Life): Board {
@@ -161,6 +168,10 @@ class BonusEngine(
         bonus.clear()
         // Move the bonus to the end.
         return bonuses.remove(bonus) + bonus
+    }
+
+    private suspend fun apply(board: Board, tool: Bomb): Board {
+        return pop(board, tool)
     }
 
     private fun apply(board: Board, tool: ExtraLife): Board {
@@ -214,13 +225,11 @@ class BonusEngine(
         notifyFeedback(Feedback.Sound(sound))
     }
 
-    private suspend fun useTool(board: Board, tool: Tool): Board {
-        return board
-    }
-
-    private fun attract(board: Board, tool: AttractionTool): Board {
-        tool.attract(board.bouquet)
-        return board
+    private fun useTool(board: Board, tool: Tool): Board {
+        return when (tool) {
+            is Bomb -> usedTool(board, tool)
+            else -> board
+        }
     }
 
     private suspend fun pop(board: Board, tool: PopTool): Board {
@@ -243,12 +252,6 @@ class BonusEngine(
         return board
     }
 
-    // Prevent the bouquet from moving.
-    private fun freeze(board: Board, tool: FreezeTool): Board {
-        tool.freeze(board.bouquet)
-        return board
-    }
-
     fun clear() {
         activated.clear()
         used.clear()
@@ -257,6 +260,6 @@ class BonusEngine(
     }
 
     companion object {
-        private const val DURATION_POP = 2000L
+        private const val DURATION_POP = 3000L
     }
 }

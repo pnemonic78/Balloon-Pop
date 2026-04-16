@@ -37,6 +37,15 @@ sealed class Bonus(
 
     object None : Bonus(score = 0, hits = 0, description = "", sound = SoundType.None)
 
+    // Bomb to explode.
+    class Bomb(progress: Long = 0) : Bonus(
+        score = 300,
+        hits = 100,
+        description = "💣",
+        sound = SoundType.Bomb,
+        progress = progress
+    )
+
     // Extra life.
     class Life(progress: Long = 0) : Bonus(
         score = 400,

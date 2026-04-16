@@ -10,10 +10,3 @@ fun ToolsAbove(board: Board, onToolUse: ToolCallback) {
     val tool = board.tool ?: return
     ToolAbove(tool, onToolUse, board.size)
 }
-
-@Composable
-fun ToolsBelow(board: Board, onToolUse: ToolCallback) {
-    // Only use 1 tool.
-    val tool = board.tool ?: return
-    ToolBelow(tool, onToolUse, board.size, board.difficulty)
-}

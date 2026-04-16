@@ -2,7 +2,7 @@ package pnemonic.balloon_pop
 
 import androidx.compose.ui.geometry.Rect
 import pnemonic.balloon_pop.model.balloon.Teardrop
-import pnemonic.balloon_pop.model.balloon.contains
+import pnemonic.balloon_pop.model.contains
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue

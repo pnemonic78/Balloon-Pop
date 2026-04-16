@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import pnemonic.balloon_pop.model.Bonus
-import pnemonic.balloon_pop.model.Difficulty
+import pnemonic.balloon_pop.model.tool.Bomb
 import pnemonic.balloon_pop.model.tool.ExtraLife
 import pnemonic.balloon_pop.model.tool.Score
 import pnemonic.balloon_pop.model.tool.Tool
@@ -40,18 +40,10 @@ fun ToolAbove(
     boardSize: Size
 ) {
     when (tool) {
+        is Bomb -> BombSprite(tool, onToolUse, boardSize)
         is ExtraLife -> LifeSprite(tool, onToolUse, boardSize)
         is Score -> ScoreSprite(tool, onToolUse, boardSize)
     }
-}
-
-@Composable
-fun ToolBelow(
-    tool: Tool,
-    onToolUse: ToolCallback,
-    boardSize: Size,
-    difficulty: Difficulty
-) {
 }
 
 @Composable
@@ -126,13 +118,13 @@ fun ToolSprite(
 )
 private fun Preview() {
     val boardSize = Size(previewWidthDp.dp.toPx(), previewHeightDp.dp.toPx())
-    val toolAbove = ExtraLife(Bonus.Life())
+    val tool = ExtraLife(Bonus.Life())
 
-    toolAbove.show()
+    tool.show()
 
     AppTheme {
         Box(modifier = Modifier.fillMaxSize()) {
-            ToolAbove(toolAbove, onToolUse = {}, boardSize)
+            ToolAbove(tool, onToolUse = {}, boardSize)
         }
     }
 }

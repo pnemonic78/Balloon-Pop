@@ -13,6 +13,7 @@ import kotlinx.coroutines.delay
 import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.tool.Score
 import pnemonic.balloon_pop.model.tool.ToolCallback
+import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewHeightDp
 import pnemonic.balloon_pop.view.previewWidthDp
 import pnemonic.compose.toPx
@@ -37,7 +38,7 @@ fun ScoreSprite(tool: Score, onUse: ToolCallback, boardSize: Size) {
 @Composable
 @Preview(
     showBackground = true,
-    backgroundColor = 0xFF008800,
+    backgroundColor = previewColor,
     widthDp = previewWidthDp,
     heightDp = previewHeightDp
 )

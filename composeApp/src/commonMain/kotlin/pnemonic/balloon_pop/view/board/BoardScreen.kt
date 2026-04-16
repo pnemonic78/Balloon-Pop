@@ -93,7 +93,6 @@ fun BoardView(state: BoardState) {
             },
         scene = state.board.scene
     ) {
-        ToolsBelow(board, state.onToolUse)
         BouquetView(board, state.onBalloonSize, state.onBalloonTap, state.onPrizeSize)
         PrizesView(board)
         ToolsAbove(board, state.onToolUse)

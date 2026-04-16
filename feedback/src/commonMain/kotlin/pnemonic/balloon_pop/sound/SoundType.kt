@@ -3,6 +3,7 @@ package pnemonic.balloon_pop.sound
 enum class SoundType(val fileName: String, val repeat: Boolean = false, val volume: Float = 1f) {
     None(""),
     Beach("PLYGND01.WAV", true, 0.15f),
+    Bomb("BANG04.WAV"),
     Clang("CLANG001.WAV"),
     Clink("CLINK005.WAV"),
     Coins("Cha_Ching_Register.wav"),
