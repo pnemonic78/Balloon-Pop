@@ -117,10 +117,14 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
         // Move balloons.
         for (balloon in balloons) {
-            if (balloon.isBadMove()) {
+            if (balloon.thaw(TICK)) {
                 continue
             }
-            if (balloon.thaw(TICK)) {
+            if (balloon.isBadMove()) {
+                if (balloon.isActive && (balloon.width < 0f || balloon.height < 0f)) {
+                    // We can now attach the sprite to the screen to measure it.
+                    balloon.setSize(1f, 1f)
+                }
                 continue
             }
             balloon.move()
@@ -206,7 +210,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         while (touchedBalloons.isNotEmpty()) {
             val balloon = touchedBalloons.removeAt(0)
 
-            if (balloon.isPopped) {
+            if (balloon.isPopped || (balloon.opacity <= 0.01f)) {
                 continue
             }
             balloon.hit()
@@ -298,7 +302,6 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
         val level = board.level + 1
         val scene = generateScene(level)
-        // TODO don't generate all balloons at start of level - rather add balloons per tick
         val boardNext = generateBalloons(board.copy(level = level, scene = scene, tool = null))
 
         if (level > 1) {

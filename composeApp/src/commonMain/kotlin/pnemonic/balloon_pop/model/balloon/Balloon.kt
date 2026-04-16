@@ -24,7 +24,7 @@ abstract class Balloon(
         private set(value) {
             field = value
             isPopped = (value <= 0)
-            isStopped = isPopped || (delay > 0L)
+            isStopped = isPopped || (delay != 0L)
         }
     var isPopped by mutableStateOf(false)
         private set
@@ -38,12 +38,16 @@ abstract class Balloon(
     var isStopped by mutableStateOf(false)
         private set
 
+    // Used to activate each ballon and attach it to the screen not-all-at-once.
+    val isActive: Boolean get() = opacity > 0f
+
     override fun toString(): String {
         return "${this::class.simpleName}@${hashCode()}($description, l:$left, t:$top, w:$width, h:$height, r:$rotation, d:$delay, h:$hits, o:$opacity)"
     }
 
     fun setTick(tick: Long) {
         velocity = speed * 0.001f * tick
+        opacity = 0f
     }
 
     override fun move(): Boolean {
@@ -108,7 +112,13 @@ abstract class Balloon(
     fun thaw(steam: Long): Boolean {
         val delay = max(0L, delay - steam)
         this.delay = delay
-        return delay > 0L
+        if (delay == 0L) {
+            if (opacity == 0f) {
+                opacity = 0.001f
+            }
+            return false
+        }
+        return true
     }
 
     companion object {

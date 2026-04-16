@@ -18,9 +18,9 @@ abstract class Movable(val size: Float = 1f, val speed: Float, val sway: Boolean
         private set
     var top by mutableFloatStateOf(0f)
         private set
-    var width: Float = 0f
+    var width: Float = -1f
         private set
-    var height: Float = 0f
+    var height: Float = -1f
         private set
     val right: Float get() = left + width
     val bottom: Float get() = top + height
