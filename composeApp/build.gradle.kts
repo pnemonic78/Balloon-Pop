@@ -46,9 +46,6 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            //TODO languageSettings.enableLanguageFeature("ExplicitBackingFields")
-        }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
         }

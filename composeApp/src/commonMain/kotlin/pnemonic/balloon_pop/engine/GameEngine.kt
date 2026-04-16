@@ -298,6 +298,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
         val level = board.level + 1
         val scene = generateScene(level)
+        // TODO don't generate all balloons at start of level - rather add balloons per tick
         val boardNext = generateBalloons(board.copy(level = level, scene = scene, tool = null))
 
         if (level > 1) {
