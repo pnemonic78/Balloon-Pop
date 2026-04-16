@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.VectorPainter
@@ -13,6 +12,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import pnemonic.balloon_pop.model.prize.Coins
+import pnemonic.balloon_pop.model.prize.Gemstone
 import pnemonic.balloon_pop.model.prize.Prize
 import pnemonic.balloon_pop.model.prize.PrizeCallback
 import pnemonic.compose.toDp
@@ -21,19 +21,17 @@ import kotlin.math.roundToInt
 @Composable
 fun PrizeSprite(
     prize: Prize,
-    boardSize: Size,
     onSize: PrizeCallback,
 ) {
     when (prize) {
-        is Coins -> CoinsSprite(prize, boardSize, onSize)
-        //TODO is Gemstone -> GemstoneSprite(prize, boardSize, onSize)
+        is Coins -> CoinsSprite(prize, onSize)
+        is Gemstone -> GemstoneSprite(prize, onSize)
     }
 }
 
 @Composable
 fun PrizeSprite(
     prize: Prize,
-    boardSize: Size,
     image: ImageVector,
     scale: Float,
     onSize: PrizeCallback,
@@ -42,7 +40,6 @@ fun PrizeSprite(
     val painter = rememberVectorPainter(image)
     PrizeSprite(
         prize,
-        boardSize,
         painter,
         scale,
         onSize,
@@ -53,7 +50,6 @@ fun PrizeSprite(
 @Composable
 fun PrizeSprite(
     prize: Prize,
-    boardSize: Size,
     painter: VectorPainter,
     scale: Float,
     onSize: PrizeCallback,
@@ -86,5 +82,4 @@ fun PrizeSprite(
             contentScale = ContentScale.Fit,
         )
     }
-    PrizeScore(prize, boardSize)
 }

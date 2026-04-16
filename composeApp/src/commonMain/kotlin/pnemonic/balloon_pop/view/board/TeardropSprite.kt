@@ -37,3 +37,19 @@ private fun Preview() {
         TeardropSprite(balloon, Size.Zero, onSize = {}, onTap = {})
     }
 }
+
+@Preview(
+    showBackground = true,
+    backgroundColor = previewColor,
+    widthDp = previewWidthDp,
+    heightDp = previewHeightDp
+)
+@Composable
+private fun PreviewPopped() {
+    val balloon = Teardrop()
+    balloon.hit()
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        TeardropSprite(balloon, Size.Zero, onSize = {}, onTap = {})
+    }
+}

@@ -231,7 +231,7 @@ class BonusEngine(
         if (jobHide == null) {
             jobHide = coroutineScope.launch {
                 delay(DURATION_POP)
-                // Hide the tool to bash again.
+                // Hide the tool to pop again.
                 tool.hide()
                 if (tool.hits <= 0) {
                     onUse(tool)

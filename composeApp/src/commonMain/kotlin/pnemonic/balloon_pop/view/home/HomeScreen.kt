@@ -24,7 +24,6 @@ import pnemonic.BooleanCallback
 import pnemonic.VoidCallback
 import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Difficulty
-import pnemonic.balloon_pop.model.Scene
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
 import pnemonic.balloon_pop.view.board.BouquetView
 import pnemonic.balloon_pop.view.board.SceneView
@@ -87,7 +86,7 @@ private fun HomeScreen(
             .onSizeChanged { onBoardSize(it) },
         scene = board.scene,
     ) {
-        BouquetView(board, onBalloonSize, onTap = {})
+        BouquetView(board, onBalloonSize, onTap = {}, onPrizeSize = {})
         Box(modifier = Modifier.fillMaxSize().background(color = colorMask))
         Column(
             modifier = Modifier.fillMaxSize().padding(paddingScreen),

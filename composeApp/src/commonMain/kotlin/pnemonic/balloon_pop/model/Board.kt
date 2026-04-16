@@ -2,6 +2,7 @@ package pnemonic.balloon_pop.model
 
 import androidx.compose.ui.geometry.Size
 import pnemonic.balloon_pop.model.balloon.Bouquet
+import pnemonic.balloon_pop.model.prize.Prize
 import pnemonic.balloon_pop.model.tool.Tool
 
 data class Board(
@@ -15,6 +16,7 @@ data class Board(
     val bouquet: Bouquet = Bouquet(),
     // only 1 active tool allowed - so not a list of tools.
     val tool: Tool? = null,
+    val prizes: List<Prize> = emptyList(),
 ) {
     val width: Float get() = size.width
     val height: Float get() = size.height

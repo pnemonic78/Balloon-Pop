@@ -17,20 +17,20 @@ sealed class Feedback {
         constructor(sound: Sound) : this(sound.soundType)
     }
 
-    data class Bash(
+    data class Pop(
         val soundType: SoundType,
-        val duration: Long = VIBRATE_BASH_DURATION,
-        @field:FloatRange(from = 0.0, to = 1.0) val amplitude: Float = VIBRATE_BASH_AMPLITUDE
+        val duration: Long = VIBRATE_POP_DURATION,
+        @field:FloatRange(from = 0.0, to = 1.0) val amplitude: Float = VIBRATE_POP_AMPLITUDE
     ) : Feedback()
 
     data class Hit(
-        val duration: Long = VIBRATE_BASH_DURATION,
-        @field:FloatRange(from = 0.0, to = 1.0) val amplitude: Float = VIBRATE_BASH_AMPLITUDE
+        val duration: Long = VIBRATE_POP_DURATION,
+        @field:FloatRange(from = 0.0, to = 1.0) val amplitude: Float = VIBRATE_POP_AMPLITUDE
     ) : Feedback()
 
     companion object {
-        private const val VIBRATE_BASH_DURATION = 50L
-        private const val VIBRATE_BASH_AMPLITUDE = 0.35f
+        private const val VIBRATE_POP_DURATION = 50L
+        private const val VIBRATE_POP_AMPLITUDE = 0.35f
     }
 }
 

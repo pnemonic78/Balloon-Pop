@@ -28,9 +28,8 @@ abstract class Movable(val size: Float = 1f, val speed: Float) {
     private var destinationAngle: Float = Float.NaN
     protected var velocity: Float = speed
     var rotation by mutableFloatStateOf(0f)
-        private set
+        protected set
     protected var rotationMovement = 0f
-        private set
     var opacity by mutableFloatStateOf(1f)
         protected set
     protected var angleZigZag = 0f
@@ -63,7 +62,7 @@ abstract class Movable(val size: Float = 1f, val speed: Float) {
         calculateHeading()
     }
 
-    private fun calculateHeading(): Float {
+    protected open fun calculateHeading(): Float {
         if (isBadMove()) {
             rotation = 0f
             rotationMovement = 0f

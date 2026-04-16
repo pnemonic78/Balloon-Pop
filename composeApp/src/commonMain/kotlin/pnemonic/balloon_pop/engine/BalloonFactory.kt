@@ -8,10 +8,10 @@ import pnemonic.balloon_pop.model.balloon.Butterfly
 import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
-import pnemonic.balloon_pop.model.balloon.Gold
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.HotAirBalloon
 import pnemonic.balloon_pop.model.balloon.Lemon
+import pnemonic.balloon_pop.model.balloon.Lucky
 import pnemonic.balloon_pop.model.balloon.Orange
 import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
@@ -28,15 +28,17 @@ typealias KlassName = String
 object BalloonFactory {
 
     private const val BALLOONS_PER_LEVEL = 10
+    private const val LUCK = 0.05f // 5%
+    private const val SCORE_LUCKY = 10L
 
     private const val CLASS_BUTTERFLY = "Butterfly"
     private const val CLASS_DOG = "Dog"
     private const val CLASS_FLOWER = "Flower"
     private const val CLASS_GIRAFFE = "Giraffe"
-    private const val CLASS_GOLD = "Gold"
     private const val CLASS_HEART = "Heart"
     private const val CLASS_HOT_AIR = "HotAir"
     private const val CLASS_LEMON = "Lemon"
+    private const val CLASS_LUCKY = "Lucky"
     private const val CLASS_ORANGE = "Orange"
     private const val CLASS_SNAKE = "Snake"
     private const val CLASS_STAR = "Star"
@@ -77,6 +79,15 @@ object BalloonFactory {
         candidates: List<KlassName>
     ): Balloon {
         val i = rand.nextInt(candidates.size)
+        val candidate = candidates[i]
+        return createBalloon(difficulty, level, candidate)
+    }
+
+    private fun createBalloon(
+        difficulty: Difficulty,
+        level: Int,
+        candidate: KlassName
+    ): Balloon {
         val size = when (difficulty) {
             Difficulty.Easy -> 1f + (rand.nextFloat() * 0.25f)
             Difficulty.Medium -> 0.75f + (rand.nextFloat() * 0.75f)
@@ -88,12 +99,17 @@ object BalloonFactory {
             Difficulty.Hard -> rand.nextBoolean()
         }
         // klass.createInstance() does not work in JS
-        return when (val klass = candidates[i]) {
+        return when (val klass = candidate) {
             CLASS_BUTTERFLY -> Butterfly(size = size, sway = sway)
             CLASS_DOG -> Dog(size = size, sway = sway)
             CLASS_FLOWER -> Flower(size = size, sway = sway)
             CLASS_GIRAFFE -> Giraffe(size = size, sway = sway)
-            CLASS_GOLD -> Gold(size = size, sway = sway, prize = createPrize(difficulty, level))
+            CLASS_LUCKY -> {
+                val score = SCORE_LUCKY * level * difficulty
+                val prize = createPrize()
+                Lucky(size = size, sway = sway, score = score, prize = prize)
+            }
+
             CLASS_HEART -> Heart(size = size, sway = sway)
             CLASS_HOT_AIR -> HotAirBalloon(size = size, sway = sway)
             CLASS_LEMON -> Lemon(size = size, sway = sway)
@@ -114,24 +130,27 @@ object BalloonFactory {
         val size = BALLOONS_PER_LEVEL * level * difficulty
         val candidates = createCandidates(level)
         val balloons = mutableListOf<Balloon>()
+        val luck = (size * LUCK).toInt()
 
-        (1..size).forEach { _ ->
+        (1..(size - luck)).forEach { _ ->
             balloons.add(createBalloon(difficulty, level, candidates))
         }
+        (1..luck).forEach { _ ->
+            balloons.add(createBalloon(difficulty, level, CLASS_LUCKY))
+        }
+        balloons.shuffle()
 
         return Bouquet(balloons)
     }
 
-    private fun createPrize(difficulty: Difficulty, level: Int): Prize {
-        val score = 10L * level * difficulty
+    private fun createPrize(): Prize {
         val money = rand.nextBoolean()
         return if (money) {
-            Coins(score = score)
+            Coins()
         } else {
             val gems = Gem.entries
             val i = rand.nextInt(gems.size)
-            val gem = gems[i]
-            Gemstone(score = score, gem = gem)
+            Gemstone(gem = gems[i])
         }
     }
 
@@ -141,7 +160,7 @@ object BalloonFactory {
             Dog(),
             Flower(),
             Giraffe(),
-            Gold(prize = Coins(0)),
+            Lucky(prize = Coins()),
             Heart(),
             HotAirBalloon(),
             Lemon(),

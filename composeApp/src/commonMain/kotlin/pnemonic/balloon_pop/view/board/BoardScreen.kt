@@ -30,6 +30,7 @@ import pnemonic.balloon_pop.model.BonusCallback
 import pnemonic.balloon_pop.model.GameState
 import pnemonic.balloon_pop.model.balloon.BalloonCallback
 import pnemonic.balloon_pop.model.balloon.Bouquet
+import pnemonic.balloon_pop.model.balloon.LuckyCallback
 import pnemonic.balloon_pop.model.tool.ToolCallback
 import pnemonic.balloon_pop.view.previewColor
 import pnemonic.balloon_pop.view.previewHeightDp
@@ -47,25 +48,27 @@ fun BoardScreen(navController: NavController) {
     //FIXME for JVM val viewModel = viewModel<GameViewModel>()
     val viewModel = viewModel { GameViewModel() }
     val board = viewModel.board.collectAsState()
-    val state = viewModel.state.collectAsState()
+    val gameState = viewModel.state.collectAsState()
+    val state = object : BoardState {
+        override val board = board.value
+        override val gameState = gameState.value
+        override val onSize = viewModel::onBoardSize
+        override val onTap = viewModel::onTap
+        override val onBalloonSize = viewModel::onBalloonSize
+        override val onBalloonTap = viewModel::onBalloonTap
+        override val onPrizeSize = viewModel::onPrizeSize
+        override val onHomeClick: VoidCallback = { navController.navigateUp() }
+        override val isPaused = gameState.value.isPaused
+        override val onPauseChange = viewModel::onPauseChange
+        override val isSoundEnabled = viewModel.isSoundEnabled
+        override val onSoundChange = viewModel::onSoundChange
+        override val isMusicEnabled = viewModel.isMusicEnabled
+        override val onMusicChange = viewModel::onMusicChange
+        override val onBonusClick = viewModel::onBonusClick
+        override val onToolUse = viewModel::onToolUse
+    }
 
-    BoardView(
-        board = board.value,
-        state = state.value,
-        onSize = viewModel::onBoardSize,
-        onTap = viewModel::onTap,
-        onBalloonSize = viewModel::onBalloonSize,
-        onBalloonTap = viewModel::onBalloonTap,
-        onHomeClick = { navController.navigateUp() },
-        isPaused = state.value.isPaused,
-        onPauseChange = viewModel::onPauseChange,
-        isSoundEnabled = viewModel.isSoundEnabled,
-        onSoundChange = viewModel::onSoundChange,
-        isMusicEnabled = viewModel.isMusicEnabled,
-        onMusicChange = viewModel::onMusicChange,
-        onBonusClick = viewModel::onBonusClick,
-        onToolUse = viewModel::onToolUse,
-    )
+    BoardView(state)
 
     DisposableEffect(lifecycleOwner) {
         viewModel.observe(lifecycleOwner)
@@ -77,51 +80,39 @@ fun BoardScreen(navController: NavController) {
 }
 
 @Composable
-fun BoardView(
-    board: Board,
-    state: GameState,
-    onSize: OnSizeCallback,
-    onTap: OnTapCallback,
-    onBalloonSize: BalloonCallback,
-    onBalloonTap: BalloonCallback,
-    onHomeClick: VoidCallback,
-    isPaused: Boolean = false,
-    onPauseChange: BooleanCallback,
-    isSoundEnabled: Boolean = true,
-    onSoundChange: BooleanCallback,
-    isMusicEnabled: Boolean = true,
-    onMusicChange: BooleanCallback,
-    onBonusClick: BonusCallback,
-    onToolUse: ToolCallback,
-) {
+fun BoardView(state: BoardState) {
+    val board = state.board
+    val gameState = state.gameState
+
     SceneView(
         modifier = Modifier
             .fillMaxSize()
-            .onSizeChanged(onSize)
+            .onSizeChanged(state.onSize)
             .pointerInput(board) {
-                detectTapGestures(onTap = onTap)
+                detectTapGestures(onTap = state.onTap)
             },
-        scene = board.scene
+        scene = state.board.scene
     ) {
-        ToolsBelow(board, onToolUse)
-        BouquetView(board, onBalloonSize, onBalloonTap)
-        ToolsAbove(board, onToolUse)
+        ToolsBelow(board, state.onToolUse)
+        BouquetView(board, state.onBalloonSize, state.onBalloonTap, state.onPrizeSize)
+        PrizesView(board)
+        ToolsAbove(board, state.onToolUse)
         Column(
             modifier = Modifier.fillMaxWidth()
                 .safeContentPadding()
                 .padding(8.dp),
             horizontalAlignment = AbsoluteAlignment.Left
         ) {
-            if (state !== GameState.FINISHED) {
+            if (gameState !== GameState.FINISHED) {
                 ActionsPanel(
                     modifier = Modifier.align(AbsoluteAlignment.Right),
-                    onHomeClick = onHomeClick,
-                    isPaused = isPaused,
-                    onPauseChange = onPauseChange,
-                    isSoundEnabled = isSoundEnabled,
-                    onSoundChange = onSoundChange,
-                    isMusicEnabled = isMusicEnabled,
-                    onMusicChange = onMusicChange
+                    onHomeClick = state.onHomeClick,
+                    isPaused = state.isPaused,
+                    onPauseChange = state.onPauseChange,
+                    isSoundEnabled = state.isSoundEnabled,
+                    onSoundChange = state.onSoundChange,
+                    isMusicEnabled = state.isMusicEnabled,
+                    onMusicChange = state.onMusicChange
                 )
                 Spacer(modifier = Modifier.height(spacingV))
             }
@@ -131,9 +122,9 @@ fun BoardView(
             Spacer(modifier = Modifier.height(spacingV))
             ScoreView(score = board.score)
             Spacer(modifier = Modifier.height(spacingV))
-            BonusesView(bonuses = board.bonuses, onClick = onBonusClick)
+            BonusesView(bonuses = board.bonuses, onClick = state.onBonusClick)
         }
-        StateScreen(state, onHomeClick)
+        StateScreen(gameState, state.onHomeClick)
     }
 }
 
@@ -159,24 +150,26 @@ private fun Preview() {
         y += dy
     }
     val board = Board(bouquet = Bouquet(balloons), bonuses = bonuses)
+    val state = object : BoardState {
+        override val board = board
+        override val gameState = GameState.STARTED
+        override val onSize: OnSizeCallback = {}
+        override val onTap: OnTapCallback = {}
+        override val onBalloonSize: BalloonCallback = {}
+        override val onBalloonTap: BalloonCallback = {}
+        override val onPrizeSize: LuckyCallback = {}
+        override val onHomeClick = {}
+        override val isPaused = false
+        override val onPauseChange: BooleanCallback = {}
+        override val isSoundEnabled = true
+        override val onSoundChange: BooleanCallback = {}
+        override val isMusicEnabled = true
+        override val onMusicChange: BooleanCallback = {}
+        override val onBonusClick: BonusCallback = {}
+        override val onToolUse: ToolCallback = {}
+    }
 
     AppTheme {
-        BoardView(
-            board,
-            GameState.STARTED,
-            onSize = {},
-            onTap = {},
-            onBalloonSize = {},
-            onBalloonTap = {},
-            onHomeClick = {},
-            isPaused = false,
-            onPauseChange = {},
-            isSoundEnabled = true,
-            onSoundChange = {},
-            isMusicEnabled = true,
-            onMusicChange = {},
-            onBonusClick = {},
-            onToolUse = {},
-        )
+        BoardView(state)
     }
 }

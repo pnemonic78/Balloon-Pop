@@ -2,7 +2,7 @@ package pnemonic.balloon_pop.model.prize
 
 import pnemonic.balloon_pop.sound.SoundType
 
-class Gemstone(score: Long, val gem: Gem) : Prize(score = score, sound = SoundType.Clink) {
+class Gemstone(val gem: Gem) : Prize(sound = SoundType.Clink) {
     override val description = "💎"
 
     override fun toString(): String {

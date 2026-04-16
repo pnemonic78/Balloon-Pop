@@ -29,7 +29,7 @@ private val sizeText = 20.sp
 
 @Composable
 fun LevelView(modifier: Modifier = Modifier, level: Int, count: Int) {
-    val counterIcon = remember { Teardrop(30f) }
+    val counterIcon = remember { Teardrop(25f) }
 
     Row(
         modifier = modifier.panel(),

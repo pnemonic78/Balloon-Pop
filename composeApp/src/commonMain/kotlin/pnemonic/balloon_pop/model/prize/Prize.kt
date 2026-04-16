@@ -1,6 +1,7 @@
 package pnemonic.balloon_pop.model.prize
 
 import androidx.compose.ui.geometry.Size
+import pnemonic.RADIANS_TO_DEGREES
 import pnemonic.balloon_pop.model.Movable
 import pnemonic.balloon_pop.sound.SoundType
 import kotlin.math.cos
@@ -8,7 +9,7 @@ import kotlin.math.sin
 
 typealias PrizeCallback = (Prize) -> Unit
 
-abstract class Prize(val score: Long, val sound: SoundType = SoundType.None) : Movable(size = 1f, speed = 1f) {
+abstract class Prize(val sound: SoundType = SoundType.None) : Movable(size = 1f, speed = 0.02f) {
     override fun moveNext() = moveStraight()
 
     protected fun moveStraight(): Boolean {
@@ -24,7 +25,20 @@ abstract class Prize(val score: Long, val sound: SoundType = SoundType.None) : M
         val y2 = y1 + (dx * s) + (dy * c)
         moveTo(x2, y2)
         this.velocity *= ACCELERATION
-        return angle == rotationMovement
+        return true
+    }
+
+    override fun calculateHeading(): Float {
+        if (isBadMove()) {
+            rotation = 0f
+            rotationMovement = 0f
+            return 0f
+        }
+        val angleDegrees = 90f
+        val angleVisual = 0f
+        rotation = angleVisual
+        rotationMovement = angleDegrees / RADIANS_TO_DEGREES
+        return angleVisual
     }
 
     override fun didEscape(boardSize: Size): Boolean {
@@ -36,6 +50,6 @@ abstract class Prize(val score: Long, val sound: SoundType = SoundType.None) : M
 
     companion object {
         // Accelerate because of gravity.
-        private const val ACCELERATION = 1.01f
+        private const val ACCELERATION = 1.03f
     }
 }

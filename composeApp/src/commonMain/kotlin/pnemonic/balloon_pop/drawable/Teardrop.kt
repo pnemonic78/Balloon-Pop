@@ -23,7 +23,7 @@ fun Teardrop(@FloatRange(0.0, 360.0) hue: Float): ImageVector {
         path(
             fill = Brush.linearGradient(
                 colorStops = arrayOf(
-                    0.065f to Color(0xFF72A1EC).hue(hue),
+                    0f to Color(0xFF72A1EC).hue(hue),
                     0.396f to Color(0xFF668BF0).hue(hue),
                     1f to Color(0xFF4A59F9).hue(hue)
                 ),
@@ -60,7 +60,7 @@ fun Teardrop(@FloatRange(0.0, 360.0) hue: Float): ImageVector {
             path(
                 fill = Brush.radialGradient(
                     colorStops = arrayOf(
-                        0.065f to Color(0xFF72A1EC).hue(hue),
+                        0f to Color(0xFF72A1EC).hue(hue),
                         0.306f to Color(0xFF668BF0).hue(hue),
                         0.746f to Color(0xFF4A59F9).hue(hue),
                         0.79f to Color(0xFF4F5EF9).hue(hue),
@@ -75,31 +75,15 @@ fun Teardrop(@FloatRange(0.0, 360.0) hue: Float): ImageVector {
                 )
             ) {
                 moveTo(-0.67f, 16.08f)
-                arcToRelative(
-                    16.575f,
-                    13.274f,
-                    90f,
-                    isMoreThanHalf = true,
-                    isPositiveArc = false,
-                    26.547f,
-                    0f
-                )
-                arcToRelative(
-                    16.575f,
-                    13.274f,
-                    90f,
-                    isMoreThanHalf = true,
-                    isPositiveArc = false,
-                    -26.547f,
-                    0f
-                )
+                arcToRelative(16.575f, 13.274f, 90f, isMoreThanHalf = true, isPositiveArc = false, 26.547f, 0f)
+                arcToRelative(16.575f, 13.274f, 90f, isMoreThanHalf = true, isPositiveArc = false, -26.547f, 0f)
                 close()
             }
         }
         path(
             fill = SolidColor(Color.White),
-            fillAlpha = 0.81f,
-            strokeAlpha = 0.81f
+            fillAlpha = 0.8f,
+            strokeAlpha = 0.8f
         ) {
             moveTo(6.262f, 4.668f)
             curveTo(6.989f, 3.251f, 8.415f, 3.444f, 8.918f, 3.828f)

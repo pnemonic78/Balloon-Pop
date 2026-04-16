@@ -18,6 +18,7 @@ import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Bonus
 import pnemonic.balloon_pop.model.GameState
 import pnemonic.balloon_pop.model.balloon.Balloon
+import pnemonic.balloon_pop.model.balloon.Lucky
 import pnemonic.balloon_pop.model.tool.Tool
 import pnemonic.balloon_pop.sound.SoundType
 import pnemonic.balloon_pop.view.settings.SettingsManager
@@ -105,10 +106,14 @@ class GameViewModel : LifecycleViewModel() {
         engine.onBalloonSize(balloon)
     }
 
+    fun onPrizeSize(lucky: Lucky) {
+        engine.onPrizeSize(lucky)
+    }
+
     suspend fun notifyFeedback(feedback: Feedback) {
         when (feedback) {
             Feedback.None -> return
-            is Feedback.Bash -> bash(feedback)
+            is Feedback.Pop -> pop(feedback)
             is Feedback.Hit -> vibrate(feedback.duration, feedback.amplitude)
             is Feedback.Silence -> stopSound(feedback.soundType)
             is Feedback.Sound -> playSound(feedback.soundType)
@@ -117,7 +122,7 @@ class GameViewModel : LifecycleViewModel() {
         engine.feedbackDone()
     }
 
-    private suspend fun bash(feedback: Feedback.Bash) {
+    private suspend fun pop(feedback: Feedback.Pop) {
         playSound(feedback.soundType)
         vibrate(feedback.duration, feedback.amplitude)
     }

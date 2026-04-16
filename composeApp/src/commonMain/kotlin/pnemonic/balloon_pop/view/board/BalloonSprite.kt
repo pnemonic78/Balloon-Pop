@@ -28,15 +28,17 @@ import pnemonic.balloon_pop.model.balloon.Butterfly
 import pnemonic.balloon_pop.model.balloon.Dog
 import pnemonic.balloon_pop.model.balloon.Flower
 import pnemonic.balloon_pop.model.balloon.Giraffe
-import pnemonic.balloon_pop.model.balloon.Gold
 import pnemonic.balloon_pop.model.balloon.Heart
 import pnemonic.balloon_pop.model.balloon.HotAirBalloon
 import pnemonic.balloon_pop.model.balloon.Lemon
+import pnemonic.balloon_pop.model.balloon.Lucky
+import pnemonic.balloon_pop.model.balloon.LuckyCallback
 import pnemonic.balloon_pop.model.balloon.Orange
 import pnemonic.balloon_pop.model.balloon.Snake
 import pnemonic.balloon_pop.model.balloon.Star
 import pnemonic.balloon_pop.model.balloon.Teardrop
 import pnemonic.balloon_pop.model.balloon.Watermelon
+import pnemonic.balloon_pop.model.prize.PrizeCallback
 import pnemonic.compose.toDp
 import kotlin.math.roundToInt
 
@@ -45,14 +47,15 @@ fun BalloonSprite(
     balloon: Balloon,
     boardSize: Size,
     onSize: BalloonCallback,
-    onTap: BalloonCallback
+    onTap: BalloonCallback,
+    onPrizeSize: LuckyCallback,
 ) {
     when (balloon) {
         is Butterfly -> ButterflySprite(balloon, boardSize, onSize, onTap)
         is Dog -> DogSprite(balloon, boardSize, onSize, onTap)
         is Flower -> FlowerSprite(balloon, boardSize, onSize, onTap)
         is Giraffe -> GiraffeSprite(balloon, boardSize, onSize, onTap)
-        is Gold -> GoldSprite(balloon, boardSize, onSize, onTap)
+        is Lucky -> LuckySprite(balloon, boardSize, onSize, onTap, onPrizeSize)
         is Heart -> HeartSprite(balloon, boardSize, onSize, onTap)
         is HotAirBalloon -> HotAirBalloonSprite(balloon, boardSize, onSize, onTap)
         is Lemon -> LemonSprite(balloon, boardSize, onSize, onTap)
@@ -73,6 +76,7 @@ fun BalloonSprite(
     cord: Boolean = false,
     onSize: BalloonCallback,
     onTap: BalloonCallback,
+    onPrizeSize: LuckyCallback = {},
     modifier: Modifier = Modifier
 ) {
     val painter = rememberVectorPainter(image)
@@ -84,6 +88,7 @@ fun BalloonSprite(
         cord,
         onSize,
         onTap,
+        onPrizeSize,
         modifier
     )
 }
@@ -97,6 +102,7 @@ fun BalloonSprite(
     cord: Boolean = false,
     onSize: BalloonCallback,
     onTap: BalloonCallback,
+    onPrizeSize: LuckyCallback,
     modifier: Modifier = Modifier
 ) {
     val scale = scale * balloon.size
@@ -109,14 +115,6 @@ fun BalloonSprite(
 
     Box(
         modifier = modifier
-            .onSizeChanged { size ->
-                val oldWidth = balloon.width.roundToInt()
-                val oldHeight = balloon.height.roundToInt()
-                if ((oldWidth != size.width) || (oldHeight != size.height)) {
-                    balloon.setSize(size)
-                    onSize(balloon)
-                }
-            }
             .graphicsLayer {
                 translationX = balloon.left
                 translationY = balloon.top
@@ -127,13 +125,20 @@ fun BalloonSprite(
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
-                modifier = Modifier.size(width, height)
+                modifier = Modifier
+                    .size(width, height)
+                    .onSizeChanged { size ->
+                        val oldWidth = balloon.width.roundToInt()
+                        val oldHeight = balloon.height.roundToInt()
+                        if ((oldWidth != size.width) || (oldHeight != size.height)) {
+                            balloon.setSize(size)
+                            onSize(balloon)
+                        }
+                    }
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
-                    ) {
-                        onTap(balloon)
-                    },
+                    ) { onTap(balloon) },
                 painter = painter,
                 contentDescription = balloon.description,
                 contentScale = ContentScale.Fit,
@@ -155,6 +160,13 @@ fun BalloonSprite(
                 contentDescription = "💥",
                 contentScale = ContentScale.FillBounds
             )
+        }
+    }
+    if (isPopped && (balloon is Lucky)) {
+        val prize = balloon.prize
+        if ((prize.width <= 0) || (prize.height <= 0)) {
+            val onSize: PrizeCallback = { onPrizeSize(balloon) }
+            PrizeSprite(prize, onSize)
         }
     }
     BalloonScore(balloon, boardSize)

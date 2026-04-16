@@ -145,7 +145,8 @@ private fun BalloonCell(balloon: Balloon, onClick: BalloonCallback) {
                 balloon = balloon,
                 boardSize = Size.Zero,
                 onSize = {},
-                onTap = onClick
+                onTap = onClick,
+                onPrizeSize = {},
             )
         }
         Spacer(modifier = Modifier.width(4.dp))

@@ -23,6 +23,8 @@ import pnemonic.balloon_pop.model.GameState
 import pnemonic.balloon_pop.model.Scene
 import pnemonic.balloon_pop.model.balloon.Balloon
 import pnemonic.balloon_pop.model.balloon.Bouquet
+import pnemonic.balloon_pop.model.balloon.Lucky
+import pnemonic.balloon_pop.model.prize.Prize
 import pnemonic.balloon_pop.model.tool.Tool
 import pnemonic.balloon_pop.sound.SoundType
 import pnemonic.copy
@@ -43,7 +45,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     protected val rand = Random.Default
     private val touches = mutableListOf<Offset>()
     private val touchedBalloons = mutableListOf<Balloon>()
-    private val squashed = mutableListOf<Balloon>()
+    private val popped = mutableListOf<Balloon>()
     private val bonusEngine = BonusEngine(this, coroutineScope)
 
     private val _feedback = MutableSharedFlow<Feedback>(extraBufferCapacity = 100)
@@ -109,8 +111,11 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         if ((boardSize.width <= 0) || (boardSize.height <= 0)) return board
         var lives = board.lives
         val balloons = board.bouquet.balloons
+        val prizes = board.prizes
         val removed = mutableListOf<Balloon>()
+        val removedPrizes = mutableListOf<Prize>()
 
+        // Move balloons.
         for (balloon in balloons) {
             if (balloon.isBadMove()) {
                 continue
@@ -127,11 +132,23 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
             }
         }
 
-        return if (removed.isEmpty()) {
+        // Move prizes.
+        for (prize in prizes) {
+            if (prize.isBadMove()) {
+                continue
+            }
+            prize.move()
+            if (prize.didEscape(boardSize)) {
+                removedPrizes.add(prize)
+            }
+        }
+
+        return if (removed.isEmpty() && removedPrizes.isEmpty()) {
             board
         } else {
             val balloons = balloons.removeAll(removed)
-            board.copy(bouquet = Bouquet(balloons), lives = lives)
+            val prizes = prizes.removeAll(removedPrizes)
+            board.copy(bouquet = Bouquet(balloons), lives = lives, prizes = prizes)
         }
     }
 
@@ -159,7 +176,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     }
 
     private suspend fun touch(board: Board): Board {
-        if (touches.isEmpty() && touchedBalloons.isEmpty() && squashed.isEmpty()) {
+        if (touches.isEmpty() && touchedBalloons.isEmpty() && popped.isEmpty()) {
             return board
         }
 
@@ -205,10 +222,10 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
             }
         }
 
-        if (squashed.isNotEmpty()) {
+        if (popped.isNotEmpty()) {
             val balloons = bouquet.balloons.toMutableList()
-            balloons.removeAll(squashed)
-            squashed.clear()
+            balloons.removeAll(popped)
+            popped.clear()
             bouquet = Bouquet(balloons)
         }
 
@@ -218,6 +235,14 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     fun onBalloonSize(balloon: Balloon) {
         val board = boards.value
         applyVerticalPath(balloon, board.size)
+    }
+
+    fun onPrizeSize(lucky: Lucky) {
+        val board = boards.value
+        if (lucky.isPopped) {
+            applyDrop(lucky, board.size)
+            _boards.update { it.copy(prizes = it.prizes + lucky.prize) }
+        }
     }
 
     // Vertical paths.
@@ -234,6 +259,19 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         val y2 = -balloonHeight
         balloon.moveTo(x1, y1)
         balloon.setDestination(x2, y2)
+    }
+
+    // Prizes just drop down to earth.
+    private fun applyDrop(balloon: Lucky, boardSize: Size) {
+        val prize = balloon.prize
+        val height = boardSize.height
+
+        val x1 = balloon.left + (balloon.width - prize.width).half
+        val y1 = balloon.top + (balloon.height - prize.height).half
+        val x2 = x1
+        val y2 = height
+        prize.moveTo(x1, y1)
+        prize.setDestination(x2, y2)
     }
 
     private fun generateBalloons(board: Board): Board {
@@ -284,10 +322,13 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     }
 
     override suspend fun pop(balloon: Balloon) {
-        notifyFeedback(Feedback.Bash(balloon.sound))
+        notifyFeedback(Feedback.Pop(balloon.sound))
+        if (balloon is Lucky) {
+            notifyFeedback(Feedback.Sound(balloon.prize.sound))
+        }
         coroutineScope.launch {
             delay(DELAY_DEAD_REMOVE)
-            squashed.add(balloon)
+            popped.add(balloon)
         }
     }
 
@@ -341,7 +382,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         _boards.update { Board() }
         touches.clear()
         touchedBalloons.clear()
-        squashed.clear()
+        popped.clear()
         bonusEngine.clear()
     }
 
@@ -349,7 +390,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         private const val TICK = 5L
         private const val DELAY_PER_BALLOON = TICK * 200
 
-        // Time to show the score after balloon squashed.
+        // Time to show the score after balloon popped.
         private const val DELAY_DEAD_REMOVE = 1000L
 
         private const val PADDING = 0.2f

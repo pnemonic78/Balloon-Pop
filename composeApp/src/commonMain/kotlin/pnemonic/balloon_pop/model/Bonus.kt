@@ -39,7 +39,7 @@ sealed class Bonus(
 
     // Extra life.
     class Life(progress: Long = 0) : Bonus(
-        score = 300,
+        score = 400,
         hits = 1,
         description = "💝",
         sound = SoundType.Kiss,

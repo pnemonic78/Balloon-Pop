@@ -22,6 +22,7 @@ val Pop: ImageVector
             val brush = Brush.radialGradient(
                 colorStops = arrayOf(
                     0f to Color.Transparent,
+                    0.3f to Color.Transparent,
                     1f to Color.White.copy(alpha = 0.6f)
                 ),
                 center = Offset(977.7f, 912.3f),
