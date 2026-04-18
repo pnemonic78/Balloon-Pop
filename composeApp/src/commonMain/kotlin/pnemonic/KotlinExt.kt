@@ -3,7 +3,6 @@ package pnemonic
 import androidx.compose.runtime.LongState
 import androidx.compose.runtime.State
 import kotlin.math.PI
-import kotlin.math.pow
 
 fun <T> List<T>.copy(): List<T> {
     return ArrayList(this)
@@ -67,7 +66,13 @@ fun LongState.toFloat(): Float = this.value.toFloat()
 
 fun LongState.toLong(): Long = this.value
 
-fun sqr(x: Float): Float = x.pow(2)
+fun sqr(x: Double): Double = x * x
+
+fun sqr(x: Float): Float = x * x
+
+fun sqr(x: Int): Int = x * x
+
+fun sqr(x: Long): Long = x * x
 
 operator fun <T> List<T>.times(n: Int): List<T> {
     val result = mutableListOf<T>()
