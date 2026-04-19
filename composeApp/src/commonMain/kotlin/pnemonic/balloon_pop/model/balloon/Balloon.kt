@@ -100,7 +100,7 @@ abstract class Balloon(
         val y1 = top
         val y2 = y1 + height + EPSILON_ESCAPE
 
-        return (y2 < 0f)
+        return (y2 <= 0f)
     }
 
     // delay

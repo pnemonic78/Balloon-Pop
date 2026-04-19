@@ -251,16 +251,16 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
     // Vertical paths.
     private fun applyVerticalPath(balloon: Balloon, boardSize: Size) {
-        val width = boardSize.width
-        val height = boardSize.height
-        val widthPad = width * PADDING
-        val widthPadded = width - widthPad - widthPad
+        val boardWidth = boardSize.width
+        val boardHeight = boardSize.height
+        val widthPad = boardWidth * PADDING
+        val widthPadded = boardWidth - widthPad - widthPad
         val balloonHeight = balloon.height
 
         val x1 = widthPad + (rand.nextFloat() * widthPadded)
-        val y1 = height + (balloonHeight * 0.25f)
+        val y1 = boardHeight + (balloonHeight * 0.25f)
         val x2 = x1
-        val y2 = -balloonHeight
+        val y2 = balloonHeight * -1.25f
         balloon.moveTo(x1, y1)
         balloon.setDestination(x2, y2)
     }

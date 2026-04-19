@@ -151,13 +151,13 @@ abstract class Movable(val size: Float = 1f, val speed: Float, val sway: Boolean
 
         return when {
             // heading to Top-Right
-            (angle <= 90f) -> (x1 >= x3) || (y2 < 0f)
+            (angle <= 90f) -> (x1 >= x3) || (y2 <= 0f)
             // heading to Bottom-Right
             (angle <= 180f) -> (x1 >= x3) || (y1 >= y3)
             // heading to Bottom-Left
-            (angle <= 270f) -> (x2 < 0f) || (y1 >= y3)
+            (angle <= 270f) -> (x2 <= 0f) || (y1 >= y3)
             // heading to Top-Left
-            else -> (x2 < 0f) || (y2 < 0f)
+            else -> (x2 <= 0f) || (y2 <= 0f)
         }
     }
 
