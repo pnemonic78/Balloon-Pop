@@ -48,6 +48,7 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.lifecycle.service)
         }
         commonMain.dependencies {
             implementation(libs.androidx.lifecycle.runtimeCompose)

@@ -68,19 +68,23 @@ class GameViewModel : LifecycleViewModel() {
     }
 
     override fun onStart() {
+        super.onStart()
         engine.start(difficulty)
         platform.sound.onStart()
     }
 
     override fun onPause() {
+        super.onPause()
         engine.pause()
     }
 
     override fun onResume() {
+        super.onResume()
         engine.resume()
     }
 
     override fun onStop() {
+        super.onStop()
         engine.stop()
         platform.sound.onStop()
     }
@@ -88,6 +92,7 @@ class GameViewModel : LifecycleViewModel() {
     override fun onDestroy() {
         platform.haptic.onDestroy()
         platform.sound.onDestroy()
+        super.onDestroy()
     }
 
     fun onBoardSize(size: IntSize) {

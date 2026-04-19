@@ -28,6 +28,9 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 💝 Extra life\
 🏆 Extra score
 
+## Wallpaper
+Android devices can pop balloons as a wallpaper.
+
 ## Play Online
 
 [🎈💣 in browser](./play-web/){:target="_blank"}

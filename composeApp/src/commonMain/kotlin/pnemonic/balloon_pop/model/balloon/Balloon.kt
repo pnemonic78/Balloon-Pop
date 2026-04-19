@@ -15,7 +15,7 @@ typealias BalloonCallback = (Balloon) -> Unit
 abstract class Balloon(
     size: Float = 1f,
     speed: Float = 1f,
-    val score: Long,
+    var score: Long,
     hits: Int = 1,
     val sound: SoundType = SoundType.Pop,
     sway: Boolean = false

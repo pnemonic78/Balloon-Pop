@@ -78,7 +78,7 @@ fun ScoreView(modifier: Modifier = Modifier, score: Long) {
     }
 }
 
-private val sizeScore = 30.sp
+private val sizeScore = 50.sp
 private val colorScoreGood = listOf(White, Yellow, Gold)
 private val colorScoreBad = listOf(White, Red, DarkRed)
 private val colorShadow = Yellow
@@ -91,6 +91,7 @@ fun Score(balloon: Balloon, boardSize: Size) {
 @Suppress("AssignedValueIsNeverRead")
 @Composable
 fun Score(score: Long, boardSize: Size, x: Float, y: Float, fontSize: TextUnit = sizeScore) {
+    if (score == 0L) return
     val locale = Locale.current
     val platform: Platform = getPlatform()
     val text = (if (score > 0) "+" else "") + platform.formatInteger(locale, score)

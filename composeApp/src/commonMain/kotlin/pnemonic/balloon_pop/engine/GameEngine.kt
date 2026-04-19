@@ -52,6 +52,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     val feedback: Flow<Feedback> = _feedback
 
     fun start(difficulty: Difficulty = Difficulty.Easy) {
+        ticker?.cancel()
         ticker = coroutineScope.launch(Dispatchers.Default) {
             _boards.update { it.copy(difficulty = difficulty) }
             _state.update { GameState.STARTED }
@@ -278,7 +279,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         prize.setDestination(x2, y2)
     }
 
-    private fun generateBalloons(board: Board): Board {
+    protected open fun generateBalloons(board: Board): Board {
         val bouquet = generateBouquet(board)
         var delay = 0L
 
@@ -300,7 +301,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     private suspend fun nextLevel(board: Board): Board {
         stopSounds(board)
 
-        val level = board.level + 1
+        val level = generateLevel(board)
         val scene = generateScene(level)
         val boardNext = generateBalloons(board.copy(level = level, scene = scene, tool = null))
 
@@ -312,6 +313,10 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         playSounds(boardNext)
 
         return boardNext
+    }
+
+    protected open fun generateLevel(board: Board): Int {
+        return board.level + 1
     }
 
     protected open fun generateScene(level: Int): Scene {
