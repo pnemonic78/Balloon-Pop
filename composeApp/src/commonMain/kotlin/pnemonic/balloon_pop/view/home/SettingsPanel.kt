@@ -8,10 +8,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pnemonic.BooleanCallback
 import pnemonic.VoidCallback
+import pnemonic.balloon_pop.getPlatform
 import pnemonic.balloon_pop.view.settings.ActionPanel
 import pnemonic.balloon_pop.view.settings.HelpButton
 import pnemonic.balloon_pop.view.settings.MusicButton
 import pnemonic.balloon_pop.view.settings.SoundButton
+import pnemonic.balloon_pop.view.settings.WallpaperButton
 import pnemonic.balloon_pop.view.theme.AppTheme
 import pnemonic.balloon_pop.view.theme.sizeHomeButton
 
@@ -23,10 +25,17 @@ fun SettingsPanel(
     isMusicEnabled: Boolean = true,
     onMusicChange: BooleanCallback,
     onHelpClick: VoidCallback,
+    onWallpaperClick: VoidCallback,
 ) {
+    val platform = getPlatform()
+
     ActionPanel(modifier = modifier) {
         HelpButton(size = sizeHomeButton, onHelpClick)
         Spacer(modifier = Modifier.width(8.dp))
+        if (platform.os == "android") {
+            WallpaperButton(size = sizeHomeButton, onWallpaperClick)
+            Spacer(modifier = Modifier.width(8.dp))
+        }
         SoundButton(isSoundEnabled, size = sizeHomeButton, onSoundChange)
         Spacer(modifier = Modifier.width(8.dp))
         MusicButton(isMusicEnabled, size = sizeHomeButton, onMusicChange)
@@ -43,6 +52,7 @@ private fun Preview() {
             isMusicEnabled = false,
             onMusicChange = {},
             onHelpClick = {},
+            onWallpaperClick = {},
         )
     }
 }
@@ -57,6 +67,7 @@ private fun Preview_RTL() {
             isMusicEnabled = false,
             onMusicChange = {},
             onHelpClick = {},
+            onWallpaperClick = {},
         )
     }
 }

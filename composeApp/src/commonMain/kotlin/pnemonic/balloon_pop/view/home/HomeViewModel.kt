@@ -6,8 +6,10 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import pnemonic.balloon_pop.Platform
 import pnemonic.balloon_pop.control.LifecycleViewModel
 import pnemonic.balloon_pop.engine.GameEngine
+import pnemonic.balloon_pop.getPlatform
 import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Difficulty
 import pnemonic.balloon_pop.model.balloon.Balloon
@@ -15,6 +17,7 @@ import pnemonic.balloon_pop.view.navigation.Routes
 import pnemonic.balloon_pop.view.settings.SettingsManager
 
 class HomeViewModel : LifecycleViewModel() {
+    private val platform: Platform = getPlatform()
     private val settings = SettingsManager
     val isMusicEnabled get() = settings.isMusicEnabled
     val isSoundEnabled get() = settings.isSoundEnabled
@@ -90,5 +93,9 @@ class HomeViewModel : LifecycleViewModel() {
 
     fun onBalloonSize(balloon: Balloon) {
         engine.onBalloonSize(balloon)
+    }
+
+    fun onWallpaperClick() {
+        platform.applyWallpaper()
     }
 }

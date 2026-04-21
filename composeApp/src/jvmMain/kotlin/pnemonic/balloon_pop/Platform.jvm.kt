@@ -7,7 +7,7 @@ import pnemonic.balloon_pop.haptic.HapticManager
 import pnemonic.balloon_pop.sound.SoundManager
 
 class JVMPlatform: Platform {
-    override val name: String = "Java ${System.getProperty("java.version")}"
+    override val os = "jvm"
     override val haptic: HapticManager = HapticManager
     override val sound: SoundManager = SoundManager
     override val settings: Settings by lazy { Settings() }
@@ -16,6 +16,8 @@ class JVMPlatform: Platform {
         val formatter = NumberFormat.getIntegerInstance(locale.platformLocale)
         return formatter.format(number)
     }
+
+    override fun applyWallpaper() = Unit
 }
 
 actual fun getPlatform(): Platform = JVMPlatform()

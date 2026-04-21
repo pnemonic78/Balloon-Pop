@@ -5,13 +5,11 @@ import com.russhwolf.settings.Settings
 import platform.Foundation.NSNumber
 import platform.Foundation.NSNumberFormatter
 import platform.Foundation.NSNumberFormatterOrdinalStyle
-import platform.UIKit.UIDevice
 import pnemonic.balloon_pop.haptic.HapticManager
 import pnemonic.balloon_pop.sound.SoundManager
 
 class IOSPlatform : Platform {
-    override val name: String =
-        UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
+    override val os = "ios"
     override val haptic: HapticManager = HapticManager
     override val sound: SoundManager = SoundManager
     override val settings: Settings by lazy { Settings() }
@@ -23,6 +21,8 @@ class IOSPlatform : Platform {
         }
         return formatter.stringFromNumber(NSNumber(long = number))!!
     }
+
+    override fun applyWallpaper() = Unit
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()

@@ -1,5 +1,6 @@
 package pnemonic
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LongState
 import androidx.compose.runtime.State
 import kotlin.math.PI
@@ -14,6 +15,7 @@ const val RADIANS_TO_DEGREES = (180.0 / PI).toFloat()
 fun Float.toRadians(): Float = this * DEGREES_TO_RADIANS
 
 typealias BooleanCallback = (Boolean) -> Unit
+typealias ComposeCallback = @Composable () -> Unit
 typealias VoidCallback = () -> Unit
 
 fun <T> List<T>.remove(item: T): List<T> {

@@ -44,7 +44,7 @@ fun WallpaperScreen() {
     }
 }
 
-private val colorMask = Color.Black.copy(alpha = 0.6f)
+private val colorMask = Color(0x99000044)
 
 @Composable
 private fun WallpaperScreen(

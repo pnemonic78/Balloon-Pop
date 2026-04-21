@@ -6,7 +6,7 @@ import pnemonic.balloon_pop.haptic.HapticManager
 import pnemonic.balloon_pop.sound.SoundManager
 
 class WasmPlatform: Platform {
-    override val name: String = "Web with Kotlin/Wasm"
+    override val os = "wasm"
     override val haptic: HapticManager = HapticManager
     override val sound: SoundManager = SoundManager
     override val settings: Settings by lazy { Settings() }
@@ -19,6 +19,8 @@ class WasmPlatform: Platform {
         val formatter = formatters.getOrPut(languageTag) { Intl.NumberFormat(languageTag) }
         return formatter.format(number.toJsBigInt())
     }
+
+    override fun applyWallpaper() = Unit
 }
 
 actual fun getPlatform(): Platform = WasmPlatform()

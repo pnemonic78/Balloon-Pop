@@ -49,6 +49,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.lifecycle.service)
+            implementation(libs.androidx.startup.runtime)
         }
         commonMain.dependencies {
             implementation(libs.androidx.lifecycle.runtimeCompose)

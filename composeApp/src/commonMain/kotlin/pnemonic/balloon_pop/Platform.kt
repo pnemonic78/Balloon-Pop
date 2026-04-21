@@ -7,13 +7,14 @@ import pnemonic.balloon_pop.sound.SoundManager
 
 interface Platform {
 
-    val name: String
+    val os: String
 
     val haptic: HapticManager
     val sound: SoundManager
     val settings: Settings
 
     fun formatInteger(locale: Locale, number: Long): String
+    fun applyWallpaper()
 }
 
 expect fun getPlatform(): Platform

@@ -49,6 +49,7 @@ fun HomeScreen(navController: NavHostController) {
         isMusicEnabled = viewModel.isMusicEnabled,
         onMusicChange = viewModel::onMusicChange,
         onHelpClick = { viewModel.onHelpClick(navController) },
+        onWallpaperClick =viewModel::onWallpaperClick,
         difficulty = viewModel.difficulty,
         onDifficultyChange = viewModel::onDifficultyChange,
         board = board.value,
@@ -75,6 +76,7 @@ private fun HomeScreen(
     isMusicEnabled: Boolean = true,
     onMusicChange: BooleanCallback,
     onHelpClick: VoidCallback,
+    onWallpaperClick: VoidCallback,
     difficulty: Difficulty,
     onDifficultyChange: DifficultyCallback,
     board: Board,
@@ -109,7 +111,8 @@ private fun HomeScreen(
                 onSoundChange = onSoundChange,
                 isMusicEnabled = isMusicEnabled,
                 onMusicChange = onMusicChange,
-                onHelpClick = onHelpClick
+                onHelpClick = onHelpClick,
+                onWallpaperClick = onWallpaperClick,
             )
             Spacer(modifier = Modifier.weight(0.25f))
         }
@@ -125,6 +128,7 @@ private fun Preview() {
             onSoundChange = {},
             onMusicChange = {},
             onHelpClick = {},
+            onWallpaperClick = {},
             difficulty = Difficulty.Medium,
             onDifficultyChange = {},
             board = Board(),
@@ -143,6 +147,7 @@ private fun PreviewBig() {
             onSoundChange = {},
             onMusicChange = {},
             onHelpClick = {},
+            onWallpaperClick = {},
             difficulty = Difficulty.Hard,
             onDifficultyChange = {},
             board = Board(),
