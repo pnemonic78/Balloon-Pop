@@ -40,22 +40,23 @@ fun HomeScreen(navController: NavHostController) {
     val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
     //FIXME for JVM val viewModel = viewModel<HomeViewModel>()
     val viewModel = viewModel { HomeViewModel() }
-    val board = viewModel.board.collectAsState()
 
-    HomeScreen(
-        onPlayClick = { viewModel.onPlayClick(navController) },
-        isSoundEnabled = viewModel.isSoundEnabled,
-        onSoundChange = viewModel::onSoundChange,
-        isMusicEnabled = viewModel.isMusicEnabled,
-        onMusicChange = viewModel::onMusicChange,
-        onHelpClick = { viewModel.onHelpClick(navController) },
-        onWallpaperClick =viewModel::onWallpaperClick,
-        difficulty = viewModel.difficulty,
-        onDifficultyChange = viewModel::onDifficultyChange,
-        board = board.value,
-        onBoardSize = viewModel::onBoardSize,
-        onBalloonSize = viewModel::onBalloonSize,
-    )
+    val state: HomeState = object : HomeState {
+        override val onPlayClick = { viewModel.onPlayClick(navController) }
+        override val isSoundEnabled = viewModel.isSoundEnabled
+        override val onSoundChange = viewModel::onSoundChange
+        override val isMusicEnabled = viewModel.isMusicEnabled
+        override val onMusicChange = viewModel::onMusicChange
+        override val onHelpClick = { viewModel.onHelpClick(navController) }
+        override val onWallpaperClick = viewModel::onWallpaperClick
+        override val difficulty = viewModel.difficulty
+        override val onDifficultyChange = viewModel::onDifficultyChange
+        override val board = viewModel.board.collectAsState().value
+        override val onBoardSize = viewModel::onBoardSize
+        override val onBalloonSize = viewModel::onBalloonSize
+    }
+
+    HomeScreen(state)
 
     DisposableEffect(lifecycleOwner) {
         viewModel.observe(lifecycleOwner)
@@ -66,29 +67,18 @@ fun HomeScreen(navController: NavHostController) {
     }
 }
 
-private val colorMask = Color(0xCCCC00CC)
+private val colorMask = Color(0xCC8800CC)
 
 @Composable
-private fun HomeScreen(
-    onPlayClick: VoidCallback,
-    isSoundEnabled: Boolean = true,
-    onSoundChange: BooleanCallback,
-    isMusicEnabled: Boolean = true,
-    onMusicChange: BooleanCallback,
-    onHelpClick: VoidCallback,
-    onWallpaperClick: VoidCallback,
-    difficulty: Difficulty,
-    onDifficultyChange: DifficultyCallback,
-    board: Board,
-    onBoardSize: OnSizeCallback,
-    onBalloonSize: BalloonCallback,
-) {
+private fun HomeScreen(state: HomeState) {
+    val board = state.board
+
     SceneView(
         modifier = Modifier.fillMaxSize()
-            .onSizeChanged { onBoardSize(it) },
+            .onSizeChanged { state.onBoardSize(it) },
         scene = board.scene,
     ) {
-        BouquetView(board, onBalloonSize, onTap = {}, onPrizeSize = {})
+        BouquetView(board, state.onBalloonSize, onTap = {}, onPrizeSize = {})
         Box(modifier = Modifier.fillMaxSize().background(color = colorMask))
         Column(
             modifier = Modifier.fillMaxSize().padding(paddingScreen),
@@ -98,21 +88,21 @@ private fun HomeScreen(
             Title()
             Spacer(modifier = Modifier.height(24.dp).weight(0.25f))
             StartButton(
-                onClick = onPlayClick
+                onClick = state.onPlayClick
             )
             Spacer(modifier = Modifier.height(24.dp).weight(0.2f))
             DifficultyPanel(
-                difficulty = difficulty,
-                onDifficultyChange = onDifficultyChange
+                difficulty = state.difficulty,
+                onDifficultyChange = state.onDifficultyChange
             )
             Spacer(modifier = Modifier.height(24.dp))
             SettingsPanel(
-                isSoundEnabled = isSoundEnabled,
-                onSoundChange = onSoundChange,
-                isMusicEnabled = isMusicEnabled,
-                onMusicChange = onMusicChange,
-                onHelpClick = onHelpClick,
-                onWallpaperClick = onWallpaperClick,
+                isSoundEnabled = state.isSoundEnabled,
+                onSoundChange = state.onSoundChange,
+                isMusicEnabled = state.isMusicEnabled,
+                onMusicChange = state.onMusicChange,
+                onHelpClick = state.onHelpClick,
+                onWallpaperClick = state.onWallpaperClick,
             )
             Spacer(modifier = Modifier.weight(0.25f))
         }
@@ -122,37 +112,45 @@ private fun HomeScreen(
 @Composable
 @Preview(widthDp = previewWidthDp, heightDp = previewHeightDp, locale = "ru")
 private fun Preview() {
+    val state: HomeState = object : HomeState {
+        override val onPlayClick: VoidCallback = {}
+        override val isSoundEnabled: Boolean = true
+        override val onSoundChange: BooleanCallback = {}
+        override val isMusicEnabled: Boolean = true
+        override val onMusicChange: BooleanCallback = {}
+        override val onHelpClick: VoidCallback = {}
+        override val onWallpaperClick: VoidCallback = {}
+        override val difficulty: Difficulty = Difficulty.Medium
+        override val onDifficultyChange: DifficultyCallback = {}
+        override val board: Board = Board()
+        override val onBoardSize: OnSizeCallback = {}
+        override val onBalloonSize: BalloonCallback = {}
+    }
+
     AppTheme {
-        HomeScreen(
-            onPlayClick = {},
-            onSoundChange = {},
-            onMusicChange = {},
-            onHelpClick = {},
-            onWallpaperClick = {},
-            difficulty = Difficulty.Medium,
-            onDifficultyChange = {},
-            board = Board(),
-            onBoardSize = {},
-            onBalloonSize = {},
-        )
+        HomeScreen(state)
     }
 }
 
 @Composable
 @Preview(widthDp = previewWidthDp * 2, heightDp = previewHeightDp * 2, locale = "ru")
 private fun PreviewBig() {
+    val state: HomeState = object : HomeState {
+        override val onPlayClick: VoidCallback = {}
+        override val isSoundEnabled: Boolean = true
+        override val onSoundChange: BooleanCallback = {}
+        override val isMusicEnabled: Boolean = true
+        override val onMusicChange: BooleanCallback = {}
+        override val onHelpClick: VoidCallback = {}
+        override val onWallpaperClick: VoidCallback = {}
+        override val difficulty: Difficulty = Difficulty.Hard
+        override val onDifficultyChange: DifficultyCallback = {}
+        override val board: Board = Board()
+        override val onBoardSize: OnSizeCallback = {}
+        override val onBalloonSize: BalloonCallback = {}
+    }
+
     AppTheme {
-        HomeScreen(
-            onPlayClick = {},
-            onSoundChange = {},
-            onMusicChange = {},
-            onHelpClick = {},
-            onWallpaperClick = {},
-            difficulty = Difficulty.Hard,
-            onDifficultyChange = {},
-            board = Board(),
-            onBoardSize = {},
-            onBalloonSize = {},
-        )
+        HomeScreen(state)
     }
 }
