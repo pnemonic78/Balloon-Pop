@@ -31,6 +31,7 @@ import pnemonic.copy
 import pnemonic.half
 import pnemonic.removeAll
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallback {
@@ -251,19 +252,19 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     }
 
     // Vertical paths.
+    // Try to keep the balloons within the screen.
     private fun applyVerticalPath(balloon: Balloon, boardSize: Size) {
         val boardWidth = boardSize.width
         val boardHeight = boardSize.height
-        val widthPad = boardWidth * PADDING
-        val widthPadded = boardWidth - widthPad - widthPad
+        val balloonWidth = balloon.width
         val balloonHeight = balloon.height
 
-        val x1 = widthPad + (rand.nextFloat() * widthPadded)
+        val x2 = rand.nextFloat() * boardWidth
+        val x = max(0f, min(x2 - balloonWidth.half, boardWidth - balloonWidth))
         val y1 = boardHeight + (balloonHeight * 0.25f)
-        val x2 = x1
         val y2 = balloonHeight * -1.25f
-        balloon.moveTo(x1, y1)
-        balloon.setDestination(x2, y2)
+        balloon.moveTo(x, y1)
+        balloon.setDestination(x, y2)
     }
 
     // Prizes just drop down to earth.
@@ -401,7 +402,5 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
         // Time to show the score after balloon popped.
         private const val DELAY_DEAD_REMOVE = 1000L
-
-        private const val PADDING = 0.2f
     }
 }
