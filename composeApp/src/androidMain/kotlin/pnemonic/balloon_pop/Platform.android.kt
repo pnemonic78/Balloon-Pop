@@ -1,5 +1,6 @@
 package pnemonic.balloon_pop
 
+import android.os.Build
 import androidx.compose.ui.text.intl.Locale
 import com.russhwolf.settings.Settings
 import pnemonic.balloon_pop.haptic.HapticManager
@@ -18,6 +19,8 @@ class AndroidPlatform : Platform {
         val formatter = NumberFormat.getIntegerInstance(locale.platformLocale)
         return formatter.format(number)
     }
+
+    override val isWallpaperSupported = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
 
     override fun applyWallpaper() {
         BalloonPopWallpaperManager.apply()

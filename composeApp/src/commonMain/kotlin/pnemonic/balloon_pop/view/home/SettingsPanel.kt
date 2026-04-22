@@ -32,7 +32,7 @@ fun SettingsPanel(
     ActionPanel(modifier = modifier) {
         HelpButton(size = sizeHomeButton, onHelpClick)
         Spacer(modifier = Modifier.width(8.dp))
-        if (platform.os == "android") {
+        if (platform.isWallpaperSupported) {
             WallpaperButton(size = sizeHomeButton, onWallpaperClick)
             Spacer(modifier = Modifier.width(8.dp))
         }

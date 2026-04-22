@@ -22,6 +22,8 @@ class IOSPlatform : Platform {
         return formatter.stringFromNumber(NSNumber(long = number))!!
     }
 
+    override val isWallpaperSupported = false
+
     override fun applyWallpaper() = Unit
 }
 

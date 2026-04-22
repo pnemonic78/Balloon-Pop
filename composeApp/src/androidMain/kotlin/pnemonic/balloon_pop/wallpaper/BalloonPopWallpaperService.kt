@@ -6,7 +6,6 @@ import android.hardware.display.DisplayManager
 import android.hardware.display.VirtualDisplay
 import android.os.Build
 import android.service.wallpaper.WallpaperService
-import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.View
@@ -21,6 +20,7 @@ import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import pnemonic.balloon_pop.R
 
 /**
  * Balloon Pop wallpaper service.
@@ -82,31 +82,44 @@ class BalloonPopWallpaperService : WallpaperService(), ViewModelStoreOwner {
 
         override fun onSurfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
             super.onSurfaceChanged(holder, format, width, height)
+            if (width <= 0) return
+            if (height <= 0) return
 
             if (needsInit) {
                 virtualDisplay?.release()
                 presentation?.dismiss()
 
-                composeView.setContent {
-                    WallpaperApp()
+                val engine: Engine = this
+                val displayContext: Context = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    engine.displayContext!!
+                } else {
+                    val color = resources.getColor(R.color.sky, null)
+                    holder.lockCanvas()?.also { canvas ->
+                        canvas.drawColor(color)
+                        holder.unlockCanvasAndPost(canvas)
+                    }
+                    needsInit = false
+                    return
                 }
-
-                val displayManager = context.getSystemService(DISPLAY_SERVICE) as DisplayManager
+                val config = displayContext.resources.configuration
+                val displayManager = displayContext.getSystemService(DisplayManager::class.java)
                 virtualDisplay = displayManager.createVirtualDisplay(
-                    "ComposeDisplay",
+                    "wallpaper-display",
                     width,
                     height,
-                    DisplayMetrics.DENSITY_DEFAULT,
+                    config.densityDpi,
                     holder.surface,
                     DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY
                 )?.also { vd ->
-                    presentation = Presentation(context, vd.display).apply {
+                    presentation = Presentation(displayContext, vd.display).apply {
                         setContentView(composeView)
-                        show()
                     }
+                    needsInit = false
                 }
 
-                needsInit = false
+                composeView.setContent {
+                    WallpaperApp()
+                }
             }
         }
 
@@ -122,11 +135,12 @@ class BalloonPopWallpaperService : WallpaperService(), ViewModelStoreOwner {
         override fun onVisibilityChanged(visible: Boolean) {
             super.onVisibilityChanged(visible)
             viewLifecycleDispatcher.onVisibilityChanged(visible)
-            val presentation = presentation ?: return
-            if (visible) {
-                presentation.show()
-            } else {
-                presentation.dismiss()
+            presentation?.apply {
+                if (visible) {
+                    show()
+                } else {
+                    dismiss()
+                }
             }
         }
 

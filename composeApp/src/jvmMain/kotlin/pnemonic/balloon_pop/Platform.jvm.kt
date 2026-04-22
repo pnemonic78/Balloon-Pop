@@ -2,11 +2,11 @@ package pnemonic.balloon_pop
 
 import androidx.compose.ui.text.intl.Locale
 import com.russhwolf.settings.Settings
-import java.text.NumberFormat
 import pnemonic.balloon_pop.haptic.HapticManager
 import pnemonic.balloon_pop.sound.SoundManager
+import java.text.NumberFormat
 
-class JVMPlatform: Platform {
+class JVMPlatform : Platform {
     override val os = "jvm"
     override val haptic: HapticManager = HapticManager
     override val sound: SoundManager = SoundManager
@@ -16,6 +16,8 @@ class JVMPlatform: Platform {
         val formatter = NumberFormat.getIntegerInstance(locale.platformLocale)
         return formatter.format(number)
     }
+
+    override val isWallpaperSupported = false
 
     override fun applyWallpaper() = Unit
 }

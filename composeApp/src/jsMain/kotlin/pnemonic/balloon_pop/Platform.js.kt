@@ -20,6 +20,8 @@ class JsPlatform : Platform {
         return formatter.format(number.toJsBigInt())
     }
 
+    override val isWallpaperSupported = false
+
     override fun applyWallpaper() = Unit
 }
 

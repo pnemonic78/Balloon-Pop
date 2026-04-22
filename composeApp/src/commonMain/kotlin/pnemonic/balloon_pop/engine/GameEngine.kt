@@ -35,10 +35,13 @@ import kotlin.math.min
 import kotlin.random.Random
 
 open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallback {
-    protected val _boards = MutableStateFlow(Board())
-    val boards: StateFlow<Board> = _boards
+    protected val boardsFlow = MutableStateFlow(Board())
+    val boards: StateFlow<Board> = boardsFlow
 
     private var ticker: Job? = null
+    protected open val tick = TICK
+    protected open val tickSpeed = TICK
+    protected open val delayPerBalloon = TICK * 200
     private val _state = MutableStateFlow(GameState.NOT_STARTED)
     val state: StateFlow<GameState> = _state
     val isRunning get() = state.value.isRunning
@@ -47,19 +50,23 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     private val touches = mutableListOf<Offset>()
     private val touchedBalloons = mutableListOf<Balloon>()
     private val popped = mutableListOf<Balloon>()
-    private val bonusEngine = BonusEngine(this, coroutineScope)
+    private val bonusEngine: BonusEngine? = createBonusEngine()
 
     private val _feedback = MutableSharedFlow<Feedback>(extraBufferCapacity = 100)
     val feedback: Flow<Feedback> = _feedback
 
+    protected open fun createBonusEngine(): BonusEngine? {
+        return BonusEngine(this, coroutineScope)
+    }
+
     fun start(difficulty: Difficulty = Difficulty.Easy) {
         ticker?.cancel()
         ticker = coroutineScope.launch(Dispatchers.Default) {
-            _boards.update { it.copy(difficulty = difficulty) }
+            boardsFlow.update { it.copy(difficulty = difficulty) }
             _state.update { GameState.STARTED }
             while (isActive) {
                 run()
-                delay(TICK)
+                delay(tick)
             }
         }
     }
@@ -104,7 +111,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
             playSound(SoundType.Clang)
         }
 
-        _boards.update { board }
+        boardsFlow.update { board }
     }
 
     private fun move(board: Board): Board {
@@ -164,7 +171,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
     fun onSize(size: Size) {
         //TODO set each balloon's new destination relative to old destination
-        _boards.update { board ->
+        boardsFlow.update { board ->
             board.setSize(width = size.width, height = size.height)
         }
     }
@@ -186,23 +193,8 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
             return board
         }
 
-        // Convert balloon touches to tool touches.
-        val tool = board.tool
-        if (tool != null && !tool.isVisible && touchedBalloons.isNotEmpty()) {
-            val balloons = touchedBalloons.copy()
-            touchedBalloons.clear()
-
-            for (balloon in balloons) {
-                bonusEngine.onTap(
-                    board,
-                    Offset(balloon.left + balloon.width.half, balloon.top + balloon.height.half)
-                )
-            }
-        }
-
-        while (touches.isNotEmpty()) {
-            val offset = touches.removeAt(0)
-            bonusEngine.onTap(board, offset)
+        bonusEngine?.let {
+            touchBonus(board, it)
         }
 
         var bouquet = board.bouquet
@@ -238,6 +230,27 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         return board.copy(bouquet = bouquet, score = score, lives = lives)
     }
 
+    // Convert balloon touches to tool touches.
+    private suspend fun touchBonus(board: Board, bonusEngine: BonusEngine) {
+        val tool = board.tool
+        if (tool != null && !tool.isVisible && touchedBalloons.isNotEmpty()) {
+            val balloons = touchedBalloons.copy()
+            touchedBalloons.clear()
+
+            for (balloon in balloons) {
+                bonusEngine.onTap(
+                    board,
+                    Offset(balloon.left + balloon.width.half, balloon.top + balloon.height.half)
+                )
+            }
+        }
+
+        while (touches.isNotEmpty()) {
+            val offset = touches.removeAt(0)
+            bonusEngine.onTap(board, offset)
+        }
+    }
+
     fun onBalloonSize(balloon: Balloon) {
         val board = boards.value
         applyVerticalPath(balloon, board.size)
@@ -247,7 +260,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         val board = boards.value
         if (lucky.isPopped) {
             applyDrop(lucky, board.size)
-            _boards.update { it.copy(prizes = it.prizes + lucky.prize) }
+            boardsFlow.update { it.copy(prizes = it.prizes + lucky.prize) }
         }
     }
 
@@ -285,9 +298,9 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
         var delay = 0L
 
         for (balloon in bouquet) {
-            balloon.setTick(TICK)
+            balloon.setTick(tickSpeed)
             balloon.freeze(delay)
-            delay += DELAY_PER_BALLOON
+            delay += delayPerBalloon
         }
 
         return board.copy(bouquet = bouquet)
@@ -327,7 +340,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     protected open suspend fun finished() {
         println("No more lives")
         _state.update { GameState.FINISHED }
-        _boards.update { it.copy(bouquet = Bouquet()) }
+        boardsFlow.update { it.copy(bouquet = Bouquet()) }
         playSound(SoundType.GameFinish)
     }
 
@@ -373,32 +386,31 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
 
     // Apply any bonuses
     private suspend fun bonus(board: Board): Board {
-        return bonusEngine.process(board)
+        return bonusEngine?.process(board) ?: board
     }
 
     fun onBonusClick(bonus: Bonus) {
         if (isRunning) {
-            bonusEngine.onClick(bonus)
+            bonusEngine?.onClick(bonus)
         }
     }
 
     fun onToolUse(tool: Tool) {
         if (isRunning) {
-            bonusEngine.onUse(tool)
+            bonusEngine?.onUse(tool)
         }
     }
 
     fun clear() {
-        _boards.update { Board() }
+        boardsFlow.update { Board() }
         touches.clear()
         touchedBalloons.clear()
         popped.clear()
-        bonusEngine.clear()
+        bonusEngine?.clear()
     }
 
     companion object {
         private const val TICK = 5L
-        private const val DELAY_PER_BALLOON = TICK * 200
 
         // Time to show the score after balloon popped.
         private const val DELAY_DEAD_REMOVE = 1000L
