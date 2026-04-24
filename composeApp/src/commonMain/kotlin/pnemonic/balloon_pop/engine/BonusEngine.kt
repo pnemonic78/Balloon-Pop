@@ -82,8 +82,8 @@ class BonusEngine(
         var bonuses = board.bonuses
         if (bonuses.isEmpty()) {
             bonuses = listOf(
-                Bonus.Bomb(Long.MAX_VALUE),
                 Bonus.Life(),
+                Bonus.Bomb(),
                 Bonus.Score(),
             )
             modified = true

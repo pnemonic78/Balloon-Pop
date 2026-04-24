@@ -28,7 +28,7 @@ data class Board(
     fun isLevelFinished(): Boolean = bouquet.isEmpty()
 
     companion object {
-        const val LIVES = 5
+        const val LIVES = 10
         const val MAX_LIVES = 10
     }
 }

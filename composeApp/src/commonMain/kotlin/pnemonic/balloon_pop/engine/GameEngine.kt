@@ -41,7 +41,7 @@ open class GameEngine(private val coroutineScope: CoroutineScope) : EngineCallba
     private var ticker: Job? = null
     protected open val tick = TICK
     protected open val tickSpeed = TICK
-    protected open val delayPerBalloon = TICK * 200
+    protected open val delayPerBalloon = TICK * 250
     private val _state = MutableStateFlow(GameState.NOT_STARTED)
     val state: StateFlow<GameState> = _state
     val isRunning get() = state.value.isRunning
