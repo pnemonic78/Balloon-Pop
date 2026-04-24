@@ -124,21 +124,26 @@ fun BalloonSprite(
             }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(
-                modifier = Modifier
-                    .size(width, height)
-                    .onSizeChanged { size ->
-                        val oldWidth = balloon.width.roundToInt()
-                        val oldHeight = balloon.height.roundToInt()
-                        if ((oldWidth != size.width) || (oldHeight != size.height)) {
-                            balloon.setSize(size)
-                            onSize(balloon)
-                        }
+            var modifier = Modifier
+                .size(width, height)
+                .onSizeChanged { size ->
+                    val oldWidth = balloon.width.roundToInt()
+                    val oldHeight = balloon.height.roundToInt()
+                    if ((oldWidth != size.width) || (oldHeight != size.height)) {
+                        balloon.setSize(size)
+                        onSize(balloon)
                     }
+                }
+            if (!isPopped) {
+                modifier = modifier
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null
-                    ) { onTap(balloon) },
+                    ) { onTap(balloon) }
+            }
+
+            Image(
+                modifier = modifier,
                 painter = painter,
                 contentDescription = balloon.description,
                 contentScale = ContentScale.Fit,
