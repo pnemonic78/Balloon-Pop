@@ -25,6 +25,7 @@ There are infinite levels where 🎈🎈 are floating upwards into the sky.
 💰 Gold coins
 
 ### Get bonuses:
+💣 Explode\
 💝 Extra life\
 🏆 Extra score
 
