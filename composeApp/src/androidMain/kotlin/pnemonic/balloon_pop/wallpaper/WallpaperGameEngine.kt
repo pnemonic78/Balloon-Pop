@@ -7,6 +7,7 @@ import pnemonic.balloon_pop.engine.BonusEngine
 import pnemonic.balloon_pop.engine.GameEngine
 import pnemonic.balloon_pop.model.Board
 import pnemonic.balloon_pop.model.Scene
+import pnemonic.balloon_pop.model.balloon.Bouquet
 
 class WallpaperGameEngine(coroutineScope: CoroutineScope) : GameEngine(coroutineScope) {
 
@@ -20,7 +21,15 @@ class WallpaperGameEngine(coroutineScope: CoroutineScope) : GameEngine(coroutine
 
     override fun generateLevel(board: Board): Int {
         // all types of ballons for a random scene.
-        return 100 + rand.nextInt(0, Scene.entries.size)
+        return 50 + rand.nextInt(0, Scene.entries.size)
+    }
+
+    override fun generateBouquet(board: Board): Bouquet {
+        val bouquet = super.generateBouquet(board)
+        for (balloon in bouquet) {
+            balloon.score = 0
+        }
+        return bouquet
     }
 
     override suspend fun finished() {
