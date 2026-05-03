@@ -123,7 +123,7 @@ fun BoardView(state: BoardState) {
             Spacer(modifier = Modifier.height(spacingV))
             BonusesView(bonuses = board.bonuses, onClick = state.onBonusClick)
         }
-        StateScreen(gameState, state.onHomeClick)
+        StateScreen(gameState, board.score, state.onHomeClick)
     }
 }
 
