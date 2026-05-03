@@ -35,6 +35,6 @@ abstract class Prize(val sound: SoundType = SoundType.None) : Movable(size = 1f,
 
     companion object {
         // Accelerate because of gravity.
-        private const val ACCELERATION = 1.03f
+        private const val ACCELERATION = 1.015f
     }
 }
